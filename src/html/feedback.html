@@ -1,0 +1,187 @@
+<section id="feedback" class="feedback section-pad-bottom section-hidden">
+  <div class="container">
+    <div class="feedback__container">
+      <img class="back" src="@img/feedback.png" alt="">
+      <div class="feedback__form">
+        <form class="lead" data-lead novalidate>
+          <div class="lead__progress" data-lead-progress>
+            <span class="lead__seg"></span>
+            <span class="lead__seg"></span>
+          </div>
+
+          <!-- Шаг 1 -->
+          <div class="lead__step is-active" data-step="1">
+            <div class="lead__head is-active" data-variant="residential">
+              <h2 class="lead__title">Подберём квартиру под ваш запрос</h2>
+              <div class="lead__subtitle">Подберём варианты и отправим за 15 минут</div>
+            </div>
+            <div class="lead__head" data-variant="commercial">
+              <h2 class="lead__title">Подберём помещение под ваш запрос</h2>
+              <div class="lead__subtitle">Подберем варианты и отправим вам</div>
+            </div>
+
+            <div class="lead__toggle">
+              <input class="lead__toggle-input" type="radio" name="type" id="lead-type-res" value="residential" checked>
+              <label class="lead__toggle-btn" for="lead-type-res">Квартира</label>
+              <input class="lead__toggle-input" type="radio" name="type" id="lead-type-com" value="commercial">
+              <label class="lead__toggle-btn" for="lead-type-com">Коммерческая недвижимость</label>
+            </div>
+
+            <div class="lead__field">
+              <span class="lead__field-label">Телефон*</span>
+              <input class="lead__phone-input" type="tel" inputmode="tel" name="phone" data-lead-phone required>
+            </div>
+
+            <!-- Квартира -->
+            <div class="lead__variant is-active" data-variant="residential">
+              <div class="lead__group">
+                <div class="lead__group-title">Комнатность</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-1" value="1-комн">
+                  <label class="filter-button" for="lead-rooms-1">1-комн</label>
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-2" value="2-комн">
+                  <label class="filter-button" for="lead-rooms-2">2-комн</label>
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-3" value="3-комн +">
+                  <label class="filter-button" for="lead-rooms-3">3-комн +</label>
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-4" value="Не важно">
+                  <label class="filter-button" for="lead-rooms-4">Не важно</label>
+                </div>
+              </div>
+              <div class="lead__group">
+                <div class="lead__group-title">Бюджет</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-1" value="До 20 млн">
+                  <label class="filter-button" for="lead-budget-1">До 20 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-2" value="20–40 млн">
+                  <label class="filter-button" for="lead-budget-2">20–40 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-3" value="40+ млн">
+                  <label class="filter-button" for="lead-budget-3">40+ млн</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Коммерческая -->
+            <div class="lead__variant" data-variant="commercial">
+              <div class="lead__group">
+                <div class="lead__group-title">Площадь</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="area" id="lead-area-1" value="До 52 м2">
+                  <label class="filter-button" for="lead-area-1">До 52 м2</label>
+                  <input class="filter-check" type="radio" name="area" id="lead-area-2" value="52 м2 - 100 м2">
+                  <label class="filter-button" for="lead-area-2">52 м2 - 100 м2</label>
+                  <input class="filter-check" type="radio" name="area" id="lead-area-3" value="100+ м2">
+                  <label class="filter-button" for="lead-area-3">100+ м2</label>
+                  <input class="filter-check" type="radio" name="area" id="lead-area-4" value="Любая площадь">
+                  <label class="filter-button" for="lead-area-4">Любая площадь</label>
+                </div>
+              </div>
+              <div class="lead__group">
+                <div class="lead__group-title">Бюджет</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-c-1" value="До 2 186 250 млн">
+                  <label class="filter-button" for="lead-budget-c-1">До 2 186 250 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-c-2" value="2 186 250 - 3 498 000 млн">
+                  <label class="filter-button" for="lead-budget-c-2">2 186 250 - 3 498 000 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-c-3" value="3 498 000+ млн">
+                  <label class="filter-button" for="lead-budget-c-3">3 498 000+ млн</label>
+                </div>
+              </div>
+            </div>
+
+            <button class="lead__submit button button-primary" type="button" data-action="next" disabled>Продолжить</button>
+            <div class="lead__note is-active" data-variant="residential">Без спама. Только подходящие варианты и короткая консультация.</div>
+            <div class="lead__note" data-variant="commercial">Мы свяжемся с вами и подберём подходящий для вас вариант.</div>
+          </div>
+
+          <!-- Шаг 2 -->
+          <div class="lead__step" data-step="2">
+            <button class="lead__back" type="button" data-action="back">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Назад
+            </button>
+            <!-- Квартира -->
+            <div class="lead__head is-active" data-variant="residential">
+              <h2 class="lead__title">Уточним подбор</h2>
+              <div class="lead__subtitle">Ответьте ещё на 2 вопроса, чтобы показать более точные варианты</div>
+            </div>
+            <div class="lead__group is-active" data-variant="residential">
+              <div class="lead__group-title">Как вам удобнее купить?</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-1" value="Рассрочка">
+                <label class="filter-button" for="lead-pay-1">Рассрочка</label>
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-2" value="100% оплата">
+                <label class="filter-button" for="lead-pay-2">100% оплата</label>
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-3" value="Бартер">
+                <label class="filter-button" for="lead-pay-3">Бартер</label>
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-4" value="Не важно">
+                <label class="filter-button" for="lead-pay-4">Не важно</label>
+              </div>
+            </div>
+            <div class="lead__group is-active" data-variant="residential">
+              <div class="lead__group-title">Когда хотите заехать?</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-1" value="Сдан">
+                <label class="filter-button" for="lead-movein-1">Сдан</label>
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-2" value="2026">
+                <label class="filter-button" for="lead-movein-2">2026</label>
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-3" value="2027+">
+                <label class="filter-button" for="lead-movein-3">2027+</label>
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-4" value="Не важно">
+                <label class="filter-button" for="lead-movein-4">Не важно</label>
+              </div>
+            </div>
+            <button class="lead__submit button button-primary is-active" type="submit" data-variant="residential">Получить подборку</button>
+            <div class="lead__note is-active" data-variant="residential">Менеджер свяжется с вами и подберёт подходящие варианты под ваш запрос.</div>
+
+            <!-- Коммерческая -->
+            <div class="lead__head" data-variant="commercial">
+              <h2 class="lead__title">Уточним ваш запрос</h2>
+              <div class="lead__subtitle">Ответьте ещё на 2 вопроса, чтобы мы подобрали подходящие варианты</div>
+            </div>
+            <div class="lead__group" data-variant="commercial">
+              <div class="lead__group-title">Назначение помещения</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-1" value="Офис">
+                <label class="filter-button" for="lead-purpose-1">Офис</label>
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-2" value="Магазин">
+                <label class="filter-button" for="lead-purpose-2">Магазин</label>
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-3" value="Кафе">
+                <label class="filter-button" for="lead-purpose-3">Кафе</label>
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-4" value="Не важно">
+                <label class="filter-button" for="lead-purpose-4">Не важно</label>
+              </div>
+            </div>
+            <div class="lead__group" data-variant="commercial">
+              <div class="lead__group-title">Срок готовности</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-1" value="Уже готово">
+                <label class="filter-button" for="lead-ready-1">Уже готово</label>
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-2" value="2026">
+                <label class="filter-button" for="lead-ready-2">2026</label>
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-3" value="2027+">
+                <label class="filter-button" for="lead-ready-3">2027+</label>
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-4" value="Не важно">
+                <label class="filter-button" for="lead-ready-4">Не важно</label>
+              </div>
+            </div>
+            <button class="lead__submit button button-primary" type="submit" data-variant="commercial">Отправить и получить подборку</button>
+            <div class="lead__note" data-variant="commercial">Менеджер свяжется с вами и подберёт подходящие помещения под ваш запрос.</div>
+          </div>
+
+          <!-- Успех -->
+          <div class="lead__step lead__step_success" data-step="success">
+            <div class="lead__success">
+              <div class="lead__success-icon">
+                <img src="@img/lead-icon.png" alt="">
+              </div>
+              <h2 class="lead__success-title">Заявка отправлена</h2>
+              <div class="lead__success-text">Менеджер свяжется с вами в течение 15 минут и подберёт подходящие варианты под ваш запрос.</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

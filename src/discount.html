@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  @@include('html/head.html', { "title": "Скидка" })
+  <body>
+    @@include('html/header.html')
+
+    <main>
+      <section class="hero hero-installment section-top section-hidden">
+        <div class="container">
+          <div class="hero__container">
+            <img src="@img/hero-installment.png" alt="100% оплата - выгодная цена">
+            <div class="hero__content">
+              <h1 class="hero__title">100% оплата - выгодная цена</h1>
+              <div class="hero__desc">Оплатите квартиру сразу и получите максимальную выгоду при покупке.</div>
+              <a class="hero__btn button button-primary">Рассчитать платёж</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="overview section-pad-bottom">
+        <div class="container">
+          <div class="overview__grid">
+            <div class="overview__cards">
+              <div class="overview__card">
+                <h2 class="overview__title">Покупайте сразу, получайте больше выгоды</h2>
+                <div class="overview__desc">При 100% оплате вы можете получить выгодную цену за квартиру. Это удобный и быстрый вариант покупки с лучшими условиями.</div>
+                <a href="" class="overview__btn button button-light">Рассчитать скидку</a>
+              </div>
+              <div class="overview__card">
+                <h2 class="overview__title">Кому подойдёт 100% оплата</h2>
+                <div class="overview__desc">100% оплата подойдёт тем, кто хочет купить квартиру без рассрочки, получить максимальную выгоду и закрыть сделку без лишних этапов.</div>
+                <ul class="check-list">
+                  <li class="check-list__item">
+                    <span class="check-list__icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="12" fill="#1C1C1C"/>
+                        <path d="M19 12.4221V16.615C19 17.3739 18.4013 18 17.6553 18H6.34474C5.59868 18 5 17.3834 5 16.615V12.3557C5 12.3178 5.00921 12.2798 5.00921 12.2324H10.9132V12.6688C10.9132 12.9913 11.0053 13.0862 11.3092 13.0957H12.7092C12.9579 13.0957 13.0592 12.9913 13.0684 12.7352C13.0776 12.5739 13.0684 12.4032 13.0684 12.2324H18.9816C18.9908 12.2988 19 12.3557 19 12.4221Z" fill="#F5F5F5"/>
+                        <path d="M19 9.44348V11.6063C19 11.6538 18.9908 11.6917 18.9908 11.7486H13.0868C13.0868 11.5874 13.0868 11.4261 13.0868 11.2743C13.0868 10.9992 12.9763 10.8854 12.7092 10.8854C12.2487 10.8854 11.7882 10.8854 11.3184 10.8854C11.0237 10.8854 10.9224 10.9897 10.9224 11.2933V11.7486H5V11.5494C5 11.2458 5 10.9423 5 10.6387V9.44348C5 8.68458 5.59868 8.0585 6.34474 8.0585H17.6553C18.4013 8.0585 19 8.68458 19 9.44348Z" fill="#F5F5F5"/>
+                        <path d="M12.4145 12.6403H11.5855C11.5026 12.6403 11.4382 12.5739 11.4382 12.4885V11.502C11.4382 11.4166 11.5026 11.3502 11.5855 11.3502H12.4145C12.4974 11.3502 12.5618 11.4166 12.5618 11.502V12.4885C12.5618 12.5739 12.4974 12.6403 12.4145 12.6403Z" fill="#F5F5F5"/>
+                        <path d="M12.6908 6H11.2447C10.2684 6 9.47632 6.81581 9.47632 7.82134V8.0585H10.2039V7.99209C10.2039 7.30909 10.7474 6.74941 11.4105 6.74941H12.525C13.1882 6.74941 13.7316 7.30909 13.7316 7.99209V8.0585H14.4592V7.81186C14.4592 6.81581 13.6671 6 12.6908 6Z" fill="#F5F5F5"/>
+                      </svg>
+                    </span>
+                    <span class="check-list__txt">Тем, кто хочет лучшую цену</span>
+                  </li>
+                  <li class="check-list__item">
+                    <span class="check-list__icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="12" fill="black"/>
+                        <path d="M11.1523 5.35454C11.5441 4.72853 12.4559 4.72853 12.8477 5.35454L14.4758 7.95612C14.613 8.17542 14.8299 8.333 15.0809 8.39576L18.0583 9.14024C18.7747 9.31938 19.0565 10.1866 18.5822 10.7526L16.611 13.105C16.4449 13.3033 16.362 13.5582 16.3799 13.8163L16.5919 16.878C16.6429 17.6148 15.9052 18.1507 15.2203 17.8745L12.374 16.7268C12.134 16.6301 11.866 16.6301 11.626 16.7268L8.77969 17.8745C8.09479 18.1507 7.35709 17.6148 7.4081 16.878L7.62011 13.8163C7.63798 13.5582 7.55514 13.3033 7.38898 13.105L5.41784 10.7526C4.94353 10.1866 5.22531 9.31938 5.94174 9.14024L8.9191 8.39576C9.17008 8.333 9.38697 8.17542 9.52421 7.95612L11.1523 5.35454Z" fill="white"/>
+                      </svg>
+                    </span>
+                    <span class="check-list__txt">Тем, кто готов оплатить сразу</span>
+                  </li>
+                  <li class="check-list__item">
+                    <span class="check-list__icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="12" fill="#1E9139"/>
+                        <path d="M9.81955 10.9761C11.273 11.1335 12.5188 11.5569 13.3954 12.1482C16.1507 12.5033 20.7298 11.3085 19.9013 9.16365C17.8701 11.3704 11.1072 11.3676 9.07471 9.16365C8.75799 9.84523 9.18578 10.4449 9.81955 10.9761Z" fill="#F5F5F5"/>
+                        <path d="M14.4896 10.1468C21.7999 9.95615 21.7828 5.18754 14.4896 5C7.1869 5.18859 7.18954 9.95755 14.4896 10.1468Z" fill="#F5F5F5"/>
+                        <path d="M8.52432 16.7702C11.507 16.7702 14.0249 15.5911 14.0579 14.188C13.6261 11.8648 9.6017 11.453 7.36751 11.6688C7.35433 11.6688 7.34115 11.6688 7.33126 11.6723C6.78449 11.7318 6.24135 11.8277 5.71304 11.9837H5.70975C5.62043 12.0086 5.52848 12.0334 5.44279 12.0642C5.01039 12.2073 4.57832 12.3865 4.18381 12.624C4.17129 12.6275 4.15415 12.6352 4.14427 12.6485C4.13767 12.6485 4.13108 12.652 4.12779 12.6555C4.07835 12.6881 4.03056 12.7112 3.98607 12.75C3.86775 12.8203 3.75636 12.9137 3.6532 13.0054C3.36086 13.2559 3.09259 13.5834 3.02041 13.9816C3.01382 13.9956 3.01382 14.0131 3.01053 14.0271C3.00426 14.0495 3.00196 14.0771 3.00064 14.1041C2.95351 15.6061 5.51892 16.7513 8.52432 16.7702Z" fill="#F5F5F5"/>
+                        <path d="M8.52432 17.47C6.19093 17.47 4.20029 16.8122 3.14236 15.815C2.08837 18.2033 7.24623 19.3671 9.99093 18.8975C9.99423 18.901 10.0008 18.901 10.0041 18.8975C10.2744 18.8615 10.5426 18.8128 10.8083 18.7541C10.83 18.7513 10.8468 18.7429 10.8676 18.7401C10.8709 18.7436 10.8742 18.7436 10.8742 18.7401C10.9358 18.724 10.9978 18.717 11.0588 18.6946C11.0653 18.6981 11.0719 18.6946 11.0752 18.6911C11.1115 18.6841 11.1477 18.6736 11.184 18.6631C11.1906 18.6631 11.1939 18.6631 11.2005 18.6561C12.5254 18.3139 14.6317 17.308 13.9063 15.815C12.8516 16.8122 10.861 17.47 8.52432 17.47Z" fill="#F5F5F5"/>
+                        <path d="M19.9013 13.2818C18.8631 14.2825 16.8856 14.9473 14.5588 14.9613C14.5127 15.0767 14.4567 15.1887 14.3875 15.3007C14.6063 15.6474 14.7289 16.0207 14.717 16.3923C17.7485 16.2748 20.5482 15.1313 19.9013 13.2818Z" fill="#F5F5F5"/>
+                        <path d="M14.717 14.188C14.717 14.2125 14.7104 14.2335 14.7104 14.258C17.6849 14.1537 20.5077 13.0138 19.9013 11.2245C18.8519 12.2759 16.562 12.9655 14.2293 12.9039C14.5437 13.2983 14.6989 13.7244 14.717 14.188Z" fill="#F5F5F5"/>
+                      </svg>
+                    </span>
+                    <span class="check-list__txt">Тем, кто покупает для инвестиций</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="overview__card">
+                <h2 class="overview__title">Основные условия рассрочки</h2>
+                <div class="accordion" data-accordion>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Скидка — до 10%</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Размер скидки зависит от выбранной квартиры, площади, проекта и текущих условий продажи.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">100% оплата</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Вы оплачиваете полную стоимость квартиры и получаете индивидуальное предложение по цене.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Фиксация стоимости</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">После согласования условий итоговая цена закрепляется за вами.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Быстрое оформление</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Покупка проходит проще: без графиков платежей, рассрочки и дополнительных согласований.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Подходит для инвестиций</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Полная оплата помогает быстрее оформить объект и перейти к дальнейшим планам: ремонту, сдаче или перепродаже.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Индивидуальный расчёт</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Менеджер рассчитает точную скидку и покажет финальную стоимость по выбранной квартире.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="overview__media">
+              <img src="@img/overview-img.png" alt="Место, где бизнес работает без лишних препятствий">
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section class="calc section-pad-bottom section-hidden">
+        <div class="container">
+          <div class="calc__container" data-calc>
+            <div class="calc__left calc__wrap">
+              <h2 class="calc__title">Калькулятор рассрочки</h2>
+
+              <div class="calc__group">
+                <div class="calc__label text-s">Стоимость квартиры</div>
+                <div class="calc__field">
+                  <input type="text" class="calc__input" data-calc-price-input inputmode="numeric" value="18 000 000 KGS">
+                </div>
+                <div class="calc__slider-wrap">
+                  <input type="range" class="calc__slider" data-calc-price min="1000000" max="50000000" step="100000" value="18000000">
+                  <div class="calc__slider-labels text-s">
+                    <span>1 000 000 KGS</span>
+                    <span>50 000 000 KGS</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="calc__group">
+                <div class="calc__label text-s">Первоначальный взнос</div>
+                <div class="calc__row">
+                  <div class="calc__field calc__field_sm">
+                    <input type="text" class="calc__input" data-calc-percent-input inputmode="numeric" value="30 %">
+                  </div>
+                  <div class="calc__field">
+                    <input type="text" class="calc__input" data-calc-initial-input inputmode="numeric" value="5 400 000 KGS">
+                  </div>
+                </div>
+                <div class="calc__slider-wrap">
+                  <input type="range" class="calc__slider" data-calc-percent min="10" max="70" step="1" value="30">
+                  <div class="calc__slider-labels text-s">
+                    <span>10%</span>
+                    <span>70%</span>
+                  </div>
+                </div>
+                <div class="calc__chips">
+                  <button type="button" class="calc__chip" data-calc-preset="20">20%</button>
+                  <button type="button" class="calc__chip is-active" data-calc-preset="30">30%</button>
+                  <button type="button" class="calc__chip" data-calc-preset="40">40%</button>
+                  <button type="button" class="calc__chip" data-calc-preset="50">50%</button>
+                </div>
+              </div>
+
+              <div class="calc__group">
+                <div class="calc__label text-s">Срок рассрочки</div>
+                <div class="calc__chips">
+                  <button type="button" class="calc__chip" data-calc-term="6">6 мес</button>
+                  <button type="button" class="calc__chip" data-calc-term="12">12 мес</button>
+                  <button type="button" class="calc__chip" data-calc-term="18">18 мес</button>
+                  <button type="button" class="calc__chip is-active" data-calc-term="24">24 мес</button>
+                </div>
+              </div>
+
+              <button type="button" class="calc__submit button button-primary" data-calc-submit>Получить рассчет</button>
+            </div>
+
+            <div class="calc__right calc__wrap">
+              <div class="calc__caption text-l">Ваш примерный рассчет</div>
+              <div class="calc__result">
+                <div class="calc__result-main">
+                  <span class="calc__result-value" data-calc-monthly>525 000</span>
+                  <span class="calc__result-unit">KGS / мес</span>
+                </div>
+                <div class="calc__result-sub text-s">При сроке <span data-calc-term-text>24 месяца</span></div>
+              </div>
+              <ul class="calc__summary">
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Стоимость квартиры</span>
+                  <span class="calc__summary-val" data-calc-sum-price>18 000 000 KGS</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Первоначальный взнос</span>
+                  <span class="calc__summary-val" data-calc-sum-initial>5 400 000 KGS</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Остаток к оплате</span>
+                  <span class="calc__summary-val" data-calc-sum-remainder>12 600 000 KGS</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Срок рассрочки</span>
+                  <span class="calc__summary-val" data-calc-sum-term>24 мес.</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Переплата</span>
+                  <span class="calc__summary-val calc__summary-val_accent" data-calc-sum-overpay>0 KGS</span>
+                </li>
+              </ul>
+              <a class="calc__action button" href="projects.html">Посмотреть квартиры</a>
+              <div class="calc__note text-s">*Рассчет предварительный. Точные условия уточнит менеджер</div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      @@include('html/feedback.html');
+    </main>
+
+    @@include('html/footer.html') 
+    @@include('html/foot.html')
+  </body>
+</html>

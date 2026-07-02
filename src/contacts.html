@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  @@include('html/head.html', { "title": "Контакты" })
+  <body>
+    @@include('html/header.html')
+
+    <main>
+      <section class="contacts section-top section-pad-bottom section-hidden">
+        <div class="container">
+          <div class="contacts__container">
+            <h2 class="contacts__title title-indent">Свяжитесь с нами</h2>
+            <div class="contacts__grid">
+              <div class="contacts__cards">
+                <div class="contacts__col">
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Офис</div>
+                    <div class="contacts__txt">ARTWIN</div>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Адрес</div>
+                    <div class="contacts__txt">Пр. Ч. Айтматова 243, ​5 этаж</div>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">График работы</div>
+                    <ul class="contacts__list">
+                      <li>Пн-Пт: 9:00-18:00</li>
+                      <li>Сб: 9:00-18:00</li>
+                    </ul>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Номер телефона</div>
+                    <ul class="contacts__list">
+                      <li><a href="tel:8000">8000</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="contacts__col">
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Офис</div>
+                    <div class="contacts__txt">Ош</div>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Адрес</div>
+                    <div class="contacts__txt">ул. Шакирова 275</div>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">График работы</div>
+                    <ul class="contacts__list">
+                      <li>Пн-Пт: 9:00-18:00</li>
+                      <li>Сб: 9:00-18:00</li>
+                    </ul>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Номер телефона</div>
+                    <ul class="contacts__list">
+                      <li><a href="tel:0559800008">0 (559) 80-0008</a></li>
+                      <li><a href="tel:0777800008">0 (777) 80-0008</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="contacts__socials">
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Instagram</div>
+                    <a href="#" target="_blank" rel="noopener noreferrer">@artwin.kg</a>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">YouTube</div>
+                    <a href="#" target="_blank" rel="noopener noreferrer">ARTWIN</a>
+                  </div>
+                  <div class="contacts__group">
+                    <div class="contacts__caption">Email</div>
+                    <a href="mailto:office@artwin.kg">office@artwin.kg</a>
+                  </div>
+                </div>
+              </div>
+              <div class="contacts__img"><img src="@img/contacts-img.png" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      @@include('html/feedback.html');
+    </main>
+
+    @@include('html/footer.html') 
+    @@include('html/foot.html')
+  </body>
+</html>

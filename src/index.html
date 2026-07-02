@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  @@include('html/head.html', { "title": "Главная" })
+  <body>
+    @@include('html/header.html')
+
+    <main>
+      <section class="hero section-top section-hidden">
+        <div class="container">
+          <div class="hero__container">
+            <img src="@img/hero-img.jpg" alt="Квартиры в престижном районе Бишкека">
+            <ul class="hero__badges text-s">
+              <li>От 2 833 380</li>
+              <li>Сдача 2027</li>
+              <li>Рассрочка</li>
+              <li>От 1-комнатных и выше</li>
+            </ul>
+            <div class="hero__content">
+              <h1 class="hero__title">Квартиры в престижном районе Бишкека</h1>
+              <div class="hero__desc">Сдача 2027-2028. Рассрочка 0%</div>
+              <a class="hero__btn button button-primary">Выбрать квартиру</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="projects section-pad-bottom section-hidden">
+        <div class="container">
+          <div class="projects__container">
+            <div class="projects__topbar">
+              <label for="filter-open" class="filters-trigger">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Фильтр
+              </label>
+            </div>
+
+            <input type="checkbox" id="filter-open" class="filter-drawer-toggle">
+            <label for="filter-open" class="filter-overlay"></label>
+
+            <div class="filter-drawer">
+              <div class="filter-drawer__header">
+                <label for="filter-open" class="filter-drawer__back">
+                  <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Назад
+                </label>
+                <div class="filter-drawer__title">Фильтр</div>
+                <button type="reset" form="filter-form" class="filter-drawer__reset">Сбросить</button>
+              </div>
+              <div class="filter-drawer__body">
+                <form id="filter-form">
+                  <div class="projects__filters filters">
+                    <div class="filters__group">
+                      <div class="filters__label text-s">Цена</div>
+                      <div class="filters__btns">
+                        <input type="checkbox" id="f-price-1" class="filter-check" name="price" value="low">
+                        <label for="f-price-1" class="filter-button">от 2,19 млн сом</label>
+                        <input type="checkbox" id="f-price-2" class="filter-check" name="price" value="mid">
+                        <label for="f-price-2" class="filter-button">2,19–3,50 млн сом</label>
+                        <input type="checkbox" id="f-price-3" class="filter-check" name="price" value="high">
+                        <label for="f-price-3" class="filter-button">от 3,50 млн сом</label>
+                      </div>
+                    </div>
+                    <div class="filters__group">
+                      <div class="filters__label text-s">Комнатность</div>
+                      <div class="filters__btns">
+                        <input type="checkbox" id="f-rooms-1" class="filter-check" name="rooms" value="1">
+                        <label for="f-rooms-1" class="filter-button">1-комн</label>
+                        <input type="checkbox" id="f-rooms-2" class="filter-check" name="rooms" value="2">
+                        <label for="f-rooms-2" class="filter-button">2-комн</label>
+                        <input type="checkbox" id="f-rooms-3" class="filter-check" name="rooms" value="3">
+                        <label for="f-rooms-3" class="filter-button">3-комн</label>
+                        <input type="checkbox" id="f-rooms-4" class="filter-check" name="rooms" value="4">
+                        <label for="f-rooms-4" class="filter-button">4-комн</label>
+                      </div>
+                    </div>
+                    <div class="filters__group">
+                      <div class="filters__label text-s">Срок сдачи</div>
+                      <div class="filters__btns">
+                        <input type="checkbox" id="f-date-1" class="filter-check" name="date" value="done">
+                        <label for="f-date-1" class="filter-button">Сдан</label>
+                        <input type="checkbox" id="f-date-2" class="filter-check" name="date" value="2026">
+                        <label for="f-date-2" class="filter-button">2026</label>
+                        <input type="checkbox" id="f-date-3" class="filter-check" name="date" value="2027">
+                        <label for="f-date-3" class="filter-button">2027+</label>
+                      </div>
+                    </div>
+                    <div class="filters__group">
+                      <div class="filters__label text-s">Условия</div>
+                      <div class="filters__btns">
+                        <input type="checkbox" id="f-pay-1" class="filter-check" name="pay" value="installment">
+                        <label for="f-pay-1" class="filter-button filter-button_accent">% Рассрочка</label>
+                        <input type="checkbox" id="f-pay-2" class="filter-check" name="pay" value="full">
+                        <label for="f-pay-2" class="filter-button">100% оплата</label>
+                        <input type="checkbox" id="f-pay-3" class="filter-check" name="pay" value="barter">
+                        <label for="f-pay-3" class="filter-button">Бартер</label>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="filter-drawer__footer">
+                <label for="filter-open" class="filter-drawer__apply button button-primary">Показать проекты</label>
+              </div>
+            </div>
+            <div class="projects__cards projects__cards">
+              <a href="" class="project__card project-card">
+                <div class="project-card__top">
+                  <ul class="project-card__badges">
+                    <li>Сдан</li>
+                    <li>Бизнес</li>
+                    <!-- Рассрочка всегда последняя -->
+                    <li>% Рассрочка</li>
+                  </ul>
+                  <img src="@img/project-1.png" alt="London square">
+                </div>
+                <div class="project-card__content">
+                  <div class="project-card__col">
+                    <div class="project-card__caption text-l text-up">London square</div>
+                    <div class="project-card__address">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="10" fill="#1E9139"/>
+                        <g clip-path="url(#clip0_690_618)">
+                          <path d="M9.8678 4.0016C9.90553 4.00071 9.94336 4.00036 9.98121 4.00024C9.94336 4.00036 9.90553 4.00069 9.8678 4.0016Z" fill="white"/>
+                          <path d="M10.1325 4.00162C10.0884 4.00054 10.0442 4 10 4C10.0442 4 10.0884 4.00056 10.1325 4.00162Z" fill="white"/>
+                          <path d="M9.99996 6.99805C8.8938 6.99805 7.9939 7.89795 7.9939 9.00411C7.9939 10.1103 8.8938 11.0102 9.99996 11.0102C11.1061 11.0102 12.006 10.1103 12.006 9.00411C12.006 7.89795 11.1061 6.99805 9.99996 6.99805Z" fill="white"/>
+                          <path d="M9.86782 4.00157C8.50584 4.03446 7.23103 4.57535 6.26554 5.53305C5.26884 6.52171 4.71384 7.84342 4.70273 9.25474C4.69014 10.8575 5.45378 12.1105 6.09665 12.8794C6.6018 13.4836 7.88777 14.5757 9.62479 15.8756C9.84602 16.0412 10.1549 16.0414 10.376 15.8762C11.3598 15.1409 13.1257 13.7744 13.8993 12.8833C14.5371 12.1486 15.2974 10.9301 15.2974 9.29739C15.2974 7.8824 14.7464 6.55211 13.7458 5.55157C12.7765 4.58228 11.4978 4.03488 10.1325 4.0016C10.0884 4.00054 9.90555 4.00068 9.86782 4.00157ZM9.99998 11.9477C8.37686 11.9477 7.05635 10.6272 7.05635 9.00407C7.05635 7.38093 8.37686 6.06044 9.99998 6.06044C11.6231 6.06044 12.9436 7.38096 12.9436 9.00407C12.9436 10.6272 11.6231 11.9477 9.99998 11.9477Z" fill="white"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_690_618">
+                            <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span>Токомбаева / Дуйшеева</span>
+                    </div>
+                  </div>
+                  <div class="project-card__col">
+                    <div>от 18 млн KGS</div>
+                    <div>1–3 комн.</div>
+                  </div>
+                </div>
+              </a>
+              <a href="" class="project__card project-card">
+                <div class="project-card__top">
+                  <ul class="project-card__badges">
+                    <li>Сдан</li>
+                    <li>Бизнес</li>
+                    <!-- Рассрочка всегда последняя -->
+                    <li>% Рассрочка</li>
+                  </ul>
+                  <img src="@img/project-2.png" alt="БЦ SEOUL">
+                </div>
+                <div class="project-card__content">
+                  <div class="project-card__col">
+                    <div class="project-card__caption text-l text-up">БЦ SEOUL</div>
+                    <div class="project-card__address">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="10" fill="#1E9139"/>
+                        <g clip-path="url(#clip0_690_618)">
+                          <path d="M9.8678 4.0016C9.90553 4.00071 9.94336 4.00036 9.98121 4.00024C9.94336 4.00036 9.90553 4.00069 9.8678 4.0016Z" fill="white"/>
+                          <path d="M10.1325 4.00162C10.0884 4.00054 10.0442 4 10 4C10.0442 4 10.0884 4.00056 10.1325 4.00162Z" fill="white"/>
+                          <path d="M9.99996 6.99805C8.8938 6.99805 7.9939 7.89795 7.9939 9.00411C7.9939 10.1103 8.8938 11.0102 9.99996 11.0102C11.1061 11.0102 12.006 10.1103 12.006 9.00411C12.006 7.89795 11.1061 6.99805 9.99996 6.99805Z" fill="white"/>
+                          <path d="M9.86782 4.00157C8.50584 4.03446 7.23103 4.57535 6.26554 5.53305C5.26884 6.52171 4.71384 7.84342 4.70273 9.25474C4.69014 10.8575 5.45378 12.1105 6.09665 12.8794C6.6018 13.4836 7.88777 14.5757 9.62479 15.8756C9.84602 16.0412 10.1549 16.0414 10.376 15.8762C11.3598 15.1409 13.1257 13.7744 13.8993 12.8833C14.5371 12.1486 15.2974 10.9301 15.2974 9.29739C15.2974 7.8824 14.7464 6.55211 13.7458 5.55157C12.7765 4.58228 11.4978 4.03488 10.1325 4.0016C10.0884 4.00054 9.90555 4.00068 9.86782 4.00157ZM9.99998 11.9477C8.37686 11.9477 7.05635 10.6272 7.05635 9.00407C7.05635 7.38093 8.37686 6.06044 9.99998 6.06044C11.6231 6.06044 12.9436 7.38096 12.9436 9.00407C12.9436 10.6272 11.6231 11.9477 9.99998 11.9477Z" fill="white"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_690_618">
+                            <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span>Юнусалиева / Суванбердиева</span>
+                    </div>
+                  </div>
+                  <div class="project-card__col">
+                    <div>от 18 млн KGS</div>
+                    <div>1–3 комн.</div>
+                  </div>
+                </div>
+              </a>
+              <a href="" class="project__card project-card">
+                <div class="project-card__top">
+                  <ul class="project-card__badges">
+                    <li>Сдан</li>
+                    <li>Бизнес</li>
+                    <!-- Рассрочка всегда последняя -->
+                    <li>% Рассрочка</li>
+                  </ul>
+                  <img src="@img/project-3.png" alt="TOKYO">
+                </div>
+                <div class="project-card__content">
+                  <div class="project-card__col">
+                    <div class="project-card__caption text-l text-up">TOKYO</div>
+                    <div class="project-card__address">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="10" fill="#1E9139"/>
+                        <g clip-path="url(#clip0_690_618)">
+                          <path d="M9.8678 4.0016C9.90553 4.00071 9.94336 4.00036 9.98121 4.00024C9.94336 4.00036 9.90553 4.00069 9.8678 4.0016Z" fill="white"/>
+                          <path d="M10.1325 4.00162C10.0884 4.00054 10.0442 4 10 4C10.0442 4 10.0884 4.00056 10.1325 4.00162Z" fill="white"/>
+                          <path d="M9.99996 6.99805C8.8938 6.99805 7.9939 7.89795 7.9939 9.00411C7.9939 10.1103 8.8938 11.0102 9.99996 11.0102C11.1061 11.0102 12.006 10.1103 12.006 9.00411C12.006 7.89795 11.1061 6.99805 9.99996 6.99805Z" fill="white"/>
+                          <path d="M9.86782 4.00157C8.50584 4.03446 7.23103 4.57535 6.26554 5.53305C5.26884 6.52171 4.71384 7.84342 4.70273 9.25474C4.69014 10.8575 5.45378 12.1105 6.09665 12.8794C6.6018 13.4836 7.88777 14.5757 9.62479 15.8756C9.84602 16.0412 10.1549 16.0414 10.376 15.8762C11.3598 15.1409 13.1257 13.7744 13.8993 12.8833C14.5371 12.1486 15.2974 10.9301 15.2974 9.29739C15.2974 7.8824 14.7464 6.55211 13.7458 5.55157C12.7765 4.58228 11.4978 4.03488 10.1325 4.0016C10.0884 4.00054 9.90555 4.00068 9.86782 4.00157ZM9.99998 11.9477C8.37686 11.9477 7.05635 10.6272 7.05635 9.00407C7.05635 7.38093 8.37686 6.06044 9.99998 6.06044C11.6231 6.06044 12.9436 7.38096 12.9436 9.00407C12.9436 10.6272 11.6231 11.9477 9.99998 11.9477Z" fill="white"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_690_618">
+                            <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span>7 Апреля / Исакеева</span>
+                    </div>
+                  </div>
+                  <div class="project-card__col">
+                    <div>от 18 млн KGS</div>
+                    <div>1–3 комн.</div>
+                  </div>
+                </div>
+              </a>
+              <a href="" class="project__card project-card">
+                <div class="project-card__top">
+                  <ul class="project-card__badges">
+                    <li>На стадии строительства</li>
+                    <li>Комфорт-плюс</li>
+                    <!-- Рассрочка всегда последняя -->
+                    <li>% Рассрочка</li>
+                  </ul>
+                  <img src="@img/project-4.jpg" alt="TOKYO CITY">
+                </div>
+                <div class="project-card__content">
+                  <div class="project-card__col">
+                    <div class="project-card__caption text-l text-up">TOKYO CITY</div>
+                    <div class="project-card__address">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="10" fill="#1E9139"/>
+                        <g clip-path="url(#clip0_690_618)">
+                          <path d="M9.8678 4.0016C9.90553 4.00071 9.94336 4.00036 9.98121 4.00024C9.94336 4.00036 9.90553 4.00069 9.8678 4.0016Z" fill="white"/>
+                          <path d="M10.1325 4.00162C10.0884 4.00054 10.0442 4 10 4C10.0442 4 10.0884 4.00056 10.1325 4.00162Z" fill="white"/>
+                          <path d="M9.99996 6.99805C8.8938 6.99805 7.9939 7.89795 7.9939 9.00411C7.9939 10.1103 8.8938 11.0102 9.99996 11.0102C11.1061 11.0102 12.006 10.1103 12.006 9.00411C12.006 7.89795 11.1061 6.99805 9.99996 6.99805Z" fill="white"/>
+                          <path d="M9.86782 4.00157C8.50584 4.03446 7.23103 4.57535 6.26554 5.53305C5.26884 6.52171 4.71384 7.84342 4.70273 9.25474C4.69014 10.8575 5.45378 12.1105 6.09665 12.8794C6.6018 13.4836 7.88777 14.5757 9.62479 15.8756C9.84602 16.0412 10.1549 16.0414 10.376 15.8762C11.3598 15.1409 13.1257 13.7744 13.8993 12.8833C14.5371 12.1486 15.2974 10.9301 15.2974 9.29739C15.2974 7.8824 14.7464 6.55211 13.7458 5.55157C12.7765 4.58228 11.4978 4.03488 10.1325 4.0016C10.0884 4.00054 9.90555 4.00068 9.86782 4.00157ZM9.99998 11.9477C8.37686 11.9477 7.05635 10.6272 7.05635 9.00407C7.05635 7.38093 8.37686 6.06044 9.99998 6.06044C11.6231 6.06044 12.9436 7.38096 12.9436 9.00407C12.9436 10.6272 11.6231 11.9477 9.99998 11.9477Z" fill="white"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_690_618">
+                            <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span>7 Апреля / Исакеева</span>
+                    </div>
+                  </div>
+                  <div class="project-card__col">
+                    <div>От 1 773 486 KGS</div>
+                    <div>1-4 ком</div>
+                  </div>
+                </div>
+              </a>
+              <a href="" class="project__card project-card">
+                <div class="project-card__top">
+                  <ul class="project-card__badges">
+                    <li>Сдан</li>
+                    <li>Бизнес</li>
+                    <!-- Рассрочка всегда последняя -->
+                    <li>% Рассрочка</li>
+                  </ul>
+                  <img src="@img/project-5.png" alt="HAYAT">
+                </div>
+                <div class="project-card__content">
+                  <div class="project-card__col">
+                    <div class="project-card__caption text-l text-up">HAYAT</div>
+                    <div class="project-card__address">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="10" fill="#1E9139"/>
+                        <g clip-path="url(#clip0_690_618)">
+                          <path d="M9.8678 4.0016C9.90553 4.00071 9.94336 4.00036 9.98121 4.00024C9.94336 4.00036 9.90553 4.00069 9.8678 4.0016Z" fill="white"/>
+                          <path d="M10.1325 4.00162C10.0884 4.00054 10.0442 4 10 4C10.0442 4 10.0884 4.00056 10.1325 4.00162Z" fill="white"/>
+                          <path d="M9.99996 6.99805C8.8938 6.99805 7.9939 7.89795 7.9939 9.00411C7.9939 10.1103 8.8938 11.0102 9.99996 11.0102C11.1061 11.0102 12.006 10.1103 12.006 9.00411C12.006 7.89795 11.1061 6.99805 9.99996 6.99805Z" fill="white"/>
+                          <path d="M9.86782 4.00157C8.50584 4.03446 7.23103 4.57535 6.26554 5.53305C5.26884 6.52171 4.71384 7.84342 4.70273 9.25474C4.69014 10.8575 5.45378 12.1105 6.09665 12.8794C6.6018 13.4836 7.88777 14.5757 9.62479 15.8756C9.84602 16.0412 10.1549 16.0414 10.376 15.8762C11.3598 15.1409 13.1257 13.7744 13.8993 12.8833C14.5371 12.1486 15.2974 10.9301 15.2974 9.29739C15.2974 7.8824 14.7464 6.55211 13.7458 5.55157C12.7765 4.58228 11.4978 4.03488 10.1325 4.0016C10.0884 4.00054 9.90555 4.00068 9.86782 4.00157ZM9.99998 11.9477C8.37686 11.9477 7.05635 10.6272 7.05635 9.00407C7.05635 7.38093 8.37686 6.06044 9.99998 6.06044C11.6231 6.06044 12.9436 7.38096 12.9436 9.00407C12.9436 10.6272 11.6231 11.9477 9.99998 11.9477Z" fill="white"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_690_618">
+                            <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span>Суюмбаева / Московская</span>
+                    </div>
+                  </div>
+                  <div class="project-card__col">
+                    <div>от 18 млн KGS</div>
+                    <div>1–3 комн.</div>
+                  </div>
+                </div>
+              </a>
+              <a href="" class="project__card project-card">
+                <div class="project-card__top">
+                  <ul class="project-card__badges">
+                    <li>Сдан</li>
+                    <li>Бизнес</li>
+                    <!-- Рассрочка всегда последняя -->
+                    <li>% Рассрочка</li>
+                  </ul>
+                  <img src="@img/project-6.png" alt="URPAQ PARK">
+                </div>
+                <div class="project-card__content">
+                  <div class="project-card__col">
+                    <div class="project-card__caption text-l text-up">URPAQ PARK</div>
+                    <div class="project-card__address">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="20" height="20" rx="10" fill="#1E9139"/>
+                        <g clip-path="url(#clip0_690_618)">
+                          <path d="M9.8678 4.0016C9.90553 4.00071 9.94336 4.00036 9.98121 4.00024C9.94336 4.00036 9.90553 4.00069 9.8678 4.0016Z" fill="white"/>
+                          <path d="M10.1325 4.00162C10.0884 4.00054 10.0442 4 10 4C10.0442 4 10.0884 4.00056 10.1325 4.00162Z" fill="white"/>
+                          <path d="M9.99996 6.99805C8.8938 6.99805 7.9939 7.89795 7.9939 9.00411C7.9939 10.1103 8.8938 11.0102 9.99996 11.0102C11.1061 11.0102 12.006 10.1103 12.006 9.00411C12.006 7.89795 11.1061 6.99805 9.99996 6.99805Z" fill="white"/>
+                          <path d="M9.86782 4.00157C8.50584 4.03446 7.23103 4.57535 6.26554 5.53305C5.26884 6.52171 4.71384 7.84342 4.70273 9.25474C4.69014 10.8575 5.45378 12.1105 6.09665 12.8794C6.6018 13.4836 7.88777 14.5757 9.62479 15.8756C9.84602 16.0412 10.1549 16.0414 10.376 15.8762C11.3598 15.1409 13.1257 13.7744 13.8993 12.8833C14.5371 12.1486 15.2974 10.9301 15.2974 9.29739C15.2974 7.8824 14.7464 6.55211 13.7458 5.55157C12.7765 4.58228 11.4978 4.03488 10.1325 4.0016C10.0884 4.00054 9.90555 4.00068 9.86782 4.00157ZM9.99998 11.9477C8.37686 11.9477 7.05635 10.6272 7.05635 9.00407C7.05635 7.38093 8.37686 6.06044 9.99998 6.06044C11.6231 6.06044 12.9436 7.38096 12.9436 9.00407C12.9436 10.6272 11.6231 11.9477 9.99998 11.9477Z" fill="white"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_690_618">
+                            <rect width="12" height="12" fill="white" transform="translate(4 4)"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span>Байтик Баатыра / Токомбаева</span>
+                    </div>
+                  </div>
+                  <div class="project-card__col">
+                    <div>от 18 млн KGS</div>
+                    <div>1–3 комн.</div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="projects__bottom bottom">
+              <a href="projects.html" class="projects__btn button button-light">Показать все</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="main-about section-pad section-hidden">
+        <div class="container">
+          <div class="main-about__container">
+            <h2 class="main-about__title title-indent">Мы строим наследие</h2>
+            <div class="main-about__top">
+              <img class="back" src="@img/main-about-back-1.jpg" alt="">
+              <img class="main-about__logo" src="@img/logo-light.svg" alt="">
+              <div class="main-about__row">
+                <div class="main-about__desc">Наши проекты — это пространства, где создаются семейные истории, крепнут традиции и растет будущее детей</div>
+                <a href="about.html" class="main-about__btn button button-white">Подробнее</a>
+              </div>
+            </div>
+            <div class="main-about__cards">
+              <div class="main-about__card main-about__card_lg">
+                <div class="main-about__caption text-l">С 2019 года реализуем проекты полного цикла — от идеи до сдачи объекта</div>
+                <!-- <div class="main-about__desc"></div> -->
+                 <div class="main-about__icon"><img src="@img/main-about-1.png" alt=""></div>
+              </div>
+              <div class="main-about__card center">
+                <div class="main-about__caption text-l">Более 3500 людей уже выбрали наши дома. Их выбор - лучшее подтверждение качества</div>
+              </div>
+              <div class="main-about__card center">
+                <div class="main-about__caption text-l">7 жилых комплексов, 1 бизнес-центр класса «А», 1 социальный проект</div>
+              </div>
+            </div>
+            <div class="main-about__box">
+              <img class="back" src="@img/main-about-back-2.jpg" alt="">
+              <div class="main-about__caption text-l">Более 570 000 м² - не просто масштабные цифры, а качественные перемены в архитектуре Кыргызстана</div>
+            </div>
+            <div class="main-about__cards">
+              <div class="main-about__card main-about__card_m">
+                <div class="main-about__caption text-l">С каждого проданного м²</div>
+                <div class="main-about__desc">$1 на благотворительность</div>
+                 <div class="main-about__icon"><img src="@img/main-about-2.png" alt=""></div>
+              </div>
+              <div class="main-about__card main-about__card_m">
+                <div class="main-about__caption text-l">Социальные проекты</div>
+                <div class="main-about__desc">Реализуем социальные инициативы и участвуем в развитии городской среды</div>
+                <a href="" class="main-about__link button button-light">Подробнее</a>
+                 <div class="main-about__icon"><img src="@img/main-about-3.png" alt=""></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="benefits section-pad section-hidden">
+        <div class="container">
+          <div class="benefits__container">
+            <h2 class="benefits__title title-indent">Что вы получаете, кроме квартиры</h2>
+            <div class="benefits__slider">
+              <div class="swiper benefitsSwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide benefits-card">
+                    <img src="@img/home-benefits-1.jpg" alt="">
+                    <div class="benefits-card__caption text-l">Развитая экосистема в жилых комплексах</div>
+                    <div class="benefits-card__desc">Безопасные детские площадки, собственный детский сад, развивающий центр, зоны для спорта.</div>
+                  </div>
+                  <div class="swiper-slide benefits-card">
+                    <img src="@img/home-benefits-2.jpg" alt="">
+                    <div class="benefits-card__caption text-l">Стильные жилые кварталы с безупречной архитектурой</div>
+                    <div class="benefits-card__desc">Идеальное сочетание безопасности, красоты, технологичности и ярких оттенков.</div>
+                  </div>
+                  <div class="swiper-slide benefits-card">
+                    <img src="@img/home-benefits-3.jpg" alt="">
+                    <div class="benefits-card__caption text-l">Офисы и коммерческие помещения по последнему слову соразмерности</div>
+                    <div class="benefits-card__desc">Просторные рабочие зоны с панорамными окнами, высокие потолки, конференц-залы, зоны отдыха, двухуровневый паркинг с услугой VALET-PARKING.</div>
+                  </div>
+                  <div class="swiper-slide benefits-card">
+                    <img src="@img/home-benefits-4.jpg" alt="">
+                    <div class="benefits-card__caption text-l">Жилые проекты в лучших районах столицы</div>
+                    <div class="benefits-card__desc">Современные респектабельные районы с удобной транспортной развязкой - легкий путь в любую точку города. Рядом топовые парки, образовательные учреждения, зоны для отдыха.</div>
+                  </div>
+                  <div class="swiper-slide benefits-card">
+                    <img src="@img/home-benefits-5.png" alt="">
+                    <div class="benefits-card__caption text-l">ARTWIN — это жилые комплексы с фокусом на повседневный комфорт и безопасность. 3 ключевые фишки во всех ЖК:</div>
+                    <div class="benefits-card__desc">Face ID: система узнает вас и заблокирует доступ для посторонних. Автоматический паркинг: умные ворота мгновенно считывают номера и пропускают авто жителей. Smart-замки: открытие квартиры отпечатком пальца, картой, кодом или через смартфон.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="how section-pad-bottom section-hidden">
+        <div class="container">
+          <div class="how__container">
+            <h2 class="how__title title-indent">Как купить квартиру</h2>
+            <div class="how__slider">
+              <div class="swiper howSwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide how-card">
+                    <div class="how-card__icon"><img src="@img/how-1.png" alt=""></div>
+                    <div class="how-card__content">
+                      <div class="how-card__caption text-l">Рассрочка 0% до 22 месяцев</div>
+                      <div class="how-card__desc">Гибкий график оплаты</div>
+                    </div>
+                    <a href="" class="how-card__btn button button-light">Узнать подробнее</a>
+                  </div>
+                  <div class="swiper-slide how-card">
+                    <div class="how-card__icon"><img src="@img/how-2.png" alt=""></div>
+                    <div class="how-card__content">
+                      <div class="how-card__caption text-l">100% оплата</div>
+                      <div class="how-card__desc">Выгодные цены</div>
+                    </div>
+                    <a href="" class="how-card__btn button button-light">Узнать подробнее</a>
+                  </div>
+                  <div class="swiper-slide how-card">
+                    <div class="how-card__icon"><img src="@img/how-3.png" alt=""></div>
+                    <div class="how-card__content">
+                      <div class="how-card__caption text-l">Trade-in (бартер)</div>
+                      <div class="how-card__desc">Обмен старой недвижимости на новую квартиру в ARTWIN</div>
+                    </div>
+                    <a href="" class="how-card__btn button button-light">Узнать подробнее</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      @@include('html/feedback.html');
+      <section class="main-news section-pad-bottom section-hidden">
+        <div class="container">
+          <div class="main-news__container">
+            <h2 class="main-news__title title-indent">Новости</h2>
+            <div class="main-news__cards news__cards">
+              <a href="news-inner.html" class="news__card news-card">
+                <div class="news-card__img"><img src="@img/news-1.jpg" alt=""></div>
+                <div class="news-card__content">
+                  <div class="news-card__caption">SEOUL - первый инновационный бизнес-центра класса «А» от ARTWIN</div>
+                  <div class="news-card__meta text-s">26 март. 2026</div>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__card news-card">
+                <div class="news-card__img"><img src="@img/news-2.jpg" alt=""></div>
+                <div class="news-card__content">
+                  <div class="news-card__caption">Мы строим наследие! Мы формируем ценность, которая останется с людьми на поколения</div>
+                  <div class="news-card__meta text-s">26 март. 2026</div>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__card news-card">
+                <div class="news-card__img"><img src="@img/news-3.jpg" alt=""></div>
+                <div class="news-card__content">
+                  <div class="news-card__caption">Английский уют в сердце Бишкека!Жилой квартал LONDON SQUARE меняет облик столицы</div>
+                  <div class="news-card__meta text-s">26 март. 2026</div>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__card news-card">
+                <div class="news-card__img"><img src="@img/news-4.jpg" alt=""></div>
+                <div class="news-card__content">
+                  <div class="news-card__caption">GUEST ZONE в жилом комплексе HAYAT. Гостевое пространство для проведения мероприятий в особо важные дни жильцов</div>
+                  <div class="news-card__meta text-s">26 март. 2026</div>
+                </div>
+              </a>
+            </div>
+            <div class="main-news__bottom bottom">
+              <a href="news.html" class="main-news__btn button button-light">Показать все</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/footer.html') 
+    @@include('html/foot.html')
+  </body>
+</html>

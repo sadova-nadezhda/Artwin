@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  @@include('html/head.html', { "title": "404" })
+  <body>
+    @@include('html/header.html')
+
+    <main>
+      <section class="page-error section-hidden">
+        <div class="container">
+          <div class="page-error__container">
+            <div class="page-error__content">
+              <h1 class="page-error__title">404</h1>
+              <div class="page-error__desc">Такой страницы больше нет</div>
+              <a href="/" class="page-error__btn button button-primary">На главную</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/foot.html')
+  </body>
+</html>
