@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Вход" })
+  <body>
+    <main>
+      <section class="login section-hidden">
+        <img class="login__bg" src="@img/login-bg.png" alt="">
+        <div class="login__card">
+          <form class="auth" data-auth novalidate>
+
+            <!-- Шаг 1 — номер телефона -->
+            <div class="auth__step is-active" data-step="phone">
+              <div class="auth__head">
+                <h1 class="auth__title">Войти по номеру телефона</h1>
+                <p class="auth__subtitle">Введите номер телефона. Мы отправим SMS-код для входа или создания аккаунта.</p>
+              </div>
+
+              <div class="auth__field">
+                <span class="auth__field-label">Телефон*</span>
+                <input class="auth__phone-input" type="tel" inputmode="tel" name="phone" data-auth-phone required>
+              </div>
+
+              <button class="auth__submit button button-primary" type="button" data-action="send" disabled>Получить код</button>
+              <a href="index.html" class="auth__back">Назад</a>
+            </div>
+
+            <!-- Шаг 2 — код из SMS -->
+            <div class="auth__step" data-step="code">
+              <div class="auth__head">
+                <h1 class="auth__title">Введите код из SMS</h1>
+                <p class="auth__subtitle">
+                  <span>Мы отправили код на номер </span>
+                  <b data-auth-phone-label></b></p>
+              </div>
+
+              <label class="auth__field">
+                <span class="auth__field-label">Код из СMS*</span>
+                <input class="auth__input" type="text" inputmode="numeric" name="code" placeholder="Пример: 001100" maxlength="6" autocomplete="one-time-code" data-auth-code required>
+              </label>
+
+              <div class="auth__resend">
+                <span data-auth-timer>Отправить код повторно через: 30</span>
+                <button class="auth__resend-btn" type="button" data-action="resend" hidden>Отправить код повторно</button>
+              </div>
+
+              <button class="auth__submit button button-primary" type="submit" data-auth-verify disabled>Отправить</button>
+              <button class="auth__back" type="button" data-action="back">Назад</button>
+            </div>
+
+          </form>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/foot.html')
+  </body>
+</html>

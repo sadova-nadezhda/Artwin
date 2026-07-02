@@ -220,8 +220,7 @@
   // Phone mask
   // ======================
   const initPhoneMask = () => {
-    // Лид-форма использует intl-tel-input со своей маской — исключаем её
-    const inputs = $$('input[type="tel"]:not([data-lead-phone])');
+    const inputs = $$('input[type="tel"]:not([data-lead-phone]):not([data-auth-phone])');
     if (!inputs.length) return;
 
     const format = (value, matrix) => {
@@ -251,6 +250,41 @@
   };
 
   // ======================
+  // Телефон (intl-tel-input) — общий модуль
+  // ======================
+  const createPhoneInput = (input) => {
+    if (!input) return null;
+
+    const iti = window.intlTelInput
+      ? window.intlTelInput(input, {
+          initialCountry: "kg",
+          countryOrder: ["kg", "kz", "ru", "uz"],
+          separateDialCode: true,
+          strictMode: true,
+          loadUtils: () => import(/* webpackIgnore: true */ "https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/utils.js"),
+        })
+      : null;
+
+    const isValid = () => {
+      if (iti && typeof iti.isValidNumber === "function") {
+        const valid = iti.isValidNumber();
+        if (valid !== null && valid !== undefined) return valid;
+      }
+      return input.value.replace(/\D/g, "").length >= 6;
+    };
+
+    const getNumber = () => {
+      if (!iti) return input.value;
+      const full = typeof iti.getNumber === "function" ? iti.getNumber() : "";
+      if (full) return full;
+      const cc = iti.getSelectedCountryData?.().dialCode;
+      return cc ? `+${cc} ${input.value}`.trim() : input.value;
+    };
+
+    return { input, iti, isValid, getNumber };
+  };
+
+  // ======================
   // Lead form (заявка)
   // ======================
   const initLeadForm = () => {
@@ -269,33 +303,10 @@
     const nextBtn = $('[data-action="next"]', form);
     const backBtn = $('[data-action="back"]', form);
 
-    // ---- intl-tel-input (выпадашка с кодами стран) ----
-    let iti = null;
-    if (window.intlTelInput) {
-      iti = window.intlTelInput(phone, {
-        initialCountry: "kg",
-        countryOrder: ["kg", "kz", "ru", "uz"],
-        separateDialCode: true,
-        strictMode: true,
-        loadUtils: () => import(/* webpackIgnore: true */ "https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/utils.js"),
-      });
-    }
-
-    const isPhoneValid = () => {
-      if (iti && typeof iti.isValidNumber === "function") {
-        const valid = iti.isValidNumber();
-        if (valid !== null && valid !== undefined) return valid;
-      }
-      return phone.value.replace(/\D/g, "").length >= 6;
-    };
-
-    const getPhoneNumber = () => {
-      if (!iti) return phone.value;
-      const full = typeof iti.getNumber === "function" ? iti.getNumber() : "";
-      if (full) return full;
-      const cc = iti.getSelectedCountryData?.().dialCode;
-      return cc ? `+${cc} ${phone.value}`.trim() : phone.value;
-    };
+    // ---- Телефон с выпадашкой кодов стран (общий модуль) ----
+    const phoneField = createPhoneInput(phone);
+    const isPhoneValid = () => phoneField.isValid();
+    const getPhoneNumber = () => phoneField.getNumber();
 
     const setStep = (name) => {
       steps.forEach((step) => step.classList.toggle("is-active", step.dataset.step === String(name)));
@@ -359,6 +370,100 @@
   };
 
   // ======================
+  // Авторизация (вход по SMS)
+  // ======================
+  const initAuthForm = () => {
+    const form = $("[data-auth]");
+    if (!form) return;
+
+    const RESEND_SECONDS = 30;
+
+    const steps = $$(".auth__step", form);
+    const phone = $("[data-auth-phone]", form);
+    const phoneLabel = $("[data-auth-phone-label]", form);
+    const codeInput = $("[data-auth-code]", form);
+    const sendBtn = $('[data-action="send"]', form);
+    const verifyBtn = $("[data-auth-verify]", form);
+    const backBtn = $('[data-action="back"]', form);
+    const resendBtn = $('[data-action="resend"]', form);
+    const timerText = $("[data-auth-timer]", form);
+
+    let timerId = null;
+
+    // ---- Телефон с выпадашкой кодов стран (общий модуль) ----
+    const phoneField = createPhoneInput(phone);
+    const isPhoneValid = () => phoneField.isValid();
+    const getPhoneNumber = () => phoneField.getNumber();
+
+    const setStep = (name) => {
+      steps.forEach((step) => step.classList.toggle("is-active", step.dataset.step === name));
+    };
+
+    const startTimer = () => {
+      let left = RESEND_SECONDS;
+      clearInterval(timerId);
+      resendBtn.hidden = true;
+      timerText.hidden = false;
+      timerText.textContent = `Отправить код повторно через: ${left}`;
+      timerId = setInterval(() => {
+        left -= 1;
+        if (left <= 0) {
+          clearInterval(timerId);
+          timerText.hidden = true;
+          resendBtn.hidden = false;
+          return;
+        }
+        timerText.textContent = `Отправить код повторно через: ${left}`;
+      }, 1000);
+    };
+
+    const syncSend = () => { sendBtn.disabled = !isPhoneValid(); };
+    const syncVerify = () => { verifyBtn.disabled = codeInput.value.replace(/\D/g, "").length < 4; };
+
+    phone.addEventListener("input", syncSend);
+    phone.addEventListener("countrychange", syncSend);
+
+    codeInput.addEventListener("input", () => {
+      codeInput.value = codeInput.value.replace(/\D/g, "");
+      syncVerify();
+    });
+
+    sendBtn.addEventListener("click", () => {
+      if (!isPhoneValid()) {
+        phone.focus();
+        return;
+      }
+      if (phoneLabel) phoneLabel.textContent = getPhoneNumber();
+      console.log("auth: отправка кода на", getPhoneNumber());
+      setStep("code");
+      startTimer();
+      codeInput.focus();
+    });
+
+    resendBtn.addEventListener("click", () => {
+      console.log("auth: повторная отправка кода на", getPhoneNumber());
+      startTimer();
+    });
+
+    backBtn?.addEventListener("click", () => {
+      clearInterval(timerId);
+      setStep("phone");
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (verifyBtn.disabled) return;
+      const data = { phone: getPhoneNumber(), code: codeInput.value };
+      console.log("auth:", data);
+      // здесь проверка кода и редирект в личный кабинет
+    });
+
+    setStep("phone");
+    syncSend();
+    syncVerify();
+  };
+
+  // ======================
   // Калькулятор рассрочки
   // ======================
   const initCalc = () => {
@@ -370,7 +475,6 @@
     const pctSlider = $("[data-calc-percent]", root);
     const pctInput = $("[data-calc-percent-input]", root);
 
-    // Диапазоны берём из атрибутов слайдеров — не дублируем значения в JS
     const MIN_PRICE = Number(priceSlider.min);
     const MAX_PRICE = Number(priceSlider.max);
     const MIN_PCT = Number(pctSlider.min);
@@ -450,7 +554,6 @@
       render();
     });
 
-    // Текстовые поля считаем «вживую», но переформатируем только по завершении ввода
     priceInput.addEventListener("input", () => {
       state.price = clamp(parse(priceInput.value), MIN_PRICE, MAX_PRICE);
       render();
@@ -490,6 +593,80 @@
   };
 
   // ======================
+  // Сайдбар личного кабинета (сворачивание на мобилке)
+  // ======================
+  const initLkAside = () => {
+    const aside = $("[data-lk-aside]");
+    if (!aside) return;
+
+    const toggle = $("[data-lk-aside-toggle]", aside);
+    const body = $(".lk__aside-body", aside);
+    if (!toggle || !body) return;
+
+    const MOBILE = 1024;
+
+    const setHeight = (open) => {
+      body.style.maxHeight = open ? `${body.scrollHeight}px` : "";
+    };
+
+    toggle.addEventListener("click", () => {
+      const open = aside.classList.toggle("is-open");
+      setHeight(open);
+    });
+
+    // На десктопе меню всегда раскрыто — сбрасываем инлайновую высоту
+    window.addEventListener("resize", debounce(() => {
+      if (window.innerWidth > MOBILE) {
+        aside.classList.remove("is-open");
+        body.style.maxHeight = "";
+      } else if (aside.classList.contains("is-open")) {
+        setHeight(true);
+      }
+    }, 150));
+  };
+
+  // ======================
+  // Переключатель языка (раскрывается вверх)
+  // ======================
+  const initLkLang = () => {
+    const lang = $("[data-lang]");
+    if (!lang) return;
+
+    const toggle = $("[data-lang-toggle]", lang);
+    const currentFlag = $(".lk-lang__current .lk-lang__flag", lang);
+    const currentName = $(".lk-lang__current .lk-lang__name", lang);
+    const options = $$("[data-lang-value]", lang);
+    if (!toggle) return;
+
+    const close = () => lang.classList.remove("is-open");
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      lang.classList.toggle("is-open");
+    });
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const flag = $(".lk-lang__flag", option);
+        const name = $(".lk-lang__name", option);
+        if (flag && currentFlag) currentFlag.innerHTML = flag.innerHTML;
+        if (name && currentName) currentName.textContent = name.textContent;
+        options.forEach((o) => o.classList.toggle("is-active", o === option));
+        close();
+        // здесь можно подключить смену языка: option.dataset.langValue
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("[data-lang]")) close();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  };
+
+  // ======================
   // Accordion
   // ======================
   const initAccordion = () => {
@@ -510,7 +687,6 @@
 
         head.addEventListener("click", () => {
           const isOpen = item.classList.contains("is-open");
-          // Аккордеон: открытым остаётся только один пункт
           items.forEach((i) => {
             i.classList.remove("is-open");
             setHeight(i, false);
@@ -523,14 +699,13 @@
       });
     });
 
-    // Пересчёт высоты открытых пунктов при ресайзе
     window.addEventListener("resize", debounce(() => {
       $$(".accordion__item.is-open").forEach((item) => setHeight(item, true));
     }, 150));
   };
 
   // ======================
-  // Show more (раскрытие скрытых элементов)
+  // Show more
   // ======================
   const initMore = () => {
     $$("[data-more]").forEach((root) => {
@@ -627,7 +802,6 @@
     });
   };
 
-
   // ======================
   // Boot
   // ======================
@@ -643,7 +817,10 @@
     initPhoneMask();
     initModals({ scrollLock });
     initLeadForm();
+    initAuthForm();
     initCalc();
+    initLkAside();
+    initLkLang();
     initAccordion();
     initMore();
 
