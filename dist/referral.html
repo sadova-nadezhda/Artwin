@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Личный кабинет</title>
+  <title>Реферальная ссылка</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260702183532" />
@@ -274,59 +274,46 @@
 
             <!-- Content -->
             <div class="lk__content">
-
-              <!-- Профиль пользователя -->
-              <div class="profile-card">
-                <h1 class="profile-card__title">Профиль пользователя</h1>
-                <div class="profile-card__row">
-                  <div class="profile-card__avatar">
-                    <img src="img/user.png" alt="Амантай" />
-                  </div>
-                  <div class="profile-card__info">
-                    <div class="profile-card__fields">
-                      <div class="profile-card__field">
-                        <span class="profile-card__label">Имя</span>
-                        <span class="profile-card__value">Амантай</span>
-                      </div>
-                      <div class="profile-card__field">
-                        <span class="profile-card__label">Номер</span>
-                        <span class="profile-card__value">+996228880000</span>
-                      </div>
-                    </div>
-                    <button class="profile-card__edit button button-white modal-btn" type="button" data-type="edit-profile">
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_571_10739)">
-                          <path d="M17.2315 0.606635L17.2099 0.586875C16.7956 0.208437 16.2585 0 15.6977 0C15.0689 0 14.4652 0.26617 14.0413 0.730201L6.02624 9.5051C5.95318 9.58507 5.89777 9.67943 5.86351 9.78216L4.92106 12.6075C4.81209 12.9342 4.86678 13.2954 5.06732 13.5738C5.26947 13.8544 5.59512 14.0219 5.93853 14.0219C6.08707 14.0219 6.2323 13.9914 6.37 13.9311L9.09878 12.7373C9.19799 12.6939 9.28699 12.6302 9.36 12.5502L17.3751 3.7754C18.2092 2.86235 18.1449 1.44095 17.2315 0.606635ZM6.72677 12.0856L7.2798 10.4277L7.32644 10.3766L8.37461 11.334L8.32797 11.3851L6.72677 12.0856ZM16.2323 2.73151L9.4185 10.1912L8.37033 9.23387L15.1842 1.77409C15.3174 1.62818 15.4998 1.5478 15.6977 1.5478C15.8713 1.5478 16.0376 1.6124 16.1663 1.72993L16.1879 1.74969C16.4709 2.00812 16.4908 2.44857 16.2323 2.73151Z" fill="black"/>
-                          <path d="M15.6767 7.14023C15.2493 7.14023 14.9028 7.48673 14.9028 7.91413V14.4844C14.9028 15.5696 14.0198 16.4525 12.9346 16.4525H3.555C2.46973 16.4525 1.58686 15.5696 1.58686 14.4844V5.18097C1.58686 4.09576 2.46978 3.21284 3.555 3.21284H10.344C10.7714 3.21284 11.1179 2.86634 11.1179 2.43894C11.1179 2.01154 10.7714 1.66504 10.344 1.66504H3.555C1.61627 1.66504 0.0390625 3.2423 0.0390625 5.18097V14.4843C0.0390625 16.423 1.61632 18.0003 3.555 18.0003H12.9346C14.8732 18.0003 16.4505 16.423 16.4505 14.4843V7.91413C16.4506 7.48673 16.1041 7.14023 15.6767 7.14023Z" fill="black"/>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_571_10739">
-                            <rect width="18" height="18" fill="white"/>
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      Редактировать профиль
-                    </button>
-                  </div>
-                </div>
-              </div>
-
               <div class="lk-row">
-                <!-- Статус -->
-                <div class="status">
-                  <h2 class="status__title">Статус</h2>
-                  <div class="status__card bronze">
-                    <span class="status__card-name">BRONZE</span>
-                    <img class="status__card-img" src="img/status-leopard.png" alt="">
+
+                <!-- Реферальная ссылка -->
+                <div class="referral">
+                  <div class="referral__head">
+                    <h1 class="referral__title">Реферальная ссылка</h1>
+                    <p class="referral__desc">Поделитесь ссылкой с друзьями или знакомыми. Если они оформят договор и внесут первую оплату, вам начислятся бонусы.</p>
                   </div>
-                  <div class="status__progress">
-                    <div class="status__progress-head">
-                      <span class="status__progress-title">Повышение статуса</span>
-                      <span class="status__progress-count">1/3 квартиры</span>
+
+                  <div class="referral__fields">
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Ваш реферальный код</span>
+                        <span class="copy-field__value" data-copy-value>LDN-SQ21</span>
+                      </div>
+                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать код">
+                        <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
                     </div>
-                    <p class="status__progress-text">До статуса SILVER: купить ещё 1 квартиру</p>
-                    <div class="status__bar">
-                      <span class="status__bar-fill" style="width: 33%"></span>
+
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Ваша реферальная ссылка</span>
+                        <span class="copy-field__value" data-copy-value>https://artwin.kg/r/LDN-SQ21</span>
+                      </div>
+                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать ссылку">
+                        <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -349,103 +336,14 @@
                     <button class="button button-light" type="button">История бонусов</button>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
 
           </div>
         </div>
       </section>
     </main>
-
-    <!-- Модалки -->
-    <div class="modals">
-      <div class="modal modal--edit" data-type="edit-profile" data-lenis-prevent>
-        <button class="modal__close" type="button">
-          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-
-        <form class="edit">
-          <div class="edit__head">
-            <h2 class="edit__title">Редактировать профиль</h2>
-            <p class="edit__subtitle">Обновите данные, которые отображаются в личном кабинете</p>
-          </div>
-
-          <div class="edit__avatar">
-            <div class="edit__avatar-img">
-              <img src="img/user.png" alt="" />
-              <label class="edit__avatar-btn">
-                <input type="file" accept="image/*" hidden>
-                <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 11.5C9 11.5 9.83333 11.1597 10.5 10.4792C11.1667 9.79861 11.5 8.97222 11.5 8C11.5 7.04167 11.1667 6.21875 10.5 5.53125C9.83333 4.84375 9 4.5 8 4.5C7 4.5 6.16667 4.84375 5.5 5.53125C4.83333 6.21875 4.5 7.04514 4.5 8.01042C4.5 8.97569 4.83333 9.79861 5.5 10.4792C6.16667 11.1597 7 11.5 8 11.5ZM8 10C7.41667 10 6.9375 9.80465 6.5625 9.41396C6.1875 9.02326 6 8.545 6 7.97917C6 7.425 6.1875 6.9566 6.5625 6.57396C6.9375 6.19132 7.41667 6 8 6C8.58333 6 9.0625 6.19132 9.4375 6.57396C9.8125 6.9566 10 7.425 10 7.97917C10 8.545 9.8125 9.02326 9.4375 9.41396C9.0625 9.80465 8.58333 10 8 10ZM1.5 14C1.09722 14 0.746528 13.8507 0.447917 13.5521C0.149306 13.2535 0 12.9028 0 12.5V3.5C0 3.09722 0.149306 2.74653 0.447917 2.44792C0.746528 2.14931 1.09722 2 1.5 2H4L5.5 0H10.5L12 2H14.5C14.9125 2 15.2656 2.14931 15.5594 2.44792C15.8531 2.74653 16 3.09722 16 3.5V12.5C16 12.9028 15.8531 13.2535 15.5594 13.5521C15.2656 13.8507 14.9125 14 14.5 14H1.5ZM1.5 12.5H14.5V3.5H11.25L9.74792 1.5H6.25L4.75 3.5H1.5V12.5Z" fill="#090909"/>
-                </svg>
-              </label>
-            </div>
-            <button class="edit__avatar-remove" type="button">Удалить фото</button>
-          </div>
-
-          <div class="edit__group">
-            <h3 class="edit__group-title">Личные данные</h3>
-            <label class="edit__field">
-              <span class="edit__field-label">Ваше имя*</span>
-              <input class="edit__input" type="text" name="firstName" value="Амантай" required>
-            </label>
-            <label class="edit__field">
-              <span class="edit__field-label">Ваша фамилия*</span>
-              <input class="edit__input" type="text" name="lastName" value="Токтоболотов" required>
-            </label>
-            <label class="edit__field">
-              <span class="edit__field-label">Номер телефона*</span>
-              <input class="edit__input" type="text" inputmode="tel" name="phone" value="+996228880000" required>
-            </label>
-          </div>
-
-          <div class="edit__group">
-            <h3 class="edit__group-title">Безопасность</h3>
-            <div class="edit__security">
-              <button class="button button-light modal-btn" type="button" data-type="reset-password">Смена пароля</button>
-              <button class="button button-danger" type="button">Удалить аккаунт</button>
-            </div>
-          </div>
-
-          <button class="edit__submit button button-primary" type="submit">Сохранить</button>
-        </form>
-      </div>
-
-      <div class="modal modal--reset" data-type="reset-password" data-lenis-prevent>
-        <button class="modal__close" type="button">
-          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-
-        <form class="edit">
-          <div class="edit__head">
-            <h2 class="edit__title">Сброс пароля</h2>
-          </div>
-
-          <div class="edit__group">
-            <label class="edit__field">
-              <span class="edit__field-label">Текущий пароль*</span>
-              <input class="edit__input" type="password" name="currentPassword" value="password12345" autocomplete="current-password">
-            </label>
-            <label class="edit__field">
-              <span class="edit__field-label">Новый пароль*</span>
-              <input class="edit__input" type="password" name="newPassword" placeholder="Введите новый пароль" autocomplete="new-password">
-            </label>
-            <label class="edit__field">
-              <span class="edit__field-label">Повторите новый пароль*</span>
-              <input class="edit__input" type="password" name="newPasswordRepeat" placeholder="Повторите ваш новый пароль" autocomplete="new-password">
-            </label>
-          </div>
-
-          <button class="edit__submit button button-light" type="submit" disabled>Изменить пароль</button>
-          <button class="edit__forgot" type="button">Забыли текущий пароль?</button>
-        </form>
-      </div>
-    </div>
 
     <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260702183532"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260702183532"></script>

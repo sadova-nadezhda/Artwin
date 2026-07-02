@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Как это работает" })
+  <body class="lk-page">
+    @@include('html/header-lk.html')
+
+    <main>
+      <section class="lk section-hidden">
+        <div class="container">
+          <div class="how__grid">
+
+            <!-- Left -->
+            <div class="how__col">
+
+              <!-- Уровни -->
+              <div class="how-levels">
+                <div class="how-levels__head">
+                  <a class="how-levels__back" href="loyalty.html" aria-label="Назад">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="24" height="24" rx="4" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="black" fill-opacity="0.03"/>
+                    <path d="M14 7L9 12L14 17L14 7Z" fill="#1D1B20"/>
+                    </svg>
+                  </a>
+                  <h1 class="how-levels__title">Как это работает?</h1>
+                </div>
+
+                <div class="how-levels__list">
+                  <div class="how-level">
+                    <span class="how-level__icon how-level__icon_bronze"><img src="@img/status-leopard.png"></span>
+                    <div class="how-level__info">
+                      <span class="how-level__name">Bronze: 1-комнатная квартира</span>
+                      <span class="how-level__desc">-4% на квартиру | -5% на коммерцию</span>
+                    </div>
+                  </div>
+                  <div class="how-level">
+                    <span class="how-level__icon how-level__icon_silver"><img src="@img/status-leopard.png"></span>
+                    <div class="how-level__info">
+                      <span class="how-level__name">Silver: 2-4-комнатная квартира</span>
+                      <span class="how-level__desc">-5% на квартиру | -6% на коммерцию</span>
+                    </div>
+                  </div>
+                  <div class="how-level">
+                    <span class="how-level__icon how-level__icon_gold"><img src="@img/status-leopard.png"></span>
+                    <div class="how-level__info">
+                      <span class="how-level__name">Gold: 5-6-комнатная квартира</span>
+                      <span class="how-level__desc">-6% на квартиру | -7% на коммерцию</span>
+                    </div>
+                  </div>
+                  <div class="how-level">
+                    <span class="how-level__icon how-level__icon_platinum"><img src="@img/status-leopard.png"></span>
+                    <div class="how-level__info">
+                      <span class="how-level__name">Platinum: 7-8-комнатная квартира</span>
+                      <span class="how-level__desc">-7% на квартиру | -8% на коммерцию</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Подробнее -->
+              <div class="loyalty-more">
+                <h2 class="loyalty-more__title">Подробнее о программе ART LOYALTY</h2>
+                <div class="accordion" data-accordion>
+                  <div class="accordion__item is-open">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Как работает программа ART Loyalty?</span>
+                      <svg width="24" height="24" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">
+                        <div class="loyalty-more__text">
+                          <p>Покупая недвижимость в ARTWIN, вы автоматически становитесь участником программы ART Loyalty и получаете карту привилегий.</p>
+                          <p>С картой ART Loyalty вам доступны скидки и специальные предложения от наших партнёров:</p>
+                          <ul class="loyalty-more__list">
+                            <li>— мебель и товары для дома</li>
+                            <li>— дизайн интерьера и ремонт</li>
+                            <li>— фитнес-клубы и SPA</li>
+                            <li>— рестораны, кафе и кофейни</li>
+                            <li>— салоны красоты</li>
+                            <li>— автосервисы и детейлинг-центры</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right: большая карточка статуса -->
+            <div class="status-hero bronze">
+              <div class="status-hero__card">
+                <span class="status-hero__name">BRONZE</span>
+                <img class="status-hero__img" src="@img/status-leopard.png" alt="">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/foot.html')
+  </body>
+</html>

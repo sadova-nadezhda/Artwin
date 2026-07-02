@@ -593,6 +593,69 @@
   };
 
   // ======================
+  // Активный пункт меню ЛК (по текущему URL)
+  // ======================
+  const initLkActive = () => {
+    const aside = $("[data-lk-aside]");
+    if (!aside) return;
+
+    const links = $$("a.lk-nav__item", aside);
+    const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    let active = null;
+
+    links.forEach((link) => {
+      const href = (link.getAttribute("href") || "").split("/").pop().toLowerCase();
+      const isActive = !!href && href === current;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) active = link;
+    });
+
+    // Подпись кнопки-раскрытия на мобилке = активный пункт
+    const text = $(".lk__aside-toggle-text", aside);
+    if (active && text) text.textContent = active.textContent.trim();
+  };
+
+  // ======================
+  // Копирование в буфер (реф. код / ссылка)
+  // ======================
+  const initCopy = () => {
+    const buttons = $$("[data-copy]");
+    if (!buttons.length) return;
+
+    const copyText = async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return;
+      } catch (e) {
+        // Фолбэк для небезопасного контекста / старых браузеров
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (err) {}
+        ta.remove();
+      }
+    };
+
+    buttons.forEach((btn) => {
+      let timer = null;
+      btn.addEventListener("click", async () => {
+        const field = btn.closest(".copy-field");
+        const valueEl = field && $("[data-copy-value]", field);
+        const text = valueEl ? valueEl.textContent.trim() : "";
+        if (!text) return;
+
+        await copyText(text);
+        btn.classList.add("is-copied");
+        clearTimeout(timer);
+        timer = setTimeout(() => btn.classList.remove("is-copied"), 1500);
+      });
+    });
+  };
+
+  // ======================
   // Сайдбар личного кабинета (сворачивание на мобилке)
   // ======================
   const initLkAside = () => {
@@ -817,6 +880,8 @@
     initLeadForm();
     initAuthForm();
     initCalc();
+    initLkActive();
+    initCopy();
     initLkAside();
     initLkLang();
     initAccordion();

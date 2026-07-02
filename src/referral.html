@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Реферальная ссылка" })
+  <body class="lk-page">
+    @@include('html/header-lk.html')
+
+    <main>
+      <section class="lk section-hidden">
+        <div class="container">
+          <div class="lk__grid">
+
+            @@include('html/aside-lk.html')
+
+            <!-- Content -->
+            <div class="lk__content">
+              <div class="lk-row">
+
+                <!-- Реферальная ссылка -->
+                <div class="referral">
+                  <div class="referral__head">
+                    <h1 class="referral__title">Реферальная ссылка</h1>
+                    <p class="referral__desc">Поделитесь ссылкой с друзьями или знакомыми. Если они оформят договор и внесут первую оплату, вам начислятся бонусы.</p>
+                  </div>
+
+                  <div class="referral__fields">
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Ваш реферальный код</span>
+                        <span class="copy-field__value" data-copy-value>LDN-SQ21</span>
+                      </div>
+                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать код">
+                        <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Ваша реферальная ссылка</span>
+                        <span class="copy-field__value" data-copy-value>https://artwin.kg/r/LDN-SQ21</span>
+                      </div>
+                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать ссылку">
+                        <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Бонусы -->
+                <div class="bonuses disabled">
+                  <h2 class="bonuses__title">Бонусы</h2>
+                  <div class="bonuses__grid">
+                    <div class="bonuses__item bonuses__item_accent">
+                      <span class="bonuses__label">Доступно к списанию</span>
+                      <span class="bonuses__value">1200</span>
+                    </div>
+                    <div class="bonuses__item">
+                      <span class="bonuses__label">Начислено за все время</span>
+                      <span class="bonuses__value">2400</span>
+                    </div>
+                  </div>
+                  <div class="bonuses__actions">
+                    <button class="button button-primary" type="button">Потратить бонусы</button>
+                    <button class="button button-light" type="button">История бонусов</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/foot.html')
+  </body>
+</html>
