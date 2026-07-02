@@ -2409,15 +2409,15 @@ textarea {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: calc(24 * var(--width-multiplier));
+  gap: calc(16 * var(--width-multiplier));
+  text-align: center;
 }
 
-.page-error__title {
-  font: 500 calc(120 * var(--width-multiplier))/1 GolosText;
-}
-
-.page-error__desc {
-  font: 500 calc(28 * var(--width-multiplier))/1.2 GolosText;
+.page-error__content img {
+  height: calc(200 * var(--width-multiplier));
+  width: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .projects__topbar {
@@ -2655,14 +2655,6 @@ textarea {
 
   .contacts__grid {
     grid-template-columns: 1fr;
-  }
-
-  .page-error__title {
-    font-size: calc(80 * var(--width-multiplier));
-  }
-
-  .page-error__desc {
-    font-size: calc(24 * var(--width-multiplier));
   }
 }
 
@@ -3084,12 +3076,8 @@ textarea {
     row-gap: calc(16 * var(--width-multiplier));
   }
 
-  .page-error__title {
-    font-size: calc(50 * var(--width-multiplier));
-  }
-
-  .page-error__desc {
-    font-size: calc(20 * var(--width-multiplier));
+  .page-error__container {
+    padding: calc(32 * var(--width-multiplier)) 0;
   }
 
   .projects__topbar {
