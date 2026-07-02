@@ -614,7 +614,6 @@
       setHeight(open);
     });
 
-    // На десктопе меню всегда раскрыто — сбрасываем инлайновую высоту
     window.addEventListener("resize", debounce(() => {
       if (window.innerWidth > MOBILE) {
         aside.classList.remove("is-open");
@@ -626,7 +625,7 @@
   };
 
   // ======================
-  // Переключатель языка (раскрывается вверх)
+  // Переключатель языка
   // ======================
   const initLkLang = () => {
     const lang = $("[data-lang]");
@@ -653,7 +652,6 @@
         if (name && currentName) currentName.textContent = name.textContent;
         options.forEach((o) => o.classList.toggle("is-active", o === option));
         close();
-        // здесь можно подключить смену языка: option.dataset.langValue
       });
     });
 
