@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бартерт</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260702124158" />
+  <!-- intl-tel-input -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260702124158" />
+  <link rel="stylesheet" href="css/style.css?_v=20260702124158" />
+</head>
+
+  <body>
+    <header class="header">
+  <div class="container">
+    <div class="header__container">   
+      <div class="header__group">
+        <a href="/" class="header__logo">
+          <img src="img/logo.svg" alt="" />
+        </a>
+        <nav class="header__nav">
+          <ul class="header__menu">
+            <li class="header__menu-item header__menu-item--has-drop">
+              <a href="" class="header__menu-trigger">
+                Проекты
+                <svg class="header__menu-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <div class="header__dropdown">
+                <div class="swiper header__drop-swiper">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <a href="" class="header__drop-card header__drop-card--active">
+                        <div class="header__drop-card-img">
+                          <img src="img/project-1.png" alt="London Square" />
+                        </div>
+                        <div class="header__drop-card-name">London Square</div>
+                      </a>
+                    </div>
+                    <div class="swiper-slide">
+                      <a href="" class="header__drop-card">
+                        <div class="header__drop-card-img">
+                          <img src="img/project-2.png" alt="БЦ Seoul" />
+                        </div>
+                        <div class="header__drop-card-name">БЦ Seoul</div>
+                      </a>
+                    </div>
+                    <div class="swiper-slide">
+                      <a href="" class="header__drop-card">
+                        <div class="header__drop-card-img">
+                          <img src="img/project-3.png" alt="Urpaq Park" />
+                        </div>
+                        <div class="header__drop-card-name">Urpaq Park</div>
+                      </a>
+                    </div>
+                    <div class="swiper-slide">
+                      <a href="" class="header__drop-card">
+                        <div class="header__drop-card-img">
+                          <img src="img/project-4.jpg" alt="Esentai" />
+                        </div>
+                        <div class="header__drop-card-name">Esentai</div>
+                      </a>
+                    </div>
+                    <div class="swiper-slide">
+                      <a href="" class="header__drop-card">
+                        <div class="header__drop-card-img">
+                          <img src="img/project-5.png" alt="Hayat" />
+                        </div>
+                        <div class="header__drop-card-name">Hayat</div>
+                      </a>
+                    </div>
+                    <div class="swiper-slide">
+                      <a href="" class="header__drop-card">
+                        <div class="header__drop-card-img">
+                          <img src="img/project-6.png" alt="Boston Tower" />
+                        </div>
+                        <div class="header__drop-card-name">Boston Tower</div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+            </li>
+            <li><a href="about.html">О компании</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header__group">
+        <a href="tel:8000" class="header__social header__tel">
+          <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.39124 0.533867C3.8139 0.232865 4.36686 0.122709 4.84241 0.256523C5.22293 0.363596 5.52615 0.616363 5.68909 0.969414L7.27405 4.40398C7.64598 5.20982 7.42461 6.13142 6.71838 6.63445L5.6344 7.40594C5.61951 7.41658 5.60458 7.42959 5.58948 7.45281C5.57362 7.47729 5.55182 7.52172 5.53772 7.60027C5.49434 7.84199 5.54925 8.21997 5.71155 8.6823C5.87141 9.13766 6.12756 9.65045 6.45569 10.152C6.87001 10.7854 7.32729 11.2907 7.7262 11.5964C7.9264 11.7497 8.10247 11.8454 8.2428 11.8874C8.38405 11.9295 8.45942 11.9094 8.49866 11.8815L9.58264 11.11C10.2954 10.6025 11.2063 10.7279 11.7858 11.3991L14.276 14.2848L14.3639 14.3991C14.5526 14.6742 14.6295 15.0142 14.5895 15.3659C14.5313 15.8752 14.2402 16.3567 13.8131 16.6608L11.6461 18.2038V18.2048C11.2734 18.4681 10.8317 18.6057 10.3805 18.5993L10.3776 18.6003V18.5993C9.61531 18.5983 8.64327 18.2482 7.41663 17.2565C6.05347 16.1544 4.58738 14.4306 3.28284 12.4079C1.97425 10.3787 0.989692 8.29913 0.515259 6.54949C0.152296 5.21106 0.132755 4.23217 0.305298 3.51531C0.479043 2.79354 0.844397 2.34737 1.22424 2.07684L3.39124 0.533867ZM4.52698 1.45574C4.40469 1.42136 4.22167 1.4531 4.07385 1.55828L1.90686 3.10125C1.63997 3.29136 1.46681 3.64132 1.4176 4.16668C1.36859 4.6906 1.44664 5.36051 1.651 6.14227C2.0595 7.70466 2.96236 9.67075 4.28284 11.7184C5.5259 13.646 6.90402 15.2633 8.15784 16.277C8.44168 16.5065 8.81447 16.7788 9.21252 16.9929C9.61422 17.2088 10.0224 17.3552 10.3815 17.3552H10.3864C10.59 17.3599 10.7904 17.2987 10.9625 17.1804L13.1315 15.6374C13.2783 15.5328 13.3788 15.3625 13.3951 15.2204C13.4033 15.1487 13.3874 15.1222 13.3795 15.113H13.3785L10.8883 12.2272C10.8116 12.1384 10.7101 12.0741 10.6041 12.0524C10.5031 12.0318 10.3869 12.0471 10.2643 12.1345L9.18127 12.9059C8.97924 13.0499 8.69985 13.1688 8.34338 13.1569C8.03306 13.1465 7.67928 13.0368 7.27991 12.7829L7.10608 12.6657C6.54211 12.2604 5.95946 11.6133 5.45959 10.8493C5.30227 10.6088 4.9709 10.0714 4.70667 9.43523C4.44527 8.80584 4.23546 8.04659 4.35608 7.37371C4.43075 6.95772 4.63362 6.60973 4.95276 6.3825L6.03577 5.61004C6.26942 5.44358 6.2928 5.16501 6.18909 4.94012L4.60413 1.50457C4.59897 1.49351 4.58491 1.47219 4.52698 1.45574Z" fill="#151515" stroke="#151515" stroke-width="0.4"/>
+          </svg>
+          <span>8000</span>
+        </a>
+        <a href="" class="header__social" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_630_2043)">
+              <mask id="mask0_630_2043" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+                <path d="M0 1.90735e-06H18V18H0V1.90735e-06Z" fill="white"/>
+              </mask>
+              <g mask="url(#mask0_630_2043)">
+                <path d="M1.60464 13.1284C0.918598 11.908 0.527344 10.4997 0.527344 8.99997C0.527344 4.34005 4.34011 0.527315 9 0.527315C13.6599 0.527315 17.4727 4.34005 17.4727 8.99997C17.4727 13.6599 13.6599 17.4726 9 17.4726C7.5003 17.4726 6.09202 17.0813 4.8716 16.3953L0.527344 17.4726L1.60464 13.1284Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.0063 9.99365C7.6566 9.64282 6.25299 8.08519 6.76374 7.57444C6.90411 7.43406 7.46542 7.05065 7.68441 6.83166C8.43018 6.08589 7.57454 5.16255 7.02586 4.61386C6.98104 4.56904 6.13641 3.66 5.01506 4.78138C3.01028 6.78617 5.86788 10.3809 6.7392 11.2607C7.61905 12.1321 11.2138 14.9897 13.2186 12.9849C14.34 11.8635 13.4309 11.0189 13.3861 10.9741C12.8374 10.4254 11.9141 9.5698 11.1683 10.3156C10.9493 10.5346 10.5659 11.0958 10.4255 11.2362C9.91476 11.747 8.35712 10.3434 8.0063 9.99365Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10"/>
+              </g>
+            </g>
+            <defs>
+              <clipPath id="clip0_630_2043">
+                <rect width="18" height="18" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </a>
+      </div>
+      <div class="header__group">
+        <a href="profile.html" class="header__profile">Личный кабинет</a>
+      </div>
+      <div class="header__burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <div class="header__mobile">
+    <div class="header__mobile-head">
+      <a href="/" class="header__logo">
+        <img src="img/logo.svg" alt="" />
+      </a>
+      <button class="header__mobile-close" type="button">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2L14 14M14 2L2 14" stroke="#151515" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <nav>
+      <ul class="header__mobile-menu">
+        <li class="header__mobile-item header__mobile-item--has-drop">
+          <button class="header__mobile-trigger" type="button">
+            Проекты
+            <svg class="header__mobile-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="header__mobile-drop">
+            <ul class="header__mobile-drop-list">
+              <li><a href="">London Square</a></li>
+              <li><a href="">БЦ Seoul</a></li>
+              <li><a href="">Urpaq Park</a></li>
+              <li><a href="">Esentai</a></li>
+              <li><a href="">Hayat</a></li>
+              <li><a href="">Boston Tower</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="header__mobile-item">
+          <a href="about.html" class="header__mobile-link">О компании</a>
+        </li>
+        <li class="header__mobile-item">
+          <a href="news.html" class="header__mobile-link">Новости</a>
+        </li>
+        <li class="header__mobile-item">
+          <a href="contacts.html" class="header__mobile-link">Контакты</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="header__mobile-contacts">
+      <a href="tel:8000" class="header__social header__tel">
+        <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.39124 0.533867C3.8139 0.232865 4.36686 0.122709 4.84241 0.256523C5.22293 0.363596 5.52615 0.616363 5.68909 0.969414L7.27405 4.40398C7.64598 5.20982 7.42461 6.13142 6.71838 6.63445L5.6344 7.40594C5.61951 7.41658 5.60458 7.42959 5.58948 7.45281C5.57362 7.47729 5.55182 7.52172 5.53772 7.60027C5.49434 7.84199 5.54925 8.21997 5.71155 8.6823C5.87141 9.13766 6.12756 9.65045 6.45569 10.152C6.87001 10.7854 7.32729 11.2907 7.7262 11.5964C7.9264 11.7497 8.10247 11.8454 8.2428 11.8874C8.38405 11.9295 8.45942 11.9094 8.49866 11.8815L9.58264 11.11C10.2954 10.6025 11.2063 10.7279 11.7858 11.3991L14.276 14.2848L14.3639 14.3991C14.5526 14.6742 14.6295 15.0142 14.5895 15.3659C14.5313 15.8752 14.2402 16.3567 13.8131 16.6608L11.6461 18.2038V18.2048C11.2734 18.4681 10.8317 18.6057 10.3805 18.5993L10.3776 18.6003V18.5993C9.61531 18.5983 8.64327 18.2482 7.41663 17.2565C6.05347 16.1544 4.58738 14.4306 3.28284 12.4079C1.97425 10.3787 0.989692 8.29913 0.515259 6.54949C0.152296 5.21106 0.132755 4.23217 0.305298 3.51531C0.479043 2.79354 0.844397 2.34737 1.22424 2.07684L3.39124 0.533867Z" fill="#151515" stroke="#151515" stroke-width="0.4"/>
+        </svg>
+        <span>8000</span>
+      </a>
+      <a href="" class="header__social" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_mob)">
+            <mask id="mask0_mob" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+              <path d="M0 1.90735e-06H18V18H0V1.90735e-06Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_mob)">
+              <path d="M1.60464 13.1284C0.918598 11.908 0.527344 10.4997 0.527344 8.99997C0.527344 4.34005 4.34011 0.527315 9 0.527315C13.6599 0.527315 17.4727 4.34005 17.4727 8.99997C17.4727 13.6599 13.6599 17.4726 9 17.4726C7.5003 17.4726 6.09202 17.0813 4.8716 16.3953L0.527344 17.4726L1.60464 13.1284Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.0063 9.99365C7.6566 9.64282 6.25299 8.08519 6.76374 7.57444C6.90411 7.43406 7.46542 7.05065 7.68441 6.83166C8.43018 6.08589 7.57454 5.16255 7.02586 4.61386C6.98104 4.56904 6.13641 3.66 5.01506 4.78138C3.01028 6.78617 5.86788 10.3809 6.7392 11.2607C7.61905 12.1321 11.2138 14.9897 13.2186 12.9849C14.34 11.8635 13.4309 11.0189 13.3861 10.9741C12.8374 10.4254 11.9141 9.5698 11.1683 10.3156C10.9493 10.5346 10.5659 11.0958 10.4255 11.2362C9.91476 11.747 8.35712 10.3434 8.0063 9.99365Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10"/>
+            </g>
+          </g>
+          <defs>
+            <clipPath id="clip0_mob">
+              <rect width="18" height="18" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </a>
+      <a href="profile.html" class="header__profile header__mobile-profile">Личный кабинет</a>
+    </div>
+  </div>
+</header>
+
+
+    <main>
+      <section class="hero hero-installment section-top section-hidden">
+        <div class="container">
+          <div class="hero__container">
+            <img src="img/hero-installment.png" alt="Trade-in (бартер)">
+            <div class="hero__content">
+              <h1 class="hero__title">Trade-in (бартер)</h1>
+              <div class="hero__desc">Обменяйте старую недвижимость на новую в ARTWIN. Оставьте заявку на сайте и узнайте подробнее.</div>
+              <a class="hero__btn button button-primary">Узнать подробнее</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="overview section-pad-bottom">
+        <div class="container">
+          <div class="overview__grid">
+            <div class="overview__cards">
+              <div class="overview__card">
+                <h2 class="overview__title">Выгодный обмен вашей старой недвижимости на новую</h2>
+                <div class="overview__desc">Мы оценим вашу недвижимость, подберем квартиру и рассчитаем условия обмена</div>
+                <a href="" class="overview__btn button button-light">Оставить заявку на оценку</a>
+              </div>
+              <div class="overview__card">
+                <h2 class="overview__title">Кому подойдет Trade-in (бартер)?</h2>
+                <!-- <div class="overview__desc">Мы оценим вашу недвижимость, подберем квартиру и рассчитаем условия обмена</div> -->
+                <ul class="check-list">
+                  <li class="check-list__item">
+                    <span class="check-list__icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="12" fill="#1C1C1C"/>
+                        <path d="M19 12.4221V16.615C19 17.3739 18.4013 18 17.6553 18H6.34474C5.59868 18 5 17.3834 5 16.615V12.3557C5 12.3178 5.00921 12.2798 5.00921 12.2324H10.9132V12.6688C10.9132 12.9913 11.0053 13.0862 11.3092 13.0957H12.7092C12.9579 13.0957 13.0592 12.9913 13.0684 12.7352C13.0776 12.5739 13.0684 12.4032 13.0684 12.2324H18.9816C18.9908 12.2988 19 12.3557 19 12.4221Z" fill="#F5F5F5"/>
+                        <path d="M19 9.44348V11.6063C19 11.6538 18.9908 11.6917 18.9908 11.7486H13.0868C13.0868 11.5874 13.0868 11.4261 13.0868 11.2743C13.0868 10.9992 12.9763 10.8854 12.7092 10.8854C12.2487 10.8854 11.7882 10.8854 11.3184 10.8854C11.0237 10.8854 10.9224 10.9897 10.9224 11.2933V11.7486H5V11.5494C5 11.2458 5 10.9423 5 10.6387V9.44348C5 8.68458 5.59868 8.0585 6.34474 8.0585H17.6553C18.4013 8.0585 19 8.68458 19 9.44348Z" fill="#F5F5F5"/>
+                        <path d="M12.4145 12.6403H11.5855C11.5026 12.6403 11.4382 12.5739 11.4382 12.4885V11.502C11.4382 11.4166 11.5026 11.3502 11.5855 11.3502H12.4145C12.4974 11.3502 12.5618 11.4166 12.5618 11.502V12.4885C12.5618 12.5739 12.4974 12.6403 12.4145 12.6403Z" fill="#F5F5F5"/>
+                        <path d="M12.6908 6H11.2447C10.2684 6 9.47632 6.81581 9.47632 7.82134V8.0585H10.2039V7.99209C10.2039 7.30909 10.7474 6.74941 11.4105 6.74941H12.525C13.1882 6.74941 13.7316 7.30909 13.7316 7.99209V8.0585H14.4592V7.81186C14.4592 6.81581 13.6671 6 12.6908 6Z" fill="#F5F5F5"/>
+                      </svg>
+                    </span>
+                    <span class="check-list__txt">Всем, кто хочет переехать в новую квартиру без лишних хлопот</span>
+                  </li>
+                  <li class="check-list__item">
+                    <span class="check-list__icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="12" fill="black"/>
+                        <path d="M11.1523 5.35454C11.5441 4.72853 12.4559 4.72853 12.8477 5.35454L14.4758 7.95612C14.613 8.17542 14.8299 8.333 15.0809 8.39576L18.0583 9.14024C18.7747 9.31938 19.0565 10.1866 18.5822 10.7526L16.611 13.105C16.4449 13.3033 16.362 13.5582 16.3799 13.8163L16.5919 16.878C16.6429 17.6148 15.9052 18.1507 15.2203 17.8745L12.374 16.7268C12.134 16.6301 11.866 16.6301 11.626 16.7268L8.77969 17.8745C8.09479 18.1507 7.35709 17.6148 7.4081 16.878L7.62011 13.8163C7.63798 13.5582 7.55514 13.3033 7.38898 13.105L5.41784 10.7526C4.94353 10.1866 5.22531 9.31938 5.94174 9.14024L8.9191 8.39576C9.17008 8.333 9.38697 8.17542 9.52421 7.95612L11.1523 5.35454Z" fill="white"/>
+                      </svg>
+                    </span>
+                    <span class="check-list__txt">Владельцам вторичного жилья, которые не хотят тратить время на самостоятельную продажу</span>
+                  </li>
+                  <li class="check-list__item">
+                    <span class="check-list__icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="24" height="24" rx="12" fill="#1E9139"/>
+                        <path d="M9.81955 10.9761C11.273 11.1335 12.5188 11.5569 13.3954 12.1482C16.1507 12.5033 20.7298 11.3085 19.9013 9.16365C17.8701 11.3704 11.1072 11.3676 9.07471 9.16365C8.75799 9.84523 9.18578 10.4449 9.81955 10.9761Z" fill="#F5F5F5"/>
+                        <path d="M14.4896 10.1468C21.7999 9.95615 21.7828 5.18754 14.4896 5C7.1869 5.18859 7.18954 9.95755 14.4896 10.1468Z" fill="#F5F5F5"/>
+                        <path d="M8.52432 16.7702C11.507 16.7702 14.0249 15.5911 14.0579 14.188C13.6261 11.8648 9.6017 11.453 7.36751 11.6688C7.35433 11.6688 7.34115 11.6688 7.33126 11.6723C6.78449 11.7318 6.24135 11.8277 5.71304 11.9837H5.70975C5.62043 12.0086 5.52848 12.0334 5.44279 12.0642C5.01039 12.2073 4.57832 12.3865 4.18381 12.624C4.17129 12.6275 4.15415 12.6352 4.14427 12.6485C4.13767 12.6485 4.13108 12.652 4.12779 12.6555C4.07835 12.6881 4.03056 12.7112 3.98607 12.75C3.86775 12.8203 3.75636 12.9137 3.6532 13.0054C3.36086 13.2559 3.09259 13.5834 3.02041 13.9816C3.01382 13.9956 3.01382 14.0131 3.01053 14.0271C3.00426 14.0495 3.00196 14.0771 3.00064 14.1041C2.95351 15.6061 5.51892 16.7513 8.52432 16.7702Z" fill="#F5F5F5"/>
+                        <path d="M8.52432 17.47C6.19093 17.47 4.20029 16.8122 3.14236 15.815C2.08837 18.2033 7.24623 19.3671 9.99093 18.8975C9.99423 18.901 10.0008 18.901 10.0041 18.8975C10.2744 18.8615 10.5426 18.8128 10.8083 18.7541C10.83 18.7513 10.8468 18.7429 10.8676 18.7401C10.8709 18.7436 10.8742 18.7436 10.8742 18.7401C10.9358 18.724 10.9978 18.717 11.0588 18.6946C11.0653 18.6981 11.0719 18.6946 11.0752 18.6911C11.1115 18.6841 11.1477 18.6736 11.184 18.6631C11.1906 18.6631 11.1939 18.6631 11.2005 18.6561C12.5254 18.3139 14.6317 17.308 13.9063 15.815C12.8516 16.8122 10.861 17.47 8.52432 17.47Z" fill="#F5F5F5"/>
+                        <path d="M19.9013 13.2818C18.8631 14.2825 16.8856 14.9473 14.5588 14.9613C14.5127 15.0767 14.4567 15.1887 14.3875 15.3007C14.6063 15.6474 14.7289 16.0207 14.717 16.3923C17.7485 16.2748 20.5482 15.1313 19.9013 13.2818Z" fill="#F5F5F5"/>
+                        <path d="M14.717 14.188C14.717 14.2125 14.7104 14.2335 14.7104 14.258C17.6849 14.1537 20.5077 13.0138 19.9013 11.2245C18.8519 12.2759 16.562 12.9655 14.2293 12.9039C14.5437 13.2983 14.6989 13.7244 14.717 14.188Z" fill="#F5F5F5"/>
+                      </svg>
+                    </span>
+                    <span class="check-list__txt">Тем, кто хочет использовать текущую недвижимость в качестве первоначального взноса или части оплаты</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="overview__card">
+                <h2 class="overview__title">Условия Trade-in (бартер)</h2>
+                <div class="accordion" data-accordion>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Оценка недвижимости</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Проведём предварительную оценку вашего объекта и подскажем, можно ли использовать его как часть оплаты.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Оценка за 1 день</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">После заявки менеджер уточнит данные по объекту и подготовит предварительные условия обмена.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Квартира, дом или коммерция</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Можно рассмотреть разные типы недвижимости: квартиру, дом, помещение или коммерческий объект.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Часть оплаты новой квартиры</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Стоимость вашей недвижимости может быть зачтена как часть суммы при покупке новой квартиры.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Подбор объекта ARTWIN</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Поможем выбрать квартиру или помещение, которое подходит под ваш бюджет, цели и условия обмена.</div>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <button class="accordion__head" type="button">
+                      <span class="accordion__caption">Индивидуальные условия</span>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10L12 15L17 10H7Z" fill="#1D1B20"/>
+                      </svg>
+                    </button>
+                    <div class="accordion__body">
+                      <div class="accordion__content">Финальные условия зависят от вашей недвижимости, выбранного объекта и текущих предложений компании.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="overview__media">
+              <img src="img/overview-img.png" alt="Место, где бизнес работает без лишних препятствий">
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section class="calc section-pad-bottom section-hidden">
+        <div class="container">
+          <div class="calc__container" data-calc>
+            <div class="calc__left calc__wrap">
+              <h2 class="calc__title">Калькулятор рассрочки</h2>
+
+              <div class="calc__group">
+                <div class="calc__label text-s">Стоимость квартиры</div>
+                <div class="calc__field">
+                  <input type="text" class="calc__input" data-calc-price-input inputmode="numeric" value="18 000 000 KGS">
+                </div>
+                <div class="calc__slider-wrap">
+                  <input type="range" class="calc__slider" data-calc-price min="1000000" max="50000000" step="100000" value="18000000">
+                  <div class="calc__slider-labels text-s">
+                    <span>1 000 000 KGS</span>
+                    <span>50 000 000 KGS</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="calc__group">
+                <div class="calc__label text-s">Первоначальный взнос</div>
+                <div class="calc__row">
+                  <div class="calc__field calc__field_sm">
+                    <input type="text" class="calc__input" data-calc-percent-input inputmode="numeric" value="30 %">
+                  </div>
+                  <div class="calc__field">
+                    <input type="text" class="calc__input" data-calc-initial-input inputmode="numeric" value="5 400 000 KGS">
+                  </div>
+                </div>
+                <div class="calc__slider-wrap">
+                  <input type="range" class="calc__slider" data-calc-percent min="10" max="70" step="1" value="30">
+                  <div class="calc__slider-labels text-s">
+                    <span>10%</span>
+                    <span>70%</span>
+                  </div>
+                </div>
+                <div class="calc__chips">
+                  <button type="button" class="calc__chip" data-calc-preset="20">20%</button>
+                  <button type="button" class="calc__chip is-active" data-calc-preset="30">30%</button>
+                  <button type="button" class="calc__chip" data-calc-preset="40">40%</button>
+                  <button type="button" class="calc__chip" data-calc-preset="50">50%</button>
+                </div>
+              </div>
+
+              <div class="calc__group">
+                <div class="calc__label text-s">Срок рассрочки</div>
+                <div class="calc__chips">
+                  <button type="button" class="calc__chip" data-calc-term="6">6 мес</button>
+                  <button type="button" class="calc__chip" data-calc-term="12">12 мес</button>
+                  <button type="button" class="calc__chip" data-calc-term="18">18 мес</button>
+                  <button type="button" class="calc__chip is-active" data-calc-term="24">24 мес</button>
+                </div>
+              </div>
+
+              <button type="button" class="calc__submit button button-primary" data-calc-submit>Получить рассчет</button>
+            </div>
+
+            <div class="calc__right calc__wrap">
+              <div class="calc__caption text-l">Ваш примерный рассчет</div>
+              <div class="calc__result">
+                <div class="calc__result-main">
+                  <span class="calc__result-value" data-calc-monthly>525 000</span>
+                  <span class="calc__result-unit">KGS / мес</span>
+                </div>
+                <div class="calc__result-sub text-s">При сроке <span data-calc-term-text>24 месяца</span></div>
+              </div>
+              <ul class="calc__summary">
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Стоимость квартиры</span>
+                  <span class="calc__summary-val" data-calc-sum-price>18 000 000 KGS</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Первоначальный взнос</span>
+                  <span class="calc__summary-val" data-calc-sum-initial>5 400 000 KGS</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Остаток к оплате</span>
+                  <span class="calc__summary-val" data-calc-sum-remainder>12 600 000 KGS</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Срок рассрочки</span>
+                  <span class="calc__summary-val" data-calc-sum-term>24 мес.</span>
+                </li>
+                <li class="calc__summary-row">
+                  <span class="calc__summary-key">Переплата</span>
+                  <span class="calc__summary-val calc__summary-val_accent" data-calc-sum-overpay>0 KGS</span>
+                </li>
+              </ul>
+              <a class="calc__action button" href="projects.html">Посмотреть квартиры</a>
+              <div class="calc__note text-s">*Рассчет предварительный. Точные условия уточнит менеджер</div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+      <section id="feedback" class="feedback section-pad-bottom section-hidden">
+  <div class="container">
+    <div class="feedback__container">
+      <img class="back" src="img/feedback.png" alt="">
+      <div class="feedback__form">
+        <form class="lead" data-lead novalidate>
+          <div class="lead__progress" data-lead-progress>
+            <span class="lead__seg"></span>
+            <span class="lead__seg"></span>
+          </div>
+
+          <!-- Шаг 1 -->
+          <div class="lead__step is-active" data-step="1">
+            <div class="lead__head is-active" data-variant="residential">
+              <h2 class="lead__title">Подберём квартиру под ваш запрос</h2>
+              <div class="lead__subtitle">Подберём варианты и отправим за 15 минут</div>
+            </div>
+            <div class="lead__head" data-variant="commercial">
+              <h2 class="lead__title">Подберём помещение под ваш запрос</h2>
+              <div class="lead__subtitle">Подберем варианты и отправим вам</div>
+            </div>
+
+            <div class="lead__toggle">
+              <input class="lead__toggle-input" type="radio" name="type" id="lead-type-res" value="residential" checked>
+              <label class="lead__toggle-btn" for="lead-type-res">Квартира</label>
+              <input class="lead__toggle-input" type="radio" name="type" id="lead-type-com" value="commercial">
+              <label class="lead__toggle-btn" for="lead-type-com">Коммерческая недвижимость</label>
+            </div>
+
+            <div class="lead__field">
+              <span class="lead__field-label">Телефон*</span>
+              <input class="lead__phone-input" type="tel" inputmode="tel" name="phone" data-lead-phone required>
+            </div>
+
+            <!-- Квартира -->
+            <div class="lead__variant is-active" data-variant="residential">
+              <div class="lead__group">
+                <div class="lead__group-title">Комнатность</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-1" value="1-комн">
+                  <label class="filter-button" for="lead-rooms-1">1-комн</label>
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-2" value="2-комн">
+                  <label class="filter-button" for="lead-rooms-2">2-комн</label>
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-3" value="3-комн +">
+                  <label class="filter-button" for="lead-rooms-3">3-комн +</label>
+                  <input class="filter-check" type="radio" name="rooms" id="lead-rooms-4" value="Не важно">
+                  <label class="filter-button" for="lead-rooms-4">Не важно</label>
+                </div>
+              </div>
+              <div class="lead__group">
+                <div class="lead__group-title">Бюджет</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-1" value="До 20 млн">
+                  <label class="filter-button" for="lead-budget-1">До 20 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-2" value="20–40 млн">
+                  <label class="filter-button" for="lead-budget-2">20–40 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-3" value="40+ млн">
+                  <label class="filter-button" for="lead-budget-3">40+ млн</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Коммерческая -->
+            <div class="lead__variant" data-variant="commercial">
+              <div class="lead__group">
+                <div class="lead__group-title">Площадь</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="area" id="lead-area-1" value="До 52 м2">
+                  <label class="filter-button" for="lead-area-1">До 52 м2</label>
+                  <input class="filter-check" type="radio" name="area" id="lead-area-2" value="52 м2 - 100 м2">
+                  <label class="filter-button" for="lead-area-2">52 м2 - 100 м2</label>
+                  <input class="filter-check" type="radio" name="area" id="lead-area-3" value="100+ м2">
+                  <label class="filter-button" for="lead-area-3">100+ м2</label>
+                  <input class="filter-check" type="radio" name="area" id="lead-area-4" value="Любая площадь">
+                  <label class="filter-button" for="lead-area-4">Любая площадь</label>
+                </div>
+              </div>
+              <div class="lead__group">
+                <div class="lead__group-title">Бюджет</div>
+                <div class="lead__options">
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-c-1" value="До 2 186 250 млн">
+                  <label class="filter-button" for="lead-budget-c-1">До 2 186 250 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-c-2" value="2 186 250 - 3 498 000 млн">
+                  <label class="filter-button" for="lead-budget-c-2">2 186 250 - 3 498 000 млн</label>
+                  <input class="filter-check" type="radio" name="budget" id="lead-budget-c-3" value="3 498 000+ млн">
+                  <label class="filter-button" for="lead-budget-c-3">3 498 000+ млн</label>
+                </div>
+              </div>
+            </div>
+
+            <button class="lead__submit button button-primary" type="button" data-action="next" disabled>Продолжить</button>
+            <div class="lead__note is-active" data-variant="residential">Без спама. Только подходящие варианты и короткая консультация.</div>
+            <div class="lead__note" data-variant="commercial">Мы свяжемся с вами и подберём подходящий для вас вариант.</div>
+          </div>
+
+          <!-- Шаг 2 -->
+          <div class="lead__step" data-step="2">
+            <button class="lead__back" type="button" data-action="back">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Назад
+            </button>
+            <!-- Квартира -->
+            <div class="lead__head is-active" data-variant="residential">
+              <h2 class="lead__title">Уточним подбор</h2>
+              <div class="lead__subtitle">Ответьте ещё на 2 вопроса, чтобы показать более точные варианты</div>
+            </div>
+            <div class="lead__group is-active" data-variant="residential">
+              <div class="lead__group-title">Как вам удобнее купить?</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-1" value="Рассрочка">
+                <label class="filter-button" for="lead-pay-1">Рассрочка</label>
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-2" value="100% оплата">
+                <label class="filter-button" for="lead-pay-2">100% оплата</label>
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-3" value="Бартер">
+                <label class="filter-button" for="lead-pay-3">Бартер</label>
+                <input class="filter-check" type="radio" name="pay" id="lead-pay-4" value="Не важно">
+                <label class="filter-button" for="lead-pay-4">Не важно</label>
+              </div>
+            </div>
+            <div class="lead__group is-active" data-variant="residential">
+              <div class="lead__group-title">Когда хотите заехать?</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-1" value="Сдан">
+                <label class="filter-button" for="lead-movein-1">Сдан</label>
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-2" value="2026">
+                <label class="filter-button" for="lead-movein-2">2026</label>
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-3" value="2027+">
+                <label class="filter-button" for="lead-movein-3">2027+</label>
+                <input class="filter-check" type="radio" name="movein" id="lead-movein-4" value="Не важно">
+                <label class="filter-button" for="lead-movein-4">Не важно</label>
+              </div>
+            </div>
+            <button class="lead__submit button button-primary is-active" type="submit" data-variant="residential">Получить подборку</button>
+            <div class="lead__note is-active" data-variant="residential">Менеджер свяжется с вами и подберёт подходящие варианты под ваш запрос.</div>
+
+            <!-- Коммерческая -->
+            <div class="lead__head" data-variant="commercial">
+              <h2 class="lead__title">Уточним ваш запрос</h2>
+              <div class="lead__subtitle">Ответьте ещё на 2 вопроса, чтобы мы подобрали подходящие варианты</div>
+            </div>
+            <div class="lead__group" data-variant="commercial">
+              <div class="lead__group-title">Назначение помещения</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-1" value="Офис">
+                <label class="filter-button" for="lead-purpose-1">Офис</label>
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-2" value="Магазин">
+                <label class="filter-button" for="lead-purpose-2">Магазин</label>
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-3" value="Кафе">
+                <label class="filter-button" for="lead-purpose-3">Кафе</label>
+                <input class="filter-check" type="radio" name="purpose" id="lead-purpose-4" value="Не важно">
+                <label class="filter-button" for="lead-purpose-4">Не важно</label>
+              </div>
+            </div>
+            <div class="lead__group" data-variant="commercial">
+              <div class="lead__group-title">Срок готовности</div>
+              <div class="lead__options">
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-1" value="Уже готово">
+                <label class="filter-button" for="lead-ready-1">Уже готово</label>
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-2" value="2026">
+                <label class="filter-button" for="lead-ready-2">2026</label>
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-3" value="2027+">
+                <label class="filter-button" for="lead-ready-3">2027+</label>
+                <input class="filter-check" type="radio" name="ready" id="lead-ready-4" value="Не важно">
+                <label class="filter-button" for="lead-ready-4">Не важно</label>
+              </div>
+            </div>
+            <button class="lead__submit button button-primary" type="submit" data-variant="commercial">Отправить и получить подборку</button>
+            <div class="lead__note" data-variant="commercial">Менеджер свяжется с вами и подберёт подходящие помещения под ваш запрос.</div>
+          </div>
+
+          <!-- Успех -->
+          <div class="lead__step lead__step_success" data-step="success">
+            <div class="lead__success">
+              <div class="lead__success-icon">
+                <img src="img/lead-icon.png" alt="">
+              </div>
+              <h2 class="lead__success-title">Заявка отправлена</h2>
+              <div class="lead__success-text">Менеджер свяжется с вами в течение 15 минут и подберёт подходящие варианты под ваш запрос.</div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>;
+    </main>
+
+    <footer class="footer">
+  <div class="container">
+    <div class="footer__container">
+      <div class="footer__wrap">
+        <div class="footer__content">
+          <h2 class="footer__title">Квартира без переплат и лишних просмотров</h2>
+          <div class="footer__desc">Подберем только подходящие варианты и поможем выбрать лучший</div>
+          <a href="" class="footer__btn button button-light">Узнать подробнее</a>
+          <img src="img/img-key.png" alt="">
+        </div>
+        <div class="footer__grid">
+          <div class="footer__col">
+            <div class="footer__group">
+              <div class="footer__caption">Адрес</div>
+              <div class="footer__txt">Офис продаж ARTWIN:<br> Пр. Ч. Айтматова 243, ​5 этаж</div>
+            </div>
+            <div class="footer__group">
+              <div class="footer__caption">График работы</div>
+              <ul class="footer__list">
+                <li>Пн-Пт: 9:00-19:00</li>
+                <li>Сб-Вс: 9:00-17:00</li>
+              </ul>
+            </div>
+            <div class="footer__group">
+              <div class="footer__caption">Номер телефона</div>
+              <ul class="footer__list">
+                <li><a href="tel:8000">8000</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__col">
+            <div class="footer__group">
+              <div class="footer__caption">Адрес</div>
+              <div class="footer__txt">Офис продаж Ош:<br> ул. Шакирова 275</div>
+            </div>
+            <div class="footer__group">
+              <div class="footer__caption">График работы</div>
+              <ul class="footer__list">
+                <li>Пн-Пт: 9:00-18:00</li>
+                <li>Сб: 9:00-18:00</li>
+              </ul>
+            </div>
+            <div class="footer__group">
+              <div class="footer__caption">Номер телефона</div>
+              <ul class="footer__list">
+                <li><a href="tel:0559800008">0 (559) 80-0008</a></li>
+                <li><a href="tel:0777800008">0 (777) 80-0008</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__socials">
+            <div class="footer__group">
+              <div class="footer__caption">Instagram</div>
+              <a href="#" target="_blank" rel="noopener noreferrer">@artwin.kg</a>
+            </div>
+            <div class="footer__group">
+              <div class="footer__caption">YouTube</div>
+              <a href="#" target="_blank" rel="noopener noreferrer">ARTWIN</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__copy">
+        <span>© 2026 ARTWIN. Все права защищены.</span>
+        <a href="https://factum.agency/" target="_blank">Сделано в factum.</a>
+      </div>
+    </div>
+  </div>
+</footer>
+ 
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260702124158"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260702124158"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260702124158"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260702124158"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260702124158"></script>
+<script src="js/app.js?_v=20260702124158"></script>
+  </body>
+</html>
