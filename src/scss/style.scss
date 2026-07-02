@@ -3180,8 +3180,6 @@
   }
 }
 
-// ====== Как это работает (уровни программы) ======
-
 .how {
   &__grid {
     display: grid;
@@ -3384,6 +3382,159 @@
   }
   @media(max-width: 767px) {
     min-height: calc(160 * var(--width-multiplier));
+  }
+}
+
+.tabs {
+  display: inline-flex;
+  gap: calc(8 * var(--width-multiplier));
+  margin-bottom: calc(16 * var(--width-multiplier));
+  &__btn {
+    padding: calc(12 * var(--width-multiplier));
+    border: none;
+    border-radius: calc(8 * var(--width-multiplier));
+    background-color: var(--bg);
+    color: var(--dark);
+    font: 500 calc(14 * var(--width-multiplier))/1.2 GolosText;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+    &:hover {
+      background-color: var(--light-grey);
+    }
+    &.is-active {
+      background-color: var(--dark);
+      color: var(--light);
+    }
+  }
+}
+
+.requisites {
+  padding: calc(24 * var(--width-multiplier));
+  border-radius: calc(20 * var(--width-multiplier));
+  background-color: var(--light);
+  &__title {
+    margin-bottom: calc(16 * var(--width-multiplier));
+    font: 500 calc(20 * var(--width-multiplier))/1.2 GolosText;
+  }
+  &__subtitle {
+    margin-bottom: calc(16 * var(--width-multiplier));
+    font-weight: 600;
+    font-size: calc(16 * var(--width-multiplier));
+  }
+  &__panel {
+    display: none;
+    &.is-active {
+      display: block;
+    }
+  }
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--width-multiplier));
+    margin-bottom: calc(16 * var(--width-multiplier));
+  }
+  &__copy-all {
+    width: 100%;
+  }
+  @media(max-width: 767px) {
+    padding: calc(16 * var(--width-multiplier));
+    border-radius: calc(12 * var(--width-multiplier));
+  }
+}
+
+.copy-field__value_link {
+  color: var(--dark);
+  text-decoration: underline;
+  text-underline-offset: calc(3 * var(--width-multiplier));
+}
+
+.qr-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--width-multiplier));
+}
+
+.qr-item {
+  border: none;
+  border-radius: calc(16 * var(--width-multiplier));
+  background-color: rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: calc(16 * var(--width-multiplier));
+    width: 100%;
+    padding: calc(16 * var(--width-multiplier));
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+  }
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(42 * var(--width-multiplier));
+    height: calc(42 * var(--width-multiplier));
+    flex-shrink: 0;
+    border-radius: 50%;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--width-multiplier));
+    flex-grow: 1;
+    min-width: 0;
+  }
+  &__name {
+    font-weight: 500;
+    font-size: calc(16 * var(--width-multiplier));
+    @media(max-width: 767px) {
+      font-size: calc(14 * var(--width-multiplier));
+    }
+  }
+  &__code {
+    color: rgba(21, 21, 21, 0.5);
+    font-size: calc(14 * var(--width-multiplier));
+  }
+  .accordion__head .qr-item__arrow {
+    width: calc(24 * var(--width-multiplier));
+    height: calc(24 * var(--width-multiplier));
+    flex-shrink: 0;
+  }
+  &.accordion__item.is-open &__icon svg {
+    transform: none;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(16 * var(--width-multiplier));
+    padding: 0 calc(16 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+  }
+  &__qr {
+    width: calc(220 * var(--width-multiplier));
+    max-width: 100%;
+    aspect-ratio: 1;
+    border-radius: calc(8 * var(--width-multiplier));
+    overflow: hidden;
+    background-color: var(--light);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    @media(max-width: 767px) {
+      margin: 0 auto;
+    }
+  }
+  &__save {
+    width: calc(220 * var(--width-multiplier));
+    max-width: 100%;
   }
 }
 

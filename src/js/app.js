@@ -6,6 +6,10 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const debounce = (fn, ms) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; };
+  // Пересчёт размеров Lenis после изменения высоты контента (аккордеон, табы и т.п.)
+  const refreshLenis = () => {
+    if (window.lenis && typeof window.lenis.resize === "function") window.lenis.resize();
+  };
 
   const createScrollLock = (lenis) => {
     const locks = new Set();
@@ -620,7 +624,8 @@
   // ======================
   const initCopy = () => {
     const buttons = $$("[data-copy]");
-    if (!buttons.length) return;
+    const allButtons = $$("[data-copy-all]");
+    if (!buttons.length && !allButtons.length) return;
 
     const copyText = async (text) => {
       try {
@@ -639,6 +644,7 @@
       }
     };
 
+    // Копирование одного поля
     buttons.forEach((btn) => {
       let timer = null;
       btn.addEventListener("click", async () => {
@@ -651,6 +657,45 @@
         btn.classList.add("is-copied");
         clearTimeout(timer);
         timer = setTimeout(() => btn.classList.remove("is-copied"), 1500);
+      });
+    });
+
+    // Копировать все поля в области кнопки
+    allButtons.forEach((btn) => {
+      let timer = null;
+      const label = btn.textContent.trim();
+      btn.addEventListener("click", async () => {
+        const scope = btn.closest("[data-copy-scope]") || document;
+        const values = $$("[data-copy-value]", scope)
+          .map((el) => el.textContent.trim())
+          .filter(Boolean);
+        if (!values.length) return;
+
+        await copyText(values.join("\n"));
+        btn.textContent = "Скопировано";
+        clearTimeout(timer);
+        timer = setTimeout(() => { btn.textContent = label; }, 1500);
+      });
+    });
+  };
+
+  // ======================
+  // Вкладки (QR / Реквизиты и т.п.)
+  // ======================
+  const initTabs = () => {
+    $$("[data-tabs]").forEach((root) => {
+      const btns = $$("[data-tab]", root);
+      const panels = $$("[data-tab-panel]", root);
+      if (!btns.length) return;
+
+      btns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const name = btn.dataset.tab;
+          btns.forEach((b) => b.classList.toggle("is-active", b === btn));
+          panels.forEach((p) => p.classList.toggle("is-active", p.dataset.tabPanel === name));
+          // Высота контента изменилась — пересчитываем Lenis
+          refreshLenis();
+        });
       });
     });
   };
@@ -745,6 +790,12 @@
         if (!head) return;
 
         if (item.classList.contains("is-open")) setHeight(item, true);
+
+        // По завершении анимации высоты — обновляем скролл Lenis
+        const body = $(".accordion__body", item);
+        body?.addEventListener("transitionend", (e) => {
+          if (e.propertyName === "max-height") refreshLenis();
+        });
 
         head.addEventListener("click", () => {
           const isOpen = item.classList.contains("is-open");
@@ -882,6 +933,7 @@
     initCalc();
     initLkActive();
     initCopy();
+    initTabs();
     initLkAside();
     initLkLang();
     initAccordion();

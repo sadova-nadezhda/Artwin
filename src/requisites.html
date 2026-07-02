@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Реквизиты ARTWIN" })
+  <body class="lk-page">
+    @@include('html/header-lk.html')
+
+    <main>
+      <section class="lk section-hidden">
+        <div class="container">
+          <div class="lk__grid">
+
+            @@include('html/aside-lk.html')
+
+            <!-- Content -->
+            <div class="lk__content">
+              <div class="requisites" data-tabs>
+                <h1 class="requisites__title">Реквизиты ARTWIN</h1>
+
+                <div class="tabs">
+                  <button class="tabs__btn is-active" type="button" data-tab="qr">QR-коде</button>
+                  <button class="tabs__btn" type="button" data-tab="details">Реквизиты</button>
+                </div>
+
+                <!-- Вкладка: QR -->
+                <div class="requisites__panel is-active" data-tab-panel="qr">
+                  <p class="requisites__subtitle">Выберите объект и оплатите по QR</p>
+
+                  <div class="qr-list accordion" data-accordion>
+                    <div class="qr-item accordion__item is-open">
+                      <button class="qr-item__head accordion__head" type="button">
+                        <span class="qr-item__icon">
+                          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="42" height="42" rx="21" fill="#2348DB"/>
+                            <path d="M23.0417 10.7917H14.875C13.7521 10.7917 12.8435 11.7104 12.8435 12.8333L12.8333 29.1667C12.8333 30.2896 13.7419 31.2083 14.8648 31.2083H27.125C28.2479 31.2083 29.1667 30.2896 29.1667 29.1667V16.9167L23.0417 10.7917ZM25.0833 27.125H16.9167V25.0833H25.0833V27.125ZM25.0833 23.0417H16.9167V21H25.0833V23.0417ZM22.0208 17.9375V12.3229L27.6354 17.9375H22.0208Z" fill="white"/>
+                          </svg>
+                        </span>
+                        <span class="qr-item__info">
+                          <span class="qr-item__name">1-комн. квартира в ЖК, Токио Блок А, кв. 8</span>
+                          <span class="qr-item__code">TLT-A-12-ASAS33</span>
+                        </span>
+                        <svg class="qr-item__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17 10L12 15L7 10L17 10Z" fill="#1D1B20"/>
+                        </svg>
+                      </button>
+                      <div class="qr-item__body accordion__body">
+                        <div class="qr-item__content">
+                          <div class="qr-item__qr">
+                            <img src="@img/qr.png" alt="QR-код для оплаты">
+                          </div>
+                          <button class="qr-item__save button button-primary" type="button">Сохранить QR</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="qr-item accordion__item">
+                      <button class="qr-item__head accordion__head" type="button">
+                        <span class="qr-item__icon">
+                          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="42" height="42" rx="21" fill="#2348DB"/>
+                            <path d="M23.0417 10.7917H14.875C13.7521 10.7917 12.8435 11.7104 12.8435 12.8333L12.8333 29.1667C12.8333 30.2896 13.7419 31.2083 14.8648 31.2083H27.125C28.2479 31.2083 29.1667 30.2896 29.1667 29.1667V16.9167L23.0417 10.7917ZM25.0833 27.125H16.9167V25.0833H25.0833V27.125ZM25.0833 23.0417H16.9167V21H25.0833V23.0417ZM22.0208 17.9375V12.3229L27.6354 17.9375H22.0208Z" fill="white"/>
+                          </svg>
+                        </span>
+                        <span class="qr-item__info">
+                          <span class="qr-item__name">1-комн. квартира в ЖК, Токио Блок А, кв. 8</span>
+                          <span class="qr-item__code">TLT-A-12-ASAS33</span>
+                        </span>
+                        <svg class="qr-item__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17 10L12 15L7 10L17 10Z" fill="#1D1B20"/>
+                        </svg>
+                      </button>
+                      <div class="qr-item__body accordion__body">
+                        <div class="qr-item__content">
+                          <div class="qr-item__qr">
+                            <img src="@img/qr.png" alt="QR-код для оплаты">
+                          </div>
+                          <button class="qr-item__save button button-primary" type="button">Сохранить QR</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Вкладка: Реквизиты -->
+                <div class="requisites__panel" data-tab-panel="details" data-copy-scope>
+                  <p class="requisites__subtitle">Реквизиты Артвин Девелопмент</p>
+
+                  <div class="requisites__fields">
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Название</span>
+                        <span class="copy-field__value" data-copy-value>ООО «Артвин Девелопмент»</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Юридический адрес:</span>
+                        <span class="copy-field__value" data-copy-value>г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">ИНН</span>
+                        <span class="copy-field__value" data-copy-value>00103202310062</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">ОКПО</span>
+                        <span class="copy-field__value" data-copy-value>31824025</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Реквизиты счета:</span>
+                        <span class="copy-field__value" data-copy-value>KGS 1240020001612024</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Банк получателя:</span>
+                        <span class="copy-field__value" data-copy-value>ОАО "БАКАЙ БАНК"</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">БИК банка получателя:</span>
+                        <span class="copy-field__value" data-copy-value>124034</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">Кон.телефон:</span>
+                        <span class="copy-field__value" data-copy-value>0228 880 000</span>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label">email</span>
+                        <a class="copy-field__value copy-field__value_link" href="mailto:office@artwin.kg" data-copy-value>office@artwin.kg</a>
+                      </div>
+                      @@include('html/copy-btn.html')
+                    </div>
+                  </div>
+
+                  <button class="requisites__copy-all button button-primary" type="button" data-copy-all>Скопировать все</button>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/foot.html')
+  </body>
+</html>
