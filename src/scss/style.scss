@@ -4340,7 +4340,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(48 * var(--width-multiplier)) 0;
+    padding: calc(48 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
     border-radius: calc(20 * var(--width-multiplier));
     background-color: var(--light);
   }

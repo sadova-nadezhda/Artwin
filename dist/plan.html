@@ -7,10 +7,10 @@
   <title>Просмотр планировки</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260709183323" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260709185450" />
   <!-- intl-tel-input -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260709183323" />
-  <link rel="stylesheet" href="css/style.css?_v=20260709183323" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260709185450" />
+  <link rel="stylesheet" href="css/style.css?_v=20260709185450" />
 </head>
 
   <body class="plan-page">
@@ -82,49 +82,60 @@
 
           <div class="plan__canvas">
             <!-- OVERLAY: PNG-подложка + прозрачный SVG с контурами квартир.
-            viewBox = система координат нарисованного SVG (837×359) — она же
-            задаёт пропорции PNG. Каждая квартира — [data-plan-unit] c data-*
+            Каждая квартира — [data-plan-unit] c data-*
             полями (наводкой заполняют левую карточку); path — контур заливки.
             data-* значения примерные — проставьте реальные по квартирам. -->
             <div class="plan__plan">
               <img class="plan__plan-img" src="img/plan.png" alt="Планировка этажа">
-              <svg class="plan__svg" viewBox="0 0 837 359" preserveAspectRatio="none"
+              <svg class="plan__svg" viewBox="0 0 832 356" preserveAspectRatio="none"
                    fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Планировка этажа">
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="1" data-block="3" data-rooms="2" data-area="36.20 м2" data-price="От 1 980 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M682.5 157L620 97.5L718.5 0L770 51L728 90.5L741.5 102L687 159L684 155.5L682.5 157Z"/>
+                   data-num="1" data-block="2" data-rooms="2" data-area="54.72 м2" data-price="От 2 833 380" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M460.5 285.5V267.5H504V174H536V318.5H534.5V333.5H533V335.5H463V285.5H460.5Z"/>
                 </g>
-                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="2" data-block="2" data-rooms="2" data-area="54.72 м2" data-price="От 2 833 380" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M463.5 290V339H542L541 173.5H423V263H461V286V290H463.5Z"/>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button" data-placeholder
+                   data-num="2" data-block="2" data-rooms="1" data-area="16.98 м2" data-price="От 2 833 380" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M339 260.5V173.5H415.5V260.5H374H339Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
                    data-num="3" data-block="1" data-rooms="2" data-area="71.90 м2" data-price="От 3 720 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M249 41H133V124H153V122H156H175.5V127.5V197.5H173V225H247V194V191.5H249.5V165H247V154H249.5V131H247V122H253.5V125H271V86.5V53.5H254V55.5H247V49.5H249V41Z"/>
+                  <path class="plan__unit-shape" d="M245 39.5H132V119.5H250V122H266.5V83.5V51.5H250V55.5H242V47.5H245V39.5Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
                    data-num="4" data-block="1" data-rooms="3" data-area="107.2 м2" data-price="От 5 420 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M290.5 197H250V227.5H173V338.5H290.5V197Z"/>
+                  <path class="plan__unit-shape" d="M242 197H171V336H283.5V334H286V197.5H283V195.5H250V197H242Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="5" data-block="1" data-rooms="4" data-area="131.20 м2" data-price="От 6 640 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M129.5 197.5H20.5L20 294L11.5 295.5L0 321L11.5 348.5L37.5 358.5L63 348.5L65 338.5H129.5V197.5Z"/>
+                   data-num="5" data-block="1" data-rooms="3" data-area="110.13 м2" data-price="От 5 560 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M19 47.5V39H125.5V191H65.5H18.5V121V55.5H22V47.5H19Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="6" data-block="1" data-rooms="3" data-area="110.13 м2" data-price="От 5 560 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M129.5 41V126.5V193.5H21V41H129.5Z"/>
+                   data-num="6" data-block="1" data-rooms="4" data-area="131.20 м2" data-price="От 6 640 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M19 294V197H125.5V248.5H165V336H86.5H61L57.5 345.5L34 355.5L10.5 345.5L0 320L10.5 296.278L19 294Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button" data-placeholder
+                   data-num="7" data-block="2" data-rooms="1" data-area="14.94 м2" data-price="От 2 833 380" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M301 189.5V173.5H333V267H377.5V285.5H375V336H338H301V198.5H303.5V189.5H301Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button" data-placeholder
+                   data-num="8" data-block="2" data-rooms="1" data-area="16.08 м2" data-price="От 2 833 380" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M497.5 173.5H421.5L421 261H497.5V173.5Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="7" data-block="2" data-rooms="2" data-area="46.86 м2" data-price="От 2 430 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M379.5 269.5V338H301.5V173.5H420L419 263H382V269.5H379.5Z"/>
+                   data-num="9" data-block="3" data-rooms="4" data-area="110.15 м2" data-price="От 5 560 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M551.5 335.5L550.5 165L557 159L625.5 223.5L654 195L666.5 207.5L664 210L688 234L691.5 231L702.5 241.5L608.5 335.5H592.5H551.5Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="8" data-block="3" data-rooms="4" data-area="110.15 м2" data-price="От 5 560 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M551.5 338.5V254.5L597.5 253.5L748.5 105L733 90L772 53L836.5 115L612 338.5H551.5Z"/>
+                   data-num="10" data-block="3" data-rooms="2" data-area="46.86 м2" data-price="От 2 430 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M570.5 166.5L559.5 155.5L615 100L677 159.5L660 175.5L661 178L653.5 185.5L650.5 182.5L622 211.5L572.5 164.5L570.5 166.5Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button" data-placeholder
+                   data-num="11" data-block="3" data-rooms="1" data-area="34.20 м2" data-price="От 2 833 380" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M674.5 41.5L620 95.5L679.5 154L682.5 151.5L685.5 154L688.5 150.5L708 132.5L705.5 130L735 100L674.5 41.5Z"/>
                 </g>
                 <g class="plan__unit" data-plan-unit tabindex="0" role="button"
-                   data-num="9" data-block="3" data-rooms="3" data-area="74.04 м2" data-price="От 3 810 000" data-status="На стадии строительства">
-                  <path class="plan__unit-shape" d="M551.5 250.5V166L618 99L684 162.5L596.5 250.5H551.5Z"/>
+                   data-num="12" data-block="3" data-rooms="3" data-area="74.04 м2" data-price="От 3 810 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M716 0L679 37L737 94L738.5 93L748 101.5L716 133L730 146.5L733 143L736 145.5L756 166.5L752.5 169.5L764 180.5L830.5 113.5L716 0Z"/>
                 </g>
               </svg>
             </div>
@@ -133,11 +144,11 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260709183323"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260709183323"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260709183323"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260709183323"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260709183323"></script>
-<script src="js/app.js?_v=20260709183323"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260709185450"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260709185450"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260709185450"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260709185450"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260709185450"></script>
+<script src="js/app.js?_v=20260709185450"></script>
   </body>
 </html>
