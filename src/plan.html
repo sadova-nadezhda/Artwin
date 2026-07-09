@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Просмотр планировки" })
+  <body class="plan-page">
+    <main>
+      <!-- data-floors — сколько этажей в табах; data-active — активный по умолчанию -->
+      <section class="plan" data-plan data-floors="9" data-active="9">
+        <!-- ===== Левая карточка: инфо по выбранной квартире ===== -->
+        <aside class="plan__aside">
+          <a href="floor.html" class="plan__back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="#F5F5F5"/>
+              <path d="M12.75 8.25L9 12L12.75 15.75L12.75 8.25Z" fill="#1D1B20"/>
+            </svg>
+            <span>Вернуться назад</span>
+          </a>
+
+          <h1 class="plan__title">ЖК LONDON</h1>
+          <div class="plan__unit-name" data-plan-name>Квартира&nbsp;#1</div>
+
+          <div class="plan__fields">
+            <div class="plan__field">
+              <span class="plan__field-label">Блок</span>
+              <span class="plan__field-value" data-plan-block>1</span>
+            </div>
+            <div class="plan__field">
+              <span class="plan__field-label">Этаж</span>
+              <span class="plan__field-value" data-plan-floor>9</span>
+            </div>
+            <div class="plan__field">
+              <span class="plan__field-label">Комнатность</span>
+              <span class="plan__field-value" data-plan-rooms>1</span>
+            </div>
+            <div class="plan__field">
+              <span class="plan__field-label">Площадь</span>
+              <span class="plan__field-value" data-plan-area>54 м2</span>
+            </div>
+            <div class="plan__field">
+              <span class="plan__field-label">Цена</span>
+              <span class="plan__field-value" data-plan-price>От 2 833 380</span>
+            </div>
+            <div class="plan__field">
+              <span class="plan__field-label">Статус</span>
+              <span class="plan__field-value" data-plan-status>На стадии строительства</span>
+            </div>
+          </div>
+
+          <a class="plan__submit button button-primary">Оставить заявку</a>
+          <a href="#" class="plan__pdf button button-light" target="_blank">Скачать PDF</a>
+        </aside>
+
+        <!-- ===== Правая часть: табы этажей + план ===== -->
+        <div class="plan__main">
+          <div class="plan__tabs">
+            <div class="plan__tabs-title">Этажи</div>
+            <div class="plan__tabs-bar">
+              <button class="plan__tabs-arrow" type="button" data-plan-prev aria-label="Ниже этажом">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 7L9 12L14 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="plan__tabs-list" data-plan-tabs></div>
+              <button class="plan__tabs-arrow" type="button" data-plan-next aria-label="Выше этажом">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="plan__canvas">
+            <!-- OVERLAY: PNG-подложка + прозрачный SVG с контурами квартир.
+            viewBox = система координат нарисованного SVG (837×359) — она же
+            задаёт пропорции PNG. Каждая квартира — [data-plan-unit] c data-*
+            полями (наводкой заполняют левую карточку); path — контур заливки.
+            data-* значения примерные — проставьте реальные по квартирам. -->
+            <div class="plan__plan">
+              <img class="plan__plan-img" src="@img/plan.png" alt="Планировка этажа">
+              <svg class="plan__svg" viewBox="0 0 837 359" preserveAspectRatio="none"
+                   fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Планировка этажа">
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="1" data-block="3" data-rooms="2" data-area="36.20 м2" data-price="От 1 980 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M682.5 157L620 97.5L718.5 0L770 51L728 90.5L741.5 102L687 159L684 155.5L682.5 157Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="2" data-block="2" data-rooms="2" data-area="54.72 м2" data-price="От 2 833 380" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M463.5 290V339H542L541 173.5H423V263H461V286V290H463.5Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="3" data-block="1" data-rooms="2" data-area="71.90 м2" data-price="От 3 720 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M249 41H133V124H153V122H156H175.5V127.5V197.5H173V225H247V194V191.5H249.5V165H247V154H249.5V131H247V122H253.5V125H271V86.5V53.5H254V55.5H247V49.5H249V41Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="4" data-block="1" data-rooms="3" data-area="107.2 м2" data-price="От 5 420 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M290.5 197H250V227.5H173V338.5H290.5V197Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="5" data-block="1" data-rooms="4" data-area="131.20 м2" data-price="От 6 640 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M129.5 197.5H20.5L20 294L11.5 295.5L0 321L11.5 348.5L37.5 358.5L63 348.5L65 338.5H129.5V197.5Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="6" data-block="1" data-rooms="3" data-area="110.13 м2" data-price="От 5 560 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M129.5 41V126.5V193.5H21V41H129.5Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="7" data-block="2" data-rooms="2" data-area="46.86 м2" data-price="От 2 430 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M379.5 269.5V338H301.5V173.5H420L419 263H382V269.5H379.5Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="8" data-block="3" data-rooms="4" data-area="110.15 м2" data-price="От 5 560 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M551.5 338.5V254.5L597.5 253.5L748.5 105L733 90L772 53L836.5 115L612 338.5H551.5Z"/>
+                </g>
+                <g class="plan__unit" data-plan-unit tabindex="0" role="button"
+                   data-num="9" data-block="3" data-rooms="3" data-area="74.04 м2" data-price="От 3 810 000" data-status="На стадии строительства">
+                  <path class="plan__unit-shape" d="M551.5 250.5V166L618 99L684 162.5L596.5 250.5H551.5Z"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/foot.html')
+  </body>
+</html>

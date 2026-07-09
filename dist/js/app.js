@@ -597,7 +597,7 @@
   };
 
   // ======================
-  // Активный пункт меню ЛК (по текущему URL)
+  // Активный пункт меню ЛК
   // ======================
   const initLkActive = () => {
     const aside = $("[data-lk-aside]");
@@ -620,7 +620,7 @@
   };
 
   // ======================
-  // Копирование в буфер (реф. код / ссылка)
+  // Копирование в буфер
   // ======================
   const initCopy = () => {
     const buttons = $$("[data-copy]");
@@ -915,6 +915,250 @@
   };
 
   // ======================
+  // Выбор этажа
+  // ======================
+  const initFloorSelect = () => {
+    const root = $("[data-floor]");
+    if (!root) return;
+
+    const scene = $(".floor__scene", root);
+    const floorsEl = $("[data-floor-floors]", root);
+    const tooltip = $("[data-floor-tooltip]", root);
+    const tipNum = $("[data-floor-tooltip-num]", root);
+    const tipCaption = $("[data-floor-tooltip-caption]", root);
+    const tipAvailable = $("[data-floor-tooltip-available]", root);
+    const tipSale = $("[data-floor-tooltip-sale]", root);
+    const tipDivider = $("[data-floor-tooltip-divider]", root);
+    if (!floorsEl || !tooltip) return;
+
+    // Ровные полосы этажей: фасад делится на N частей (N = data-floors).
+    // data-free — карта «в продаже» по этажам.
+    // data-start — номер самого нижнего жилого этажа (по умолч. 1).
+    // Если снизу паркинг/цоколь — ставим 2, чтобы жильё начиналось со 2-го.
+    const count = parseInt(floorsEl.dataset.floors, 10) || 0;
+    const start = parseInt(floorsEl.dataset.start, 10) || 1;
+    let freeMap = {};
+    try { freeMap = JSON.parse(floorsEl.dataset.free || "{}"); } catch (e) {}
+    // data-heights — карта «этаж → % высоты фасада» для этажей, которым
+    // нужна своя высота (напр. верхний мансардный этаж выше остальных).
+    // Не указанные этажи (flex:1) делят оставшуюся высоту поровну.
+    let heightMap = {};
+    try { heightMap = JSON.parse(floorsEl.dataset.heights || "{}"); } catch (e) {}
+    // Необязательная нижняя полоса «цоколь / паркинг».
+    // data-base = { label, caption, height (% высоты фасада), free }.
+    // Если атрибута нет — полоса не рисуется.
+    let base = null;
+    try { base = JSON.parse(floorsEl.dataset.base || "null"); } catch (e) {}
+    if (!floorsEl.childElementCount && count > 0) {
+      const rows = [];
+      const top = start + count - 1; // номер верхнего этажа
+      for (let f = top; f >= start; f--) { // сверху вниз: верхний этаж первым
+        const free = freeMap[f] != null ? freeMap[f] : 0;
+        const h = heightMap[f]; // своя высота этажа в %, если задана
+        const style = h != null ? ` style="flex:0 0 ${h}%"` : "";
+        rows.push(
+          `<a class="floor__band${free === 0 ? " is-empty" : ""}"${style} href="plan.html" data-floor="${f}" data-caption="Этаж" data-free="${free}"></a>`
+        );
+      }
+      // Цоколь / паркинг — самой нижней полосой с фикс. высотой в %.
+      // Остальные этажи (flex:1) делят оставшуюся высоту.
+      // Продаж нет — только пометка типа (data-base-band).
+      if (base && base.height) {
+        const label = base.label || "Паркинг";
+        const caption = base.caption || "Уровень";
+        rows.push(
+          `<a class="floor__band floor__band--base" href="plan.html" style="flex:0 0 ${base.height}%" data-floor="${label}" data-caption="${caption}" data-base-band></a>`
+        );
+      }
+      floorsEl.innerHTML = rows.join("");
+    }
+
+    const zones = $$(".floor__band", floorsEl);
+    if (!zones.length) return;
+
+    let active = null;
+
+    const positionTooltip = (zone) => {
+      const sceneRect = scene.getBoundingClientRect();
+      const zoneRect = zone.getBoundingClientRect();
+      const tipRect = tooltip.getBoundingClientRect();
+      const gap = s(16);
+
+      // Справа от зоны этажа, по центру по вертикали
+      let left = zoneRect.right - sceneRect.left + gap;
+      let top = zoneRect.top - sceneRect.top + zoneRect.height / 2 - tipRect.height / 2;
+
+      // Если не помещается справа — показываем слева
+      if (left + tipRect.width > sceneRect.width) {
+        left = zoneRect.left - sceneRect.left - tipRect.width - gap;
+      }
+      // Держим в пределах сцены по вертикали
+      top = Math.max(s(8), Math.min(top, sceneRect.height - tipRect.height - s(8)));
+
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
+    };
+
+    const setActive = (zone) => {
+      if (!zone) return;
+      active = zone;
+      zones.forEach((z) => z.classList.toggle("is-active", z === zone));
+      const isBase = zone.hasAttribute("data-base-band");
+      if (tipCaption) tipCaption.textContent = zone.dataset.caption || "Этаж";
+      if (tipNum) tipNum.textContent = zone.dataset.floor;
+      // Полоса цоколя/паркинга — без строки «В продаже» и разделителя
+      if (tipDivider) tipDivider.style.display = isBase ? "none" : "";
+      if (tipSale) tipSale.style.display = isBase ? "none" : "";
+      if (!isBase && tipAvailable) tipAvailable.textContent = zone.dataset.free;
+      tooltip.classList.add("is-visible");
+      positionTooltip(zone);
+    };
+
+    const clearActive = () => {
+      active = null;
+      zones.forEach((z) => z.classList.remove("is-active"));
+      tooltip.classList.remove("is-visible");
+    };
+
+    // Десктоп: выбор этажа по наведению / фокусу
+    zones.forEach((zone) => {
+      zone.addEventListener("mouseenter", () => setActive(zone));
+      zone.addEventListener("mouseleave", clearActive);
+      zone.addEventListener("focus", () => setActive(zone));
+      zone.addEventListener("blur", clearActive);
+    });
+
+    // Мобилка: верхний таб-бар. Тап по табу ведёт на страницу этажа —
+    // ссылка та же, что и у полосы этажа (потом поменять href в одном месте).
+    // Табы строятся из тех же зон, снизу вверх = слева направо.
+    const tabsListEl = $("[data-floor-tabs-list]", root);
+    if (tabsListEl) {
+      // Коммерцию/паркинг (data-base-band) в табы не выводим — только жилые этажи
+      zones
+        .slice()
+        .reverse()
+        .filter((zone) => !zone.hasAttribute("data-base-band"))
+        .forEach((zone) => {
+          const tab = document.createElement("a");
+          tab.className = "floor__tabs-tab";
+          tab.href = zone.getAttribute("href");
+          tab.textContent = zone.dataset.floor;
+          tabsListEl.appendChild(tab);
+        });
+
+      // Стрелки листают список этажей влево/вправо
+      const page = () => tabsListEl.clientWidth * 0.7;
+      $("[data-floor-tabs-prev]", root)?.addEventListener("click", () =>
+        tabsListEl.scrollBy({ left: -page(), behavior: "smooth" })
+      );
+      $("[data-floor-tabs-next]", root)?.addEventListener("click", () =>
+        tabsListEl.scrollBy({ left: page(), behavior: "smooth" })
+      );
+    }
+
+    // Мобилка: нижняя выдвижная плашка с инфо — грабер + свайп
+    const infoEl = $("[data-floor-info]", root);
+    const infoHandle = $("[data-floor-info-handle]", root);
+    if (infoEl && infoHandle) {
+      infoHandle.addEventListener("click", () => infoEl.classList.toggle("is-expanded"));
+      let startY = null;
+      infoEl.addEventListener("touchstart", (e) => {
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      infoEl.addEventListener("touchend", (e) => {
+        if (startY == null) return;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (dy < -30) infoEl.classList.add("is-expanded");        // свайп вверх — раскрыть
+        else if (dy > 30) infoEl.classList.remove("is-expanded");  // свайп вниз — свернуть
+        startY = null;
+      }, { passive: true });
+    }
+
+    window.addEventListener("resize", debounce(() => {
+      if (active) positionTooltip(active);
+    }, 150));
+
+    // Тема (день / ночь)
+    const themeBtn = $("[data-floor-theme]", root);
+    const themeLabel = $("[data-floor-theme-label]", root);
+    themeBtn?.addEventListener("click", () => {
+      const night = root.classList.toggle("is-night");
+      if (themeLabel) themeLabel.textContent = night ? "ночь" : "день";
+    });
+  };
+
+  // ======================
+  // Просмотр планировки
+  // ======================
+  const initPlan = () => {
+    const root = $("[data-plan]");
+    if (!root) return;
+
+    // ---- Табы этажей ----
+    const tabsList = $("[data-plan-tabs]", root);
+    const count = parseInt(root.dataset.floors, 10) || 0;
+    let current = parseInt(root.dataset.active, 10) || count || 1;
+    const floorField = $("[data-plan-floor]", root);
+
+    const tabs = [];
+    if (tabsList && count > 0) {
+      for (let f = 1; f <= count; f++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "plan__tabs-tab";
+        btn.textContent = f;
+        btn.addEventListener("click", () => setFloor(f));
+        tabsList.appendChild(btn);
+        tabs.push(btn);
+      }
+    }
+
+    const setFloor = (f) => {
+      if (f < 1 || f > count) return;
+      current = f;
+      tabs.forEach((btn, i) => btn.classList.toggle("is-active", i + 1 === f));
+      if (floorField) floorField.textContent = f;
+      const activeTab = tabs[f - 1];
+      if (activeTab) activeTab.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    };
+
+    $("[data-plan-prev]", root)?.addEventListener("click", () => setFloor(current - 1));
+    $("[data-plan-next]", root)?.addEventListener("click", () => setFloor(current + 1));
+
+    // ---- Квартиры: наведение обновляет левую карточку ----
+    const nameEl = $("[data-plan-name]", root);
+    const fields = {
+      block: $("[data-plan-block]", root),
+      rooms: $("[data-plan-rooms]", root),
+      area: $("[data-plan-area]", root),
+      price: $("[data-plan-price]", root),
+      status: $("[data-plan-status]", root),
+    };
+    const units = $$("[data-plan-unit]", root);
+
+    const showUnit = (unit) => {
+      if (!unit) return;
+      units.forEach((u) => u.classList.toggle("is-active", u === unit));
+      if (nameEl) nameEl.innerHTML = `Квартира&nbsp;#${unit.dataset.num}`;
+      if (fields.block) fields.block.textContent = unit.dataset.block;
+      if (fields.rooms) fields.rooms.textContent = unit.dataset.rooms;
+      if (fields.area) fields.area.textContent = unit.dataset.area;
+      if (fields.price) fields.price.textContent = unit.dataset.price;
+      if (fields.status) fields.status.textContent = unit.dataset.status;
+    };
+
+    units.forEach((unit) => {
+      unit.addEventListener("mouseenter", () => showUnit(unit));
+      unit.addEventListener("focus", () => showUnit(unit));
+      unit.addEventListener("click", () => showUnit(unit)); // тач/клик
+    });
+
+    // Стартовое состояние
+    setFloor(current);
+    if (units.length) showUnit(units[0]);
+  };
+
+  // ======================
   // Boot
   // ======================
   document.addEventListener("DOMContentLoaded", () => {
@@ -938,6 +1182,8 @@
     initLkLang();
     initAccordion();
     initMore();
+    initFloorSelect();
+    initPlan();
 
   });
 })();
