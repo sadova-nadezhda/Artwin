@@ -5,24 +5,24 @@
     <main>
       <!-- Одна страница = два вида: фасад (выбор этажа) и планировка этажа.
       Модель этажей общая, задаётся на [data-floor-floors] ниже. Клик по этажу
-      переключает на вид планировки; кнопка «назад к дому» возвращает к фасаду. -->
+      переключает на вид планировки; кнопка «Вернуться назад» возвращает к фасаду. -->
       <section class="floorplan" data-floorplan>
 
         <!-- ===================== ВИД 1: ФАСАД ===================== -->
         <section class="floor floorplan__view floorplan__view--building" data-floor>
           <!-- Сцена: отдельный фон + слой фасада поверх -->
           <div class="floor__scene">
-            <img class="floor__bg" src="@img/floor-bg.png" alt="">
+            <img class="floor__bg" src="@img/floor-bg.png" data-night="@img/floor-bg-dark.png" alt="">
             <span class="floor__overlay"></span>
 
             <div class="floor__building">
-              <img class="floor__building-img" src="@img/urpaq-building.png" alt="ЖК LONDON">
+              <img class="floor__building-img" src="@img/urpaq-building.png" data-night="@img/urpaq-building-dark.png" alt="ЖК LONDON">
               <!-- data-floors — сколько этажей; data-start — номер нижнего жилого этажа;
               data-free — карта «этаж → квартир в продаже» (0 = этаж недоступен);
               data-heights — этажи со своей высотой; data-base — нижняя полоса (цоколь). -->
-              <div class="floor__floors" data-floor-floors data-floors="6" data-start="2"
-              data-free='{"7":5,"6":0,"5":3,"4":4,"3":2,"2":1}'
-              data-heights='{"7":34}'
+              <div class="floor__floors" data-floor-floors data-floors="8" data-start="2"
+              data-free='{"9":2,"8":3,"7":5,"6":0,"5":3,"4":4,"3":2,"2":1}'
+              data-heights='{"9":25}'
               data-base='{"label":"Коммерция","caption":"Уровень","height":20}'></div>
             </div>
 
@@ -112,6 +112,16 @@
 
         <!-- ===================== ВИД 2: ПЛАНИРОВКА ===================== -->
         <section class="plan floorplan__view floorplan__view--plan" data-plan hidden>
+          <!-- Кнопка «назад» для мобилки — поднимается в самый верх (над планом).
+          На десктопе скрыта, там работает та, что внутри карточки. -->
+          <a href="#" class="plan__back plan__back--top" data-floorplan-back>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="#F5F5F5"/>
+              <path d="M12.75 8.25L9 12L12.75 15.75L12.75 8.25Z" fill="#1D1B20"/>
+            </svg>
+            <span>Вернуться назад</span>
+          </a>
+
           <!-- ===== Левая карточка ===== -->
           <aside class="plan__aside">
             <!-- Назад к фасаду дома (в пределах той же страницы) -->
@@ -129,23 +139,23 @@
             <div class="plan__fields">
               <div class="plan__field">
                 <span class="plan__field-label">Блок</span>
-                <span class="plan__field-value" data-plan-block>1</span>
+                <span class="plan__field-value" data-plan-block>-</span>
               </div>
               <div class="plan__field">
                 <span class="plan__field-label">Этаж</span>
-                <span class="plan__field-value" data-plan-floor>1</span>
+                <span class="plan__field-value" data-plan-floor>-</span>
               </div>
               <div class="plan__field">
                 <span class="plan__field-label">Комнатность</span>
-                <span class="plan__field-value" data-plan-rooms>1</span>
+                <span class="plan__field-value" data-plan-rooms>-</span>
               </div>
               <div class="plan__field">
                 <span class="plan__field-label">Площадь</span>
-                <span class="plan__field-value" data-plan-area>54 м2</span>
+                <span class="plan__field-value" data-plan-area>- м2</span>
               </div>
               <div class="plan__field">
                 <span class="plan__field-label">Цена</span>
-                <span class="plan__field-value" data-plan-price>От 2 833 380</span>
+                <span class="plan__field-value" data-plan-price>-</span>
               </div>
               <div class="plan__field">
                 <span class="plan__field-label">Статус</span>
@@ -153,8 +163,8 @@
               </div>
             </div>
 
-            <a class="plan__submit button button-primary">Оставить заявку</a>
-            <a href="#" class="plan__pdf button button-light" target="_blank">Скачать PDF</a>
+            <!-- <a class="plan__submit button button-primary">Оставить заявку</a>
+            <a href="#" class="plan__pdf button button-light" target="_blank">Скачать PDF</a> -->
           </aside>
 
           <!-- ===== Правая часть ===== -->
@@ -179,38 +189,72 @@
             <div class="plan__canvas">
               <!-- OVERLAY: PNG-подложка + прозрачный SVG с контурами квартир.
               Каждая квартира — [data-plan-unit] c data-* полями. data-sold — продано. -->
-              <div class="plan__plan">
+              <!-- data-plan-floor — какому этажу (или этажам через запятую) соответствует план -->
+              <div class="plan__plan" data-plan-floor="2">
                 <img class="plan__plan-img" src="@img/plan.png" alt="Планировка этажа">
                 <svg width="815" height="357" viewBox="0 0 815 357" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M446 279V259.5L485.5 260L486 170L527.5 169.5L528 312V329.5V337.5L519.56 338H446V283V279Z" fill="#FF0C0C"/>
-                  <path d="M327 266V170H412V266L366 267L327 266Z" fill="#FF0C0C"/>
-                  <path d="M248.5 41L128.5 40.5V130L176.5 129.5H239V133.5H245.5H248V131.5L269 132V89V75V53H264.5H258.5H248.5V52.5V41Z" fill="#FF0C0C"/>
-                  <path d="M239.5 192.5L165.5 192L167 338L287.5 337.5V328V305V207.5L287 191.5H277.5H247.5V190H242.5H239.5V192.5Z" fill="#FF0C0C"/>
-                  <path d="M18.1221 54.5V41L133 40.5V198H64H18.5V123.5L18.1221 61.5V54.5Z" fill="#FF0C0C"/>
-                  <path d="M9.79139 295.391L11.5 289.5L18.5 287V198.086H133V226.5V242.5L170.5 242V338H69L67 346L39 356.5L32.8245 353.437L11.5 346L0 317L9.79139 295.391Z" fill="#FF0C0C"/>
-                  <path d="M290.5 191V170H332V260H373V283V286.5V337.5L331 338L290.5 337.5V237V205V199.5V191Z" fill="#FF0C0C"/>
-                  <path d="M491.5 170H406.5V266H491.5V170Z" fill="#FF0C0C"/>
-                  <path d="M532 337.5L531 164L541 154.5L555.5 169L557.5 167.5L605.5 212.5L633.5 185.5L655 206L659 203L675 218.5L683 226.5L694 237.5L594.5 337.5H580H532Z" fill="#FF0C0C"/>
-                  <path d="M557 173.5L539.5 156L599 96.5L668.5 164L663.049 169.5L655 177.5L646 186L640.5 192L614 218L609.142 222.5L557 173.5Z" fill="#FF0C0C"/>
-                  <path d="M656 40.5L595 100.5L665 168L676 156.5L683 149L692 140L701.5 130.742L711.215 122L727 106.5L717.5 98.5L716 99L707.5 91L680 64.5L656 40.5Z" fill="#FF0C0C"/>
-                  <path d="M695.5 0L652 44L714.5 105.5L710 109L705.487 113.5L696 123L688.5 130.5L705.487 147.589L727.54 170.132L745.5 186.5L815 118L695.5 0Z" fill="#FF0C0C"/>
+                  <path data-id="u1" d="M446 279V259.5L485.5 260L486 170L527.5 169.5L528 312V329.5V337.5L519.56 338H446V283V279Z" fill="#FF0C0C"/>
+                  <path data-id="u2" d="M327 266V170H412V266L366 267L327 266Z" fill="#FF0C0C"/>
+                  <path data-id="u3" d="M248.5 41L128.5 40.5V130L176.5 129.5H239V133.5H245.5H248V131.5L269 132V89V75V53H264.5H258.5H248.5V52.5V41Z" fill="#FF0C0C"/>
+                  <path data-id="u4" d="M239.5 192.5L165.5 192L167 338L287.5 337.5V328V305V207.5L287 191.5H277.5H247.5V190H242.5H239.5V192.5Z" fill="#FF0C0C"/>
+                  <path data-id="u5" d="M18.1221 54.5V41L133 40.5V198H64H18.5V123.5L18.1221 61.5V54.5Z" fill="#FF0C0C"/>
+                  <path data-id="u6" d="M9.79139 295.391L11.5 289.5L18.5 287V198.086H133V226.5V242.5L170.5 242V338H69L67 346L39 356.5L32.8245 353.437L11.5 346L0 317L9.79139 295.391Z" fill="#FF0C0C"/>
+                  <path data-id="u7" d="M290.5 191V170H332V260H373V283V286.5V337.5L331 338L290.5 337.5V237V205V199.5V191Z" fill="#FF0C0C"/>
+                  <path data-id="u8" d="M491.5 170H406.5V266H491.5V170Z" fill="#FF0C0C"/>
+                  <path data-id="u9" d="M532 337.5L531 164L541 154.5L555.5 169L557.5 167.5L605.5 212.5L633.5 185.5L655 206L659 203L675 218.5L683 226.5L694 237.5L594.5 337.5H580H532Z" fill="#FF0C0C"/>
+                  <path data-id="u10" d="M557 173.5L539.5 156L599 96.5L668.5 164L663.049 169.5L655 177.5L646 186L640.5 192L614 218L609.142 222.5L557 173.5Z" fill="#FF0C0C"/>
+                  <path data-id="u11" d="M656 40.5L595 100.5L665 168L676 156.5L683 149L692 140L701.5 130.742L711.215 122L727 106.5L717.5 98.5L716 99L707.5 91L680 64.5L656 40.5Z" fill="#FF0C0C"/>
+                  <path data-id="u12" d="M695.5 0L652 44L714.5 105.5L710 109L705.487 113.5L696 123L688.5 130.5L705.487 147.589L727.54 170.132L745.5 186.5L815 118L695.5 0Z" fill="#FF0C0C"/>
                 </svg>
-                <!-- Данные квартир. Связка с <path> по порядку (или по id/data-id).
-                Проставьте с бэка: status = free | reserved | sold. -->
+                <!-- Данные квартир. Связка с <path> по порядку. Проставьте с бэка: status = free | reserved | sold. -->
                 <script type="application/json" data-plan-units>
                   [
-                    {"num":1,"block":2,"rooms":2,"area":"54.72 м2","price":"От 2 833 380","status":"reserved"},
-                    {"num":2,"block":2,"rooms":1,"area":"16.98 м2","price":"Продано","status":"sold"},
-                    {"num":3,"block":1,"rooms":2,"area":"71.90 м2","price":"От 3 720 000","status":"reserved"},
-                    {"num":4,"block":1,"rooms":3,"area":"107.2 м2","price":"От 5 420 000","status":"free"},
-                    {"num":5,"block":1,"rooms":3,"area":"110.13 м2","price":"От 5 560 000","status":"free"},
-                    {"num":6,"block":1,"rooms":4,"area":"131.20 м2","price":"От 6 640 000","status":"free"},
-                    {"num":7,"block":2,"rooms":1,"area":"14.94 м2","price":"От 2 833 380","status":"free"},
-                    {"num":8,"block":2,"rooms":1,"area":"16.08 м2","price":"Продано","status":"sold"},
-                    {"num":9,"block":3,"rooms":4,"area":"110.15 м2","price":"От 5 560 000","status":"free"},
-                    {"num":10,"block":3,"rooms":2,"area":"46.86 м2","price":"От 2 430 000","status":"free"},
-                    {"num":11,"block":3,"rooms":1,"area":"34.20 м2","price":"От 2 833 380","status":"free"},
-                    {"num":12,"block":3,"rooms":3,"area":"74.04 м2","price":"От 3 810 000","status":"free"}
+                    {"id":"u1","num":1,"block":2,"rooms":2,"area":"54.72 м2","price":"От 2 833 380","status":"reserved"},
+                    {"id":"u2","num":2,"block":2,"rooms":1,"area":"16.98 м2","price":"Продано","status":"sold"},
+                    {"id":"u3","num":3,"block":1,"rooms":2,"area":"71.90 м2","price":"От 3 720 000","status":"reserved"},
+                    {"id":"u4","num":4,"block":1,"rooms":3,"area":"107.2 м2","price":"От 5 420 000","status":"free"},
+                    {"id":"u5","num":5,"block":1,"rooms":3,"area":"110.13 м2","price":"От 5 560 000","status":"free"},
+                    {"id":"u6","num":6,"block":1,"rooms":4,"area":"131.20 м2","price":"От 6 640 000","status":"free"},
+                    {"id":"u7","num":7,"block":2,"rooms":1,"area":"14.94 м2","price":"От 2 833 380","status":"free"},
+                    {"id":"u8","num":8,"block":2,"rooms":1,"area":"16.08 м2","price":"Продано","status":"sold"},
+                    {"id":"u9","num":9,"block":3,"rooms":4,"area":"110.15 м2","price":"От 5 560 000","status":"free"},
+                    {"id":"u10","num":10,"block":3,"rooms":2,"area":"46.86 м2","price":"От 2 430 000","status":"free"},
+                    {"id":"u11","num":11,"block":3,"rooms":1,"area":"34.20 м2","price":"От 2 833 380","status":"free"},
+                    {"id":"u12","num":12,"block":3,"rooms":3,"area":"74.04 м2","price":"От 3 810 000","status":"free"}
+                  ]
+                </script>
+              </div>
+              <div class="plan__plan" data-plan-floor="9">
+                <img class="plan__plan-img" src="@img/plan-2.png" alt="Планировка этажа">
+                <svg width="815" height="357" viewBox="0 0 815 357" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path data-id="u1" d="M446 279V259.5L485.5 260L486 170L527.5 169.5L528 312V329.5V337.5L519.56 338H446V283V279Z" fill="#FF0C0C"/>
+                  <path data-id="u2" d="M327 266V170H412V266L366 267L327 266Z" fill="#FF0C0C"/>
+                  <path data-id="u3" d="M248.5 41L128.5 40.5V130L176.5 129.5H239V133.5H245.5H248V131.5L269 132V89V75V53H264.5H258.5H248.5V52.5V41Z" fill="#FF0C0C"/>
+                  <path data-id="u4" d="M239.5 192.5L165.5 192L167 338L287.5 337.5V328V305V207.5L287 191.5H277.5H247.5V190H242.5H239.5V192.5Z" fill="#FF0C0C"/>
+                  <path data-id="u5" d="M18.1221 54.5V41L133 40.5V198H64H18.5V123.5L18.1221 61.5V54.5Z" fill="#FF0C0C"/>
+                  <path data-id="u6" d="M9.79139 295.391L11.5 289.5L18.5 287V198.086H133V226.5V242.5L170.5 242V338H69L67 346L39 356.5L32.8245 353.437L11.5 346L0 317L9.79139 295.391Z" fill="#FF0C0C"/>
+                  <path data-id="u7" d="M290.5 191V170H332V260H373V283V286.5V337.5L331 338L290.5 337.5V237V205V199.5V191Z" fill="#FF0C0C"/>
+                  <path data-id="u8" d="M491.5 170H406.5V266H491.5V170Z" fill="#FF0C0C"/>
+                  <path data-id="u9" d="M532 337.5L531 164L541 154.5L555.5 169L557.5 167.5L605.5 212.5L633.5 185.5L655 206L659 203L675 218.5L683 226.5L694 237.5L594.5 337.5H580H532Z" fill="#FF0C0C"/>
+                  <path data-id="u10" d="M557 173.5L539.5 156L599 96.5L668.5 164L663.049 169.5L655 177.5L646 186L640.5 192L614 218L609.142 222.5L557 173.5Z" fill="#FF0C0C"/>
+                  <path data-id="u11" d="M656 40.5L595 100.5L665 168L676 156.5L683 149L692 140L701.5 130.742L711.215 122L727 106.5L717.5 98.5L716 99L707.5 91L680 64.5L656 40.5Z" fill="#FF0C0C"/>
+                  <path data-id="u12" d="M695.5 0L652 44L714.5 105.5L710 109L705.487 113.5L696 123L688.5 130.5L705.487 147.589L727.54 170.132L745.5 186.5L815 118L695.5 0Z" fill="#FF0C0C"/>
+                </svg>
+                <!-- Данные квартир. Связка с <path> по порядку. Проставьте с бэка: status = free | reserved | sold. -->
+                <script type="application/json" data-plan-units>
+                  [
+                    {"id":"u1","num":13,"block":2,"rooms":2,"area":"46.3 м2","price":"От 2 900 000","status":"free"},
+                    {"id":"u2","num":14,"block":2,"rooms":1,"area":"46.6 м2","price":"От 1 100 000","status":"free"},
+                    {"id":"u3","num":15,"block":1,"rooms":2,"area":"74.7 м2","price":"Продано","status":"sold"},
+                    {"id":"u4","num":16,"block":1,"rooms":3,"area":"114.7 м2","price":"От 5 500 000","status":"free"},
+                    {"id":"u5","num":17,"block":1,"rooms":3,"area":"103.9 м2","price":"От 5 600 000","status":"reserved"},
+                    {"id":"u6","num":18,"block":1,"rooms":4,"area":"103.7 м2","price":"От 6 700 000","status":"free"},
+                    {"id":"u7","num":19,"block":2,"rooms":1,"area":"44.6 м2","price":"От 950 000","status":"free"},
+                    {"id":"u8","num":20,"block":2,"rooms":1,"area":"46.6 м2","price":"От 1 050 000","status":"free"},
+                    {"id":"u9","num":21,"block":3,"rooms":4,"area":"115.0 м2","price":"От 5 600 000","status":"free"},
+                    {"id":"u10","num":22,"block":3,"rooms":2,"area":"62.4 м2","price":"От 2 450 000","status":"free"},
+                    {"id":"u11","num":23,"block":3,"rooms":1,"area":"52.1 м2","price":"Продано","status":"sold"},
+                    {"id":"u12","num":24,"block":3,"rooms":3,"area":"80.1 м2","price":"От 3 850 000","status":"free"}
                   ]
                 </script>
               </div>

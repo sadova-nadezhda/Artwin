@@ -3751,9 +3751,11 @@
   }
 }
 .floorplan-page {
+  overflow-x: hidden; // страница не едет вбок — горизонтальный скролл только внутри плана
   main {
     flex: 1;
     display: flex;
+    min-width: 0;
   }
 }
 
@@ -3848,6 +3850,12 @@
       &:hover,
       &.is-active {
         background-color: rgba(21, 21, 21, 0.5);
+      }
+    }
+    // Выбранный этаж на мобилке — подсвеченная «полоска» (на десктопе — по наведению)
+    &.is-current {
+      @media(max-width: 767px) {
+        background-color: rgba(30, 145, 57, 0.5);
       }
     }
   }
@@ -4106,13 +4114,12 @@
       display: flex;
       flex-direction: column;
       gap: calc(16 * var(--width-multiplier));
-      padding: calc(16 * var(--width-multiplier)) calc(8 * var(--width-multiplier));
+      padding: calc(16 * var(--width-multiplier)) calc(20 * var(--width-multiplier));
       padding-top: calc(80 * var(--width-multiplier));
       background-color: var(--bg);
       border-radius: 0 0 calc(20 * var(--width-multiplier)) calc(20 * var(--width-multiplier));
       &-title {
         color: var(--dark);
-        font: 500 calc(20 * var(--width-multiplier))/1.2 GolosText;
         text-align: center;
       }
       &-bar {
@@ -4125,8 +4132,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: calc(52 * var(--width-multiplier));
-        height: calc(52 * var(--width-multiplier));
+        width: calc(40 * var(--width-multiplier));
+        height: calc(40 * var(--width-multiplier));
         border: 0;
         border-radius: calc(12 * var(--width-multiplier));
         background-color: var(--light);
@@ -4154,8 +4161,8 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: calc(52 * var(--width-multiplier));
-        height: calc(52 * var(--width-multiplier));
+        min-width: calc(40 * var(--width-multiplier));
+        height: calc(40 * var(--width-multiplier));
         padding: calc(12 * var(--width-multiplier));
         border-radius: calc(12 * var(--width-multiplier));
         background-color: var(--light);
@@ -4168,14 +4175,27 @@
           background-color: var(--dark);
           color: var(--light);
         }
+        // Активный этаж — жёлтым
+        &.is-active {
+          background-color: var(--primary);
+          color: var(--dark);
+        }
+        // Нет квартир в продаже — тёмно-серый, недоступен
+        &.is-empty {
+          background-color: rgba(21, 21, 21, 0.55);
+          color: rgba(255, 255, 255, 0.7);
+          cursor: not-allowed;
+          pointer-events: none;
+        }
       }
     }
   }
 
   // ==== Ночной режим ====
   &.is-night {
+    // Фон/здание меняются на ночные картинки (data-night) — фильтр не нужен
     .floor__bg {
-      filter: brightness(0.55) saturate(0.85) hue-rotate(200deg) contrast(1.05);
+      filter: none;
     }
     .floor__overlay {
       opacity: 1;
@@ -4246,6 +4266,10 @@
     &:hover {
       color: var(--primary-dark);
     }
+    // Верхняя копия для мобилки — на десктопе скрыта (см. медиазапрос)
+    &--top {
+      display: none;
+    }
   }
   &__title {
     margin-bottom: calc(8 * var(--width-multiplier));
@@ -4292,6 +4316,9 @@
     display: flex;
     flex-direction: column;
     gap: calc(8 * var(--width-multiplier));
+    @media(max-width: 1024px) {
+      max-width: calc(100vw - 32 * var(--width-multiplier));
+    }
   }
   &__tabs {
     padding: calc(24 * var(--width-multiplier));
@@ -4329,6 +4356,7 @@
     }
     &-list {
       flex: 1;
+      min-width: 0; // без этого лента не скроллится, а раздвигает карточку
       display: flex;
       justify-content: center;
       gap: calc(8 * var(--width-multiplier));
@@ -4373,6 +4401,7 @@
   }
   &__canvas {
     flex: 1;
+    min-width: 0; // чтобы overflow-x скроллил план, а не раздувал колонку
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4386,6 +4415,10 @@
     width: 100%;
     max-height: 100%;
     line-height: 0;
+    // Неактивный этаж скрыт — на экране только план выбранного этажа
+    &.is-hidden {
+      display: none;
+    }
   }
   &__plan-img {
     display: block;
@@ -4452,16 +4485,325 @@
     pointer-events: none;
   }
 
+  // Всплывающая кнопка «Посмотреть» над выбранной квартирой (мобилка)
+  &__view-btn {
+    position: absolute;
+    z-index: 3;
+    transform: translate(-50%, -50%) scale(0.9);
+    display: none;
+    padding: calc(10 * var(--width-multiplier)) calc(18 * var(--width-multiplier));
+    border: 0;
+    border-radius: calc(10 * var(--width-multiplier));
+    background-color: var(--dark);
+    color: var(--light);
+    font: 500 calc(14 * var(--width-multiplier))/1 GolosText;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 calc(6 * var(--width-multiplier)) calc(20 * var(--width-multiplier)) rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+    &.is-visible {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
   // ---- Планшет/мобилка: колонки в столбик ----
   @media(max-width: 1024px) {
     flex-direction: column;
     min-height: auto;
     padding: calc(24 * var(--width-multiplier));
+    // «назад» — сверху над планом; кнопку внутри карточки прячем
+    &__back--top {
+      display: inline-flex;
+      padding: calc(8 * var(--width-multiplier));
+      padding-right: calc(16 * var(--width-multiplier));
+      margin-bottom: calc(8 * var(--width-multiplier));
+      border-radius: calc(12 * var(--width-multiplier));
+      background-color: var(--light);
+      order: -1;
+    }
     &__aside {
+      order: 1;
       width: 100%;
+      .plan__back {
+        display: none;
+      }
     }
     &__submit {
       margin-top: calc(24 * var(--width-multiplier));
+    }
+  }
+
+  // ---- Телефон: плотнее, больше места под план ----
+  @media(max-width: 767px) {
+    gap: calc(12 * var(--width-multiplier));
+    padding: calc(12 * var(--width-multiplier));
+    &__aside,
+    &__tabs {
+      padding: calc(8 * var(--width-multiplier));
+      padding-top: calc(16 * var(--width-multiplier));
+    }
+    &__title {
+      font-size: calc(26 * var(--width-multiplier));
+    }
+    &__unit-name,
+    &__fields {
+      margin-bottom: calc(12 * var(--width-multiplier));
+    }
+    &__tabs-title {
+      margin-bottom: calc(12 * var(--width-multiplier));
+    }
+    // мельче стрелки/табы — влезает больше этажей в ряд
+    &__tabs-arrow,
+    &__tabs-tab {
+      width: calc(40 * var(--width-multiplier));
+      min-width: calc(40 * var(--width-multiplier));
+      height: calc(40 * var(--width-multiplier));
+    }
+    &__tabs-list {
+      justify-content: flex-start; // этажи скроллятся, как на фасаде
+    }
+    // План шире экрана — кладём его в горизонтальный скролл внутри канваса,
+    // чтобы он не растягивал страницу вбок, а прокручивался.
+    &__canvas {
+      padding: calc(16 * var(--width-multiplier));
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
+    }
+    &__plan {
+      flex: 0 0 auto;
+      width: calc(560 * var(--width-multiplier)); // ~1.5 экрана → удобный масштаб + скролл
+      max-width: none;
+    }
+    // кружок комнат крупнее, чтобы читался на маленьком плане
+    .plan__badge-text {
+      font-size: 14px;
+    }
+  }
+}
+
+// ====== Быстрый просмотр квартиры ======
+.quickview {
+  &__grid {
+    display: grid;
+    grid-template-columns: calc(506 * var(--width-multiplier)) 1fr;
+    grid-template-areas:
+      "back panel"
+      "col  panel";
+    grid-template-rows: auto auto;
+    align-items: start;
+    gap: calc(24 * var(--width-multiplier));
+  }
+  &__col {
+    grid-area: col;
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 * var(--width-multiplier));
+  }
+  &__card {
+    padding: calc(24 * var(--width-multiplier));
+    border-radius: calc(20 * var(--width-multiplier));
+    background-color: var(--light);
+  }
+
+  // ---- Карточка квартиры ----
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+  &__back {
+    grid-area: back;
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: calc(8 * var(--width-multiplier));
+    color: var(--dark);
+    font: 500 calc(16 * var(--width-multiplier))/1.2 GolosText;
+    transition: color 0.2s ease-out;
+    svg {
+      box-sizing: border-box;
+      width: calc(24 * var(--width-multiplier));
+      height: calc(24 * var(--width-multiplier));
+      border-radius: calc(6 * var(--width-multiplier));
+      background-color: var(--bg);
+    }
+    &:hover {
+      color: var(--primary-dark);
+    }
+  }
+  &__title {
+    margin-bottom: calc(8 * var(--width-multiplier));
+    font: 500 calc(32 * var(--width-multiplier))/1.1 GolosText;
+    text-transform: uppercase;
+  }
+  &__unit {
+    margin-bottom: calc(16 * var(--width-multiplier));
+    font: 500 calc(16 * var(--width-multiplier))/1.2 GolosText;
+  }
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(8 * var(--width-multiplier));
+    margin-bottom: calc(16 * var(--width-multiplier));
+  }
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--width-multiplier));
+    padding: calc(12 * var(--width-multiplier));
+    border-radius: calc(12 * var(--width-multiplier));
+    background-color: var(--bg);
+    &-label {
+      color: rgba(0, 0, 0, 0.5);
+      font-size: calc(14 * var(--width-multiplier));
+    }
+  }
+  &__submit,
+  &__pdf {
+    width: 100%;
+    padding: calc(18 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
+    border-radius: calc(12 * var(--width-multiplier));
+    font-size: calc(14 * var(--width-multiplier));
+  }
+  &__submit {
+    margin-bottom: calc(8 * var(--width-multiplier));
+  }
+
+  // ---- Способы покупки ----
+  &__buy-title {
+    margin-bottom: calc(16 * var(--width-multiplier));
+    font: 500 calc(28 * var(--width-multiplier))/1.1 GolosText;
+  }
+  &__buy-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--width-multiplier));
+  }
+  &__buy-item {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--width-multiplier));
+    width: fit-content;
+    padding: calc(10 * var(--width-multiplier));
+    border-radius: calc(12 * var(--width-multiplier));
+    background-color: var(--bg);
+  }
+  &__buy-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(24 * var(--width-multiplier));
+    height: calc(24 * var(--width-multiplier));
+    border-radius: 50%;
+    svg {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  }
+
+  // ---- Правая панель: переключатель + медиа ----
+  &__panel {
+    grid-area: panel;
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 * var(--width-multiplier));
+    min-height: calc(560 * var(--width-multiplier));
+  }
+  &__switch {
+    display: flex;
+    gap: calc(8 * var(--width-multiplier));
+  }
+  &__switch-btn {
+    flex: 1;
+    padding: calc(16 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
+    border: 0;
+    border-radius: calc(12 * var(--width-multiplier));
+    background-color: var(--bg);
+    color: var(--dark);
+    font: 500 calc(16 * var(--width-multiplier))/1.2 GolosText;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+    &:hover {
+      background-color: var(--light-grey);
+    }
+    &.is-active {
+      background-color: var(--dark);
+      color: var(--light);
+    }
+  }
+  &__media {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+  }
+  &__media-img {
+    display: none;
+    width: 100%;
+    height: calc(520 * var(--width-multiplier));
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    &.is-active {
+      display: block;
+    }
+  }
+
+  // ---- Планшет/мобилка: в один столбец ----
+  @media(max-width: 1024px) {
+    // на мобилке порядок: назад → панель (план/рендер) → карточка + способы
+    &__grid {
+      display: flex;
+      flex-direction: column;
+    }
+    &__back {
+      order: 1;
+      padding: calc(8 * var(--width-multiplier));
+      padding-right: calc(16 * var(--width-multiplier));
+      border-radius: calc(12 * var(--width-multiplier));
+      background-color: var(--light);
+    }
+    &__panel {
+      order: 2;
+      width: 100%;
+      min-height: auto;
+    }
+    &__col {
+      order: 3;
+      width: 100%;
+    }
+    &__media-img { 
+      height: calc(420 * var(--width-multiplier));
+    }
+    
+  }
+  @media(max-width: 767px) {
+    &__card {
+      padding: calc(16 * var(--width-multiplier));
+    }
+    &__title {
+      font-size: calc(24 * var(--width-multiplier));
+    }
+    &__media-img { 
+      height: calc(220 * var(--width-multiplier));
+    }
+    &__switch-btn {
+      padding: calc(12 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+      font-size: calc(14 * var(--width-multiplier));
+    }
+    &__field {
+      gap: calc(4 * var(--width-multiplier));
+      &-label {
+        font-size: calc(12 * var(--width-multiplier));
+      }
     }
   }
 }

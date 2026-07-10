@@ -911,6 +911,27 @@
   };
 
   // ======================
+  // Быстрый просмотр квартиры: переключатель Планировка / Рендер
+  // ======================
+  const initQuickview = () => {
+    const root = $("[data-quickview]");
+    if (!root) return;
+
+    const tabs = $$("[data-qv-tab]", root);
+    const views = $$("[data-qv-view]", root);
+    if (!tabs.length) return;
+
+    const activate = (key) => {
+      tabs.forEach((t) => t.classList.toggle("is-active", t.dataset.qvTab === key));
+      views.forEach((v) => v.classList.toggle("is-active", v.dataset.qvView === key));
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => activate(tab.dataset.qvTab));
+    });
+  };
+
+  // ======================
   // Обвязка планировки: голый <svg> с <path> → группы .plan__unit
   // ======================
   // Бэк отдаёт простой SVG (только контуры-<path>) + PNG + (опционально)
@@ -918,60 +939,61 @@
   // Здесь каждый path оборачивается в <g class="plan__unit" data-plan-unit>,
   // получает класс .plan__unit-shape и data-* поля из массива.
   // Связка path ↔ данные: по id (path.id / data-id) либо по порядку.
+  // enum статуса → человекочитаемая подпись для карточки
+  const PLAN_STATUS_LABEL = {
+    free: "Свободна",
+    reserved: "Забронирована",
+    sold: "Продана",
+  };
+
   const buildPlanUnits = (planRoot) => {
-    const svg = $(".plan__plan svg", planRoot);
-    if (!svg) return;
-    // приводим вставленный svg к нужному виду оверлея
-    svg.classList.add("plan__svg");
-    svg.setAttribute("preserveAspectRatio", "none");
+    // на этаже может быть несколько канвасов (.plan__plan) — обрабатываем каждый
+    $$(".plan__plan", planRoot).forEach((canvas) => {
+      const svg = $("svg", canvas);
+      if (!svg) return;
+      // приводим вставленный svg к нужному виду оверлея
+      svg.classList.add("plan__svg");
+      svg.setAttribute("preserveAspectRatio", "none");
 
-    // берём только ещё НЕ обёрнутые пути (прямые дети svg).
-    // если разметка уже с готовыми <g data-plan-unit> — список пустой, no-op.
-    const paths = $$(":scope > path", svg);
-    if (!paths.length) return;
+      // берём только ещё НЕ обёрнутые пути (прямые дети svg).
+      // если разметка уже с готовыми <g data-plan-unit> — список пустой, no-op.
+      const paths = $$(":scope > path", svg);
+      if (!paths.length) return;
 
-    // необязательные данные с бэка
-    let data = [];
-    const dataEl = $("[data-plan-units]", planRoot);
-    if (dataEl) { try { data = JSON.parse(dataEl.textContent || "[]"); } catch (e) {} }
-    const byId = new Map(data.map((u) => [String(u.id), u]));
+      // необязательные данные с бэка (свой массив у каждого канваса)
+      let data = [];
+      const dataEl = $("[data-plan-units]", canvas);
+      if (dataEl) { try { data = JSON.parse(dataEl.textContent || "[]"); } catch (e) {} }
+      // связка по порядку: i-й путь ↔ i-й элемент массива
+      const SVGNS = "http://www.w3.org/2000/svg";
+      paths.forEach((path, i) => {
+        const u = data[i] || {};
 
-    // enum статуса → человекочитаемая подпись для карточки
-    const STATUS_LABEL = {
-      free: "Свободна",
-      reserved: "Забронирована",
-      sold: "Продана",
-    };
+        const g = document.createElementNS(SVGNS, "g");
+        g.setAttribute("class", "plan__unit");
+        g.setAttribute("data-plan-unit", "");
+        path.setAttribute("class", "plan__unit-shape");
+        path.removeAttribute("fill"); // цвет заливки — из CSS, не инлайном
+        svg.replaceChild(g, path);
+        g.appendChild(path);
 
-    const SVGNS = "http://www.w3.org/2000/svg";
-    paths.forEach((path, i) => {
-      const key = path.id || path.dataset.id;
-      const u = (key && byId.get(String(key))) || data[i] || {};
+        // данные из массива → data-* (их читают карточка и бейдж комнат)
+        g.dataset.num = u.num != null ? u.num : i + 1;
+        if (u.block != null) g.dataset.block = u.block;
+        if (u.rooms != null) g.dataset.rooms = u.rooms;
+        if (u.area != null) g.dataset.area = u.area;
+        if (u.price != null) g.dataset.price = u.price;
+        if (u.status != null) g.dataset.status = PLAN_STATUS_LABEL[u.status] || u.status;
 
-      const g = document.createElementNS(SVGNS, "g");
-      g.setAttribute("class", "plan__unit");
-      g.setAttribute("data-plan-unit", "");
-      path.setAttribute("class", "plan__unit-shape");
-      path.removeAttribute("fill"); // цвет заливки — из CSS, не инлайном
-      svg.replaceChild(g, path);
-      g.appendChild(path);
-
-      // данные из массива → data-* (их читают карточка и бейдж комнат)
-      g.dataset.num = u.num != null ? u.num : i + 1;
-      if (u.block != null) g.dataset.block = u.block;
-      if (u.rooms != null) g.dataset.rooms = u.rooms;
-      if (u.area != null) g.dataset.area = u.area;
-      if (u.price != null) g.dataset.price = u.price;
-      if (u.status != null) g.dataset.status = STATUS_LABEL[u.status] || u.status;
-
-      // продано → серым и без интерактива; иначе делаем фокусируемым
-      if (u.status === "sold" || u.sold === true) {
-        g.setAttribute("data-sold", "");
-      } else {
-        if (u.status === "reserved") g.classList.add("is-reserved"); // бронь — оранжевым
-        g.setAttribute("tabindex", "0");
-        g.setAttribute("role", "button");
-      }
+        // продано → серым и без интерактива; иначе делаем фокусируемым
+        if (u.status === "sold" || u.sold === true) {
+          g.setAttribute("data-sold", "");
+        } else {
+          if (u.status === "reserved") g.classList.add("is-reserved"); // бронь — оранжевым
+          g.setAttribute("tabindex", "0");
+          g.setAttribute("role", "button");
+        }
+      });
     });
   };
 
@@ -985,14 +1007,25 @@
     const planRoot = $("[data-plan]", app);  // вид «планировка этажа»
     if (!root) return;
 
+    // Состояние в URL-хэше (#plan-5), чтобы при перезагрузке остаться на плане
+    const setPlanHash = (f) => {
+      try {
+        history.replaceState(null, "",
+          f != null ? `#plan-${f}` : location.pathname + location.search);
+      } catch (e) {}
+    };
+
     // Переключение видов в пределах страницы
     const openPlan = (floor) => {
       app.classList.add("is-plan");
-      ensurePlanReady(); 
+      planRoot.removeAttribute("hidden");
       if (floor != null) planSetFloor(parseInt(floor, 10));
       window.scrollTo({ top: 0 });
     };
-    const showBuilding = () => app.classList.remove("is-plan");
+    const showBuilding = () => {
+      app.classList.remove("is-plan");
+      setPlanHash(null);
+    };
 
     const scene = $(".floor__scene", root);
     const floorsEl = $("[data-floor-floors]", root);
@@ -1114,10 +1147,45 @@
       if (canOpen(active)) openPlan(active.dataset.floor);
     });
 
-    // Мобилка: верхний таб-бар. Тап по табу ведёт на страницу этажа —
-    // ссылка та же, что и у полосы этажа (потом поменять href в одном месте).
-    // Табы строятся из тех же зон, снизу вверх = слева направо.
+    // Мобилка: верхний таб-бар этажей + активный этаж и подсветка полоски.
+    // Стрелки меняют активный этаж (и листают ленту); тап по табу или по полосе
+    // на фасаде открывает план этого этажа.
     const tabsListEl = $("[data-floor-tabs-list]", root);
+    const floorTabs = new Map(); // этаж → элемент таба
+    const floorZones = new Map(); // этаж → полоса на фасаде
+    zones.forEach((z) => {
+      if (!z.hasAttribute("data-base-band")) {
+        const f = parseInt(z.dataset.floor, 10);
+        if (!isNaN(f)) floorZones.set(f, z);
+      }
+    });
+    const availableFloors = [...floorZones.keys()]
+      .filter((f) => !floorZones.get(f).classList.contains("is-empty"))
+      .sort((a, b) => a - b);
+
+    let facadeFloor = null;
+    const setFacadeFloor = (f) => {
+      const zone = floorZones.get(f);
+      if (!zone || zone.classList.contains("is-empty")) return;
+      facadeFloor = f;
+      // подсветка полоски на фасаде (только выбранный этаж)
+      floorZones.forEach((z, fl) => z.classList.toggle("is-current", fl === f));
+      // подсветка активного таба + подскролл ленты к нему
+      floorTabs.forEach((tab, fl) => tab.classList.toggle("is-active", fl === f));
+      const activeTab = floorTabs.get(f);
+      if (activeTab && tabsListEl) {
+        const left = activeTab.offsetLeft - (tabsListEl.clientWidth - activeTab.clientWidth) / 2;
+        tabsListEl.scrollTo({ left, behavior: "smooth" });
+      }
+    };
+    // Стрелки: шаг к соседнему доступному этажу (не открывает план)
+    const stepFacade = (dir) => {
+      if (!availableFloors.length) return;
+      const idx = availableFloors.indexOf(facadeFloor);
+      const next = availableFloors[Math.min(availableFloors.length - 1, Math.max(0, idx + dir))];
+      setFacadeFloor(next);
+    };
+
     if (tabsListEl) {
       // Коммерцию/паркинг (data-base-band) в табы не выводим — только жилые этажи
       zones
@@ -1126,25 +1194,25 @@
         .filter((zone) => !zone.hasAttribute("data-base-band"))
         .forEach((zone) => {
           const empty = zone.classList.contains("is-empty");
+          const floor = parseInt(zone.dataset.floor, 10);
           const tab = document.createElement("a");
           tab.className = "floor__tabs-tab" + (empty ? " is-empty" : "");
           tab.href = "#";
           tab.textContent = zone.dataset.floor;
           tab.addEventListener("click", (e) => {
             e.preventDefault();
-            if (!empty) openPlan(zone.dataset.floor);
+            if (!empty) openPlan(floor); // тап по табу → открыть план
           });
           tabsListEl.appendChild(tab);
+          if (!empty) floorTabs.set(floor, tab);
         });
 
-      // Стрелки листают список этажей влево/вправо
-      const page = () => tabsListEl.clientWidth * 0.7;
-      $("[data-floor-tabs-prev]", root)?.addEventListener("click", () =>
-        tabsListEl.scrollBy({ left: -page(), behavior: "smooth" })
-      );
-      $("[data-floor-tabs-next]", root)?.addEventListener("click", () =>
-        tabsListEl.scrollBy({ left: page(), behavior: "smooth" })
-      );
+      // Стрелки меняют активный этаж и подскроливают ленту
+      $("[data-floor-tabs-prev]", root)?.addEventListener("click", () => stepFacade(-1));
+      $("[data-floor-tabs-next]", root)?.addEventListener("click", () => stepFacade(1));
+
+      // Стартовый активный этаж — самый нижний доступный (напр. 2)
+      setFacadeFloor(availableFloors[0]);
     }
 
     // Мобилка: нижняя выдвижная плашка с инфо — грабер + свайп
@@ -1169,12 +1237,22 @@
       if (active) positionTooltip(active);
     }, 150));
 
-    // Тема (день / ночь)
+    // Тема (день / ночь) — переключает класс, подпись и меняет картинки
     const themeBtn = $("[data-floor-theme]", root);
     const themeLabel = $("[data-floor-theme-label]", root);
+    // Картинки с ночным вариантом: запоминаем дневной src, чтобы вернуть обратно
+    const themeImgs = $$("[data-night]", root);
+    themeImgs.forEach((img) => { img.dataset.day = img.getAttribute("src"); });
+    const applyThemeImages = (night) => {
+      themeImgs.forEach((img) => {
+        const next = night ? img.dataset.night : img.dataset.day;
+        if (next) img.setAttribute("src", next);
+      });
+    };
     themeBtn?.addEventListener("click", () => {
       const night = root.classList.toggle("is-night");
       if (themeLabel) themeLabel.textContent = night ? "ночь" : "день";
+      applyThemeImages(night);
     });
 
     // ======================
@@ -1182,11 +1260,13 @@
     // ======================
     if (!planRoot) return;
 
-    // Кнопка «Вернуться назад» — возврат к фасаду
-    $("[data-floorplan-back]", app)?.addEventListener("click", (e) => {
-      e.preventDefault();
-      showBuilding();
-    });
+    // Кнопки «Вернуться назад» (в карточке и верхняя для мобилки) — возврат к фасаду
+    $$("[data-floorplan-back]", app).forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        showBuilding();
+      })
+    );
 
     // Бэк вставляет голый <svg> с <path> + (опц.) массив данных.
     // Обрамляем каждый path в группу .plan__unit и подмешиваем данные.
@@ -1216,14 +1296,22 @@
       }
     }
 
+    // Прокрутка ленты этажей к активному табу (только сама лента, не страница)
+    const scrollTabIntoView = (tab) => {
+      if (!tab || !tabsList) return;
+      const left = tab.offsetLeft - (tabsList.clientWidth - tab.clientWidth) / 2;
+      tabsList.scrollTo({ left, behavior: "smooth" });
+    };
+
     let currentFloor = null;
     function planSetFloor(f) {
       if (f < start || f > top || isFloorEmpty(f)) return; // недоступный этаж — игнор
       currentFloor = f;
       tabs.forEach((btn, i) => btn.classList.toggle("is-active", start + i === f));
       if (floorField) floorField.textContent = f;
-      const activeTab = tabs[f - start];
-      if (activeTab) activeTab.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+      scrollTabIntoView(tabs[f - start]); // лента следует за выбранным этажом
+      showCanvas(f); // показать канвас (план) выбранного этажа
+      setPlanHash(f); // запомнить этаж в URL
     }
 
     // Стрелки листают этажи, пропуская недоступные
@@ -1258,6 +1346,53 @@
       if (fields.status) fields.status.textContent = unit.dataset.status;
     };
 
+    // ---- Переход на быстрый просмотр ----
+    const isMobile = () => window.matchMedia("(max-width: 1024px)").matches;
+    const goToQuickview = (unit) => {
+      if (!unit) return;
+      const params = new URLSearchParams();
+      if (unit.dataset.num) params.set("unit", unit.dataset.num);
+      if (currentFloor != null) params.set("floor", currentFloor);
+      location.href = `quickview.html?${params.toString()}`;
+    };
+
+    // Мобилка: всплывающая кнопка «Посмотреть» над выбранной квартирой.
+    // Одна кнопка на канвас, позиционируется в центре контура (в % от viewBox).
+    const showViewButton = (unit) => {
+      const canvas = unit.closest(".plan__plan");
+      const svg = canvas && $("svg", canvas);
+      const shape = $(".plan__unit-shape", unit);
+      const vb = svg && svg.viewBox && svg.viewBox.baseVal;
+      if (!canvas || !shape || !vb || !vb.width) return;
+      const box = shape.getBBox();
+      let btn = $(".plan__view-btn", canvas);
+      if (!btn) {
+        btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "plan__view-btn";
+        btn.textContent = "Посмотреть";
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          goToQuickview(btn._unit);
+        });
+        canvas.appendChild(btn);
+      }
+      btn._unit = unit;
+      btn.style.left = `${((box.x + box.width / 2) / vb.width) * 100}%`;
+      btn.style.top = `${((box.y + box.height / 2) / vb.height) * 100}%`;
+      btn.classList.add("is-visible");
+    };
+
+    // Клик по квартире: десктоп — сразу на quickview; мобилка — инфа + кнопка
+    const onUnitClick = (unit) => {
+      if (isMobile()) {
+        showUnit(unit);
+        showViewButton(unit);
+      } else {
+        goToQuickview(unit);
+      }
+    };
+
     // Наведение/клик по доступной квартире; проданные — серым и без интерактива
     units.forEach((unit) => {
       if (isSold(unit)) {
@@ -1267,7 +1402,7 @@
       }
       unit.addEventListener("mouseenter", () => showUnit(unit));
       unit.addEventListener("focus", () => showUnit(unit));
-      unit.addEventListener("click", () => showUnit(unit)); // тач/клик
+      unit.addEventListener("click", () => onUnitClick(unit)); // тач/клик
     });
 
     // ---- Кружки с количеством комнат внутри группы квартиры ----
@@ -1311,15 +1446,24 @@
       return best;
     };
 
-    // Бейджи и стартовую квартиру строим ЛЕНИВО — при первом открытии плана:
-    // пока вид скрыт (display:none), getBBox() вернул бы нули.
-    let planReady = false;
-    function ensurePlanReady() {
-      if (planReady) return;
-      planReady = true;
-      planRoot.removeAttribute("hidden");
+    // ---- Несколько канвасов: показываем план выбранного этажа ----
+    // Привязка канвас → этаж(и): data-plan-floor="3" или "2,3,4".
+    // Если не задано — канвас служит запасным для всех этажей.
+    const canvases = $$(".plan__plan", planRoot);
+    const canvasFloors = (c) =>
+      (c.dataset.planFloor || "").split(",").map((v) => parseInt(v, 10)).filter((v) => !isNaN(v));
+    const canvasForFloor = (f) =>
+      canvases.find((c) => canvasFloors(c).includes(f)) || canvases[0];
 
-      units.forEach((unit) => {
+    // до выбора этажа прячем все канвасы, кроме первого, чтобы не наслаивались
+    canvases.forEach((c, i) => c.classList.toggle("is-hidden", i !== 0));
+
+    // Бейджи строим ЛЕНИВО и по-канвасно: getBBox корректен только у видимого.
+    const builtCanvases = new WeakSet();
+    const buildBadgesFor = (canvas) => {
+      if (builtCanvases.has(canvas)) return;
+      builtCanvases.add(canvas);
+      $$("[data-plan-unit]", canvas).forEach((unit) => {
         const shape = $(".plan__unit-shape", unit);
         if (!shape || !unit.dataset.rooms) return;
         // ручное переопределение точки из данных (в единицах viewBox), если нужно
@@ -1341,9 +1485,23 @@
         text.textContent = unit.dataset.rooms;
         unit.append(circle, text);
       });
+    };
 
-      const firstAvailable = units.find((u) => !isSold(u));
-      if (firstAvailable) showUnit(firstAvailable);
+    function showCanvas(f) {
+      const target = canvasForFloor(f);
+      if (!target) return;
+      canvases.forEach((c) => c.classList.toggle("is-hidden", c !== target));
+      $$(".plan__view-btn", planRoot).forEach((b) => b.classList.remove("is-visible")); // прячем кнопку при смене этажа
+      buildBadgesFor(target); // канвас теперь виден → геометрия корректна
+      const first = $$("[data-plan-unit]", target).find((u) => !isSold(u));
+      if (first) showUnit(first);
+    }
+
+    // Восстановление вида после перезагрузки: #plan-5 → сразу открыть план этажа 5
+    const hashMatch = location.hash.match(/^#plan-(\d+)/);
+    if (hashMatch) {
+      const f = parseInt(hashMatch[1], 10);
+      if (f >= start && f <= top && !isFloorEmpty(f)) openPlan(f);
     }
   };
 
@@ -1372,6 +1530,7 @@
     initAccordion();
     initMore();
     initFloorplan();
+    initQuickview();
 
   });
 })();
