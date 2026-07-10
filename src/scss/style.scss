@@ -3731,6 +3731,32 @@
 
 // ====== Floor select ======
 
+// ====== Объединённая страница: фасад дома + планировка этажа ======
+// Два вида в одном контейнере, переключаются классом .is-plan.
+.floorplan {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+  &__view {
+    flex: 1;
+    min-width: 0;
+  }
+  // по умолчанию виден фасад, планировка скрыта
+  .floor.floorplan__view--building { display: block; }
+  .plan.floorplan__view--plan { display: none; }
+  // режим планировки
+  &.is-plan {
+    .floor.floorplan__view--building { display: none; }
+    .plan.floorplan__view--plan { display: flex; }
+  }
+}
+.floorplan-page {
+  main {
+    flex: 1;
+    display: flex;
+  }
+}
+
 .floor-page {
   overflow: hidden;
 }
@@ -4333,6 +4359,16 @@
         background-color: var(--primary);
         color: var(--dark);
       }
+      // Нет квартир в продаже — тёмно-серый, недоступен
+      &.is-empty {
+        background-color: rgba(21, 21, 21, 0.55);
+        color: rgba(255, 255, 255, 0.7);
+        cursor: not-allowed;
+        pointer-events: none;
+        &:hover {
+          background-color: rgba(21, 21, 21, 0.55);
+        }
+      }
     }
   }
   &__canvas {
@@ -4376,6 +4412,44 @@
     &.is-active .plan__unit-shape {
       fill: rgba(30, 145, 57, 0.28);
     }
+    // Забронировано — заливка только при наведении, оранжевым
+    &.is-reserved {
+      &:hover .plan__unit-shape,
+      &:focus .plan__unit-shape,
+      &.is-active .plan__unit-shape {
+        fill: rgba(255, 138, 0, 0.45);
+      }
+    }
+    // Продано — постоянно залито серым, интерактив отключён
+    &.is-sold {
+      cursor: default;
+      pointer-events: none;
+      .plan__unit-shape {
+        fill: rgba(21, 21, 21, 0.32);
+      }
+    }
+  }
+
+  // Кружок с количеством комнат
+  &__badge {
+    position: relative;
+    fill: rgb(30, 145, 57);
+    pointer-events: none;
+    z-index: 1;
+    &--reserved {
+      fill: rgb(255, 138, 0);
+    }
+    &--sold {
+      fill: rgba(21, 21, 21, 0.6);
+    }
+  }
+  &__badge-text {
+    fill: var(--light);
+    font-size: 12px;
+    font-weight: 500;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
   }
 
   // ---- Планшет/мобилка: колонки в столбик ----
