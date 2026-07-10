@@ -11,9 +11,9 @@
         <div class="container">
           <div class="quickview__grid">
 
-            <!-- Кнопка «назад» вынесена из карточки — чтобы на мобилке поднять её
-            в самый верх (над панелью Планировка/Рендер). -->
-            <a href="floor.html" class="quickview__back">
+            <!-- Верхняя кнопка «назад» — только для мобилки (в самый верх, над панелью).
+            На десктопе скрыта, там работает та, что внутри карточки. -->
+            <a href="floor.html" class="quickview__back quickview__back--top">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="24" height="24" rx="6" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="#F5F5F5"/>
                 <path d="M12.75 8.25L9 12L12.75 15.75L12.75 8.25Z" fill="#1D1B20"/>
@@ -26,6 +26,13 @@
 
               <!-- Карточка квартиры -->
               <aside class="quickview__card quickview__info">
+                <a href="floor.html" class="quickview__back">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="6" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="#F5F5F5"/>
+                    <path d="M12.75 8.25L9 12L12.75 15.75L12.75 8.25Z" fill="#1D1B20"/>
+                  </svg>
+                  <span>Вернуться назад</span>
+                </a>
                 <h1 class="quickview__title">ЖК LONDON</h1>
                 <div class="quickview__unit" data-qv-name>Квартира&nbsp;#1</div>
 
