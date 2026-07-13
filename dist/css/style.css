@@ -728,6 +728,35 @@ textarea {
      object-fit: cover;
 }
 
+.header .lk-lang__current {
+  width: auto;
+  height: 100%;
+  gap: calc(8 * var(--width-multiplier));
+  padding: calc(8 * var(--width-multiplier));
+  border-radius: calc(8 * var(--width-multiplier));
+  background: rgba(0, 0, 0, 0.03);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.header .lk-lang__current:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.header .lk-lang__flag {
+  width: calc(20 * var(--width-multiplier));
+  height: calc(20 * var(--width-multiplier));
+}
+
+.header .lk-lang__name {
+  flex-grow: 0;
+}
+
+.header .lk-lang__drop {
+  left: auto;
+  right: 0;
+}
+
 .footer {
   padding-bottom: calc(16 * var(--width-multiplier));
 }
@@ -2889,20 +2918,20 @@ textarea {
 
 .lk-lang {
   position: relative;
+  align-self: stretch;
 }
 
 .lk-lang__current,
 .lk-lang__option {
   display: flex;
   align-items: center;
-  gap: calc(12 * var(--width-multiplier));
+  gap: calc(8 * var(--width-multiplier));
   width: 100%;
-  padding: calc(14 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+  padding: calc(8 * var(--width-multiplier));
   border: none;
-  border-radius: calc(12 * var(--width-multiplier));
+  border-radius: calc(8 * var(--width-multiplier));
   background: none;
   color: var(--dark);
-  font: 500 calc(16 * var(--width-multiplier))/1.2 GolosText;
   text-align: left;
   cursor: pointer;
   transition: background-color 0.2s ease-out;
@@ -2939,6 +2968,7 @@ textarea {
 }
 
 .lk-lang__arrow {
+  transform: rotate(90deg);
   transition: transform 0.3s ease-out;
 }
 
@@ -2946,7 +2976,7 @@ textarea {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(100% + 8 * var(--width-multiplier));
+  top: calc(100% + 8 * var(--width-multiplier));
   display: flex;
   flex-direction: column;
   gap: calc(4 * var(--width-multiplier));
@@ -2957,7 +2987,7 @@ textarea {
   box-shadow: 0 calc(8 * var(--width-multiplier)) calc(32 * var(--width-multiplier)) rgba(0, 0, 0, 0.12);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(calc(8 * var(--width-multiplier)));
+  transform: translateY(calc(-8 * var(--width-multiplier)));
   transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0.25s;
   z-index: 5;
 }

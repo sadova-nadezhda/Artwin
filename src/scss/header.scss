@@ -295,3 +295,30 @@
     }
   }
 }
+
+.header .lk-lang {
+  &__current {
+    width: auto;
+    height: 100%;
+    gap: calc(8 * var(--width-multiplier));
+    padding: calc(8 * var(--width-multiplier));
+    border-radius: calc(8 * var(--width-multiplier));
+    background: rgba(0, 0, 0, 0.03);
+    font-weight: 400;
+    white-space: nowrap;
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+  }
+  &__flag {
+    width: calc(20 * var(--width-multiplier));
+    height: calc(20 * var(--width-multiplier));
+  }
+  &__name {
+    flex-grow: 0;
+  }
+  &__drop {
+    left: auto;
+    right: 0;
+  }
+}
