@@ -177,6 +177,59 @@ textarea {
   height: calc(90 * var(--width-multiplier));
 }
 
+.preloader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark, #151515);
+  z-index: 1000;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.preloader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(32 * var(--width-multiplier));
+}
+
+.preloader__building {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: calc(10 * var(--width-multiplier));
+  width: calc(180 * var(--width-multiplier));
+  padding: calc(16 * var(--width-multiplier));
+  border-radius: calc(12 * var(--width-multiplier)) calc(12 * var(--width-multiplier)) 0 0;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.preloader__window {
+  aspect-ratio: 3/4;
+  border-radius: calc(3 * var(--width-multiplier));
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.preloader__logo {
+  width: calc(200 * var(--width-multiplier));
+  opacity: 0;
+}
+
+.preloader__logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .container {
   width: 100%;
   max-width: calc(1376 * var(--width-multiplier));
@@ -3962,6 +4015,10 @@ textarea {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.modal-feedback {
+  overflow-y: unset;
+}
+
 .modal__close {
   position: absolute;
   top: calc(24 * var(--width-multiplier));
@@ -3982,6 +4039,13 @@ textarea {
 .modal__close svg {
   width: calc(20 * var(--width-multiplier));
   height: calc(20 * var(--width-multiplier));
+}
+
+.modal__head {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--width-multiplier));
+  margin-bottom: calc(16 * var(--width-multiplier));
 }
 
 .edit {
@@ -4107,6 +4171,25 @@ textarea {
 .edit__input::placeholder {
   color: rgba(0, 0, 0, 0.5);
   font-weight: 500;
+}
+
+.edit .iti {
+  width: 100%;
+}
+
+.edit .iti__tel-input {
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.edit .iti__selected-dial-code {
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.edit .iti__search-input {
+  font: inherit;
 }
 
 .edit__security {
@@ -5268,6 +5351,15 @@ textarea {
 
   h4 {
     font-size: calc(18 * var(--width-multiplier));
+  }
+
+  .preloader__building {
+    width: calc(150 * var(--width-multiplier));
+    gap: calc(8 * var(--width-multiplier));
+  }
+
+  .preloader__logo {
+    width: calc(160 * var(--width-multiplier));
   }
 
   .button {

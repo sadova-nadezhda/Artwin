@@ -5,6 +5,61 @@
 
 // ====== Global ======
 
+.preloader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark, $dark);
+  z-index: 1000;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  &__stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(32 * var(--width-multiplier));
+  }
+  // Дом: сетка окон, которые «зажигаются» по мере продажи квартир
+  &__building {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(10 * var(--width-multiplier));
+    width: calc(180 * var(--width-multiplier));
+    padding: calc(16 * var(--width-multiplier));
+    border-radius: calc(12 * var(--width-multiplier)) calc(12 * var(--width-multiplier)) 0 0;
+    background-color: rgba(255, 255, 255, 0.04);
+    @media(max-width: 767px) {
+      width: calc(150 * var(--width-multiplier));
+      gap: calc(8 * var(--width-multiplier));
+    }
+  }
+  &__window {
+    aspect-ratio: 3 / 4;
+    border-radius: calc(3 * var(--width-multiplier));
+    background-color: rgba(255, 255, 255, 0.06); // погашенное окно
+  }
+  &__logo {
+    width: calc(200 * var(--width-multiplier));
+    opacity: 0;
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    @media(max-width: 767px) {
+      width: calc(160 * var(--width-multiplier));
+    }
+  }
+}
+
 .container {
   width: 100%;
   max-width: calc(1376 * var(--width-multiplier));
@@ -3576,6 +3631,9 @@
     border-radius: calc(100px * var(--width-multiplier));
     background-color: rgba(0, 0, 0, 0.2);
   }
+  &-feedback {
+    overflow-y: unset;
+  }
   &__close {
     position: absolute;
     top: calc(24 * var(--width-multiplier));
@@ -3595,6 +3653,12 @@
       width: calc(20 * var(--width-multiplier));
       height: calc(20 * var(--width-multiplier));
     }
+  }
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--width-multiplier));
+    margin-bottom: calc(16 * var(--width-multiplier));
   }
   @media(max-width: 767px) {
     padding: calc(16 * var(--width-multiplier));
@@ -3701,6 +3765,21 @@
     &::placeholder {
       color: rgba(0, 0, 0, 0.5);
       font-weight: 500;
+    }
+  }
+  .iti {
+    width: 100%;
+    &__tel-input {
+      width: 100%;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    &__selected-dial-code {
+      font-weight: 500;
+      color: var(--dark);
+    }
+    &__search-input {
+      font: inherit;
     }
   }
   &__security {

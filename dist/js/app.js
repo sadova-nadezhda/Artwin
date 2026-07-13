@@ -224,7 +224,7 @@
   // Phone mask
   // ======================
   const initPhoneMask = () => {
-    const inputs = $$('input[type="tel"]:not([data-lead-phone]):not([data-auth-phone])');
+    const inputs = $$('input[type="tel"]:not([data-lead-phone]):not([data-auth-phone]):not([data-modal-phone])');
     if (!inputs.length) return;
 
     const format = (value, matrix) => {
@@ -839,6 +839,9 @@
 
     const modals = $$(".modal", wrapper);
     const getModalByType = (type) => wrapper.querySelector(`.modal[data-type="${type}"]`);
+
+    // Телефон с флагом и кодом страны внутри модалок (общий модуль)
+    $$("[data-modal-phone]", wrapper).forEach((input) => createPhoneInput(input));
 
     const showWrapper = () => {
       wrapper.style.opacity = 1;
@@ -1506,11 +1509,80 @@
   };
 
   // ======================
+  // Preloader
+  // ======================
+  const initPreloader = () => {
+    const preloader = $(".preloader");
+    if (!preloader) return;
+
+    const building = $(".preloader__building", preloader);
+    const logo = $(".preloader__logo", preloader);
+
+    // Нет GSAP или разметки — просто убираем прелоудер
+    if (typeof gsap === "undefined" || !building || !logo) {
+      preloader.remove();
+      return;
+    }
+
+    // Наполняем дом окнами
+    const count = parseInt(building.dataset.windows, 10) || 24;
+    const windows = [];
+    for (let i = 0; i < count; i++) {
+      const win = document.createElement("span");
+      win.className = "preloader__window";
+      building.appendChild(win);
+      windows.push(win);
+    }
+
+    // Блокируем скролл, пока идёт анимация
+    document.body.classList.add("no-scroll");
+    window.lenis?.stop?.();
+
+    const hide = () => {
+      preloader.classList.add("is-hidden");
+      document.body.classList.remove("no-scroll");
+      window.lenis?.start?.();
+      preloader.addEventListener("transitionend", () => preloader.remove(), { once: true });
+    };
+
+    const tl = gsap.timeline({ onComplete: hide });
+
+    // 1. Дом «вырастает»
+    tl.from(building, { y: 24, opacity: 0, duration: 0.4, ease: "power2.out" });
+
+    // 2. Окна зажигаются вразнобой — квартиры раскупают
+    tl.to(
+      windows,
+      {
+        backgroundColor: "#FFD10C",
+        boxShadow: "0 0 14px rgba(255, 209, 12, 0.55)",
+        duration: 0.3,
+        ease: "power1.out",
+        stagger: { each: 0.05, from: "random" },
+      },
+      "-=0.1"
+    );
+
+    // 3. Появляется логотип ARTWIN
+    tl.fromTo(
+      logo,
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      "-=0.15"
+    );
+
+    // 4. Небольшая пауза перед скрытием
+    tl.to({}, { duration: 0.4 });
+  };
+
+  // ======================
   // Boot
   // ======================
   document.addEventListener("DOMContentLoaded", () => {
     const lenis = initLenis();
     updateMultiplier();
+
+    initPreloader();
 
     const scrollLock = createScrollLock(lenis);
 

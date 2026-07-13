@@ -2,6 +2,13 @@
 <html lang="en">
   @@include('html/head.html', { "title": "Главная" })
   <body>
+    <div class="preloader" aria-hidden="true">
+      <div class="preloader__stage">
+        <div class="preloader__building" data-windows="24"></div>
+        <div class="preloader__logo">@@include('html/preloader-logo.html')</div>
+      </div>
+    </div>
+
     @@include('html/header.html')
 
     <main>

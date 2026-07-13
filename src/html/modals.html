@@ -1,0 +1,29 @@
+<div class="modals">
+  <div class="modal modal-feedback" data-type="feedback" data-lenis-prevent>
+    <button class="modal__close" type="button">
+      <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="modal__head">
+      <h2 class="modal__title">Оставить заявку</h2>
+      <p class="modal__subtitle">Оставьте свои контакты, и мы свяжемся с вами в ближайшее время</p>
+    </div>
+
+    <form class="edit" action="#" method="POST">
+      <div class="edit__group">
+        <label class="edit__field">
+          <span class="edit__field-label">Имя*</span>
+          <input class="edit__input" type="text" name="name" placeholder="Ваше имя" required>
+        </label>
+        <label class="edit__field">
+          <span class="edit__field-label">Телефон*</span>
+          <input class="edit__input" type="tel" inputmode="tel" name="phone" data-modal-phone required>
+        </label>
+      </div>
+
+      <button class="edit__submit button button-primary" type="submit">Отправить</button>
+    </form>
+  </div>
+</div>
