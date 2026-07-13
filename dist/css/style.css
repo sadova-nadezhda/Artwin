@@ -1675,6 +1675,7 @@ textarea {
 
 .map__btn {
   margin-left: auto;
+  padding: calc(12 * var(--width-multiplier));
 }
 
 .banner {
