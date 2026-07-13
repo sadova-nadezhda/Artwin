@@ -31,13 +31,16 @@
   &__building {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    align-content: start;
     gap: calc(10 * var(--width-multiplier));
     width: calc(180 * var(--width-multiplier));
+    min-height: calc(320 * var(--width-multiplier)); // держит форму, пока окна ещё не отрисованы
     padding: calc(16 * var(--width-multiplier));
     border-radius: calc(12 * var(--width-multiplier)) calc(12 * var(--width-multiplier)) 0 0;
     background-color: rgba(255, 255, 255, 0.04);
     @media(max-width: 767px) {
       width: calc(150 * var(--width-multiplier));
+      min-height: calc(260 * var(--width-multiplier));
       gap: calc(8 * var(--width-multiplier));
     }
   }
