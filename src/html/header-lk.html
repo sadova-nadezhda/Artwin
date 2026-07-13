@@ -9,7 +9,7 @@
           <ul class="header__menu">
             <li class="header__menu-item header__menu-item--has-drop">
               <a href="" class="header__menu-trigger">
-                Жилые комплексы
+                Проекты
                 <svg class="header__menu-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -60,6 +60,7 @@
             </li>
             <li><a href="about.html">О компании</a></li>
             <li><a href="news.html">Новости</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </nav>
       </div>
@@ -86,7 +87,7 @@
         </a>
       </div>
       <div class="header__group">
-        @@include('html/lang.html')
+        @@include('lang.html')
       </div>
       <div class="header__group header__group--user">
         <button class="header__user" type="button">
@@ -115,9 +116,33 @@
     </div>
     <nav>
       <ul class="header__mobile-menu">
-        <li class="header__mobile-item"><a href="profile.html" class="header__mobile-link">Профиль</a></li>
-        <li class="header__mobile-item"><a href="about.html" class="header__mobile-link">О компании</a></li>
-        <li class="header__mobile-item"><a href="news.html" class="header__mobile-link">Новости</a></li>
+        <li class="header__mobile-item header__mobile-item--has-drop">
+          <button class="header__mobile-trigger" type="button">
+            Проекты
+            <svg class="header__mobile-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="header__mobile-drop">
+            <ul class="header__mobile-drop-list">
+              <li><a href="">London Square</a></li>
+              <li><a href="">БЦ Seoul</a></li>
+              <li><a href="">Urpaq Park</a></li>
+              <li><a href="">Esentai</a></li>
+              <li><a href="">Hayat</a></li>
+              <li><a href="">Boston Tower</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="header__mobile-item">
+          <a href="about.html" class="header__mobile-link">О компании</a>
+        </li>
+        <li class="header__mobile-item">
+          <a href="news.html" class="header__mobile-link">Новости</a>
+        </li>
+        <li class="header__mobile-item">
+          <a href="contacts.html" class="header__mobile-link">Контакты</a>
+        </li>
       </ul>
     </nav>
     <div class="header__mobile-contacts">
@@ -127,7 +152,31 @@
         </svg>
         <span>8000</span>
       </a>
-      <a href="profile.html" class="header__profile header__mobile-profile">Личный кабинет</a>
+      <a href="" class="header__social" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_lk_mob)">
+            <mask id="mask0_lk_mob" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+              <path d="M0 1.90735e-06H18V18H0V1.90735e-06Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_lk_mob)">
+              <path d="M1.60464 13.1284C0.918598 11.908 0.527344 10.4997 0.527344 8.99997C0.527344 4.34005 4.34011 0.527315 9 0.527315C13.6599 0.527315 17.4727 4.34005 17.4727 8.99997C17.4727 13.6599 13.6599 17.4726 9 17.4726C7.5003 17.4726 6.09202 17.0813 4.8716 16.3953L0.527344 17.4726L1.60464 13.1284Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.0063 9.99365C7.6566 9.64282 6.25299 8.08519 6.76374 7.57444C6.90411 7.43406 7.46542 7.05065 7.68441 6.83166C8.43018 6.08589 7.57454 5.16255 7.02586 4.61386C6.98104 4.56904 6.13641 3.66 5.01506 4.78138C3.01028 6.78617 5.86788 10.3809 6.7392 11.2607C7.61905 12.1321 11.2138 14.9897 13.2186 12.9849C14.34 11.8635 13.4309 11.0189 13.3861 10.9741C12.8374 10.4254 11.9141 9.5698 11.1683 10.3156C10.9493 10.5346 10.5659 11.0958 10.4255 11.2362C9.91476 11.747 8.35712 10.3434 8.0063 9.99365Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10"/>
+            </g>
+          </g>
+          <defs>
+            <clipPath id="clip0_lk_mob">
+              <rect width="18" height="18" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </a>
+      <div class="header__mobile-lang">
+        @@include('lang.html')
+      </div>
     </div>
+    <a href="profile.html" class="header__user header__mobile-user">
+      <span class="header__user-avatar"><img src="@img/user.png" alt="" /></span>
+      <span class="header__user-name">Амантай</span>
+    </a>
   </div>
 </header>

@@ -103,7 +103,7 @@
         </a>
       </div>
       <div class="header__group">
-        @@include('html/lang.html')
+        @@include('lang.html')
       </div>
       <div class="header__group">
         <a href="profile.html" class="header__profile">Личный кабинет</a>
@@ -182,7 +182,10 @@
           </defs>
         </svg>
       </a>
-      <a href="profile.html" class="header__profile header__mobile-profile">Личный кабинет</a>
+      <div class="header__mobile-lang">
+        @@include('lang.html')
+      </div>
     </div>
+    <a href="profile.html" class="header__profile header__mobile-profile">Личный кабинет</a>
   </div>
 </header>

@@ -271,6 +271,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: calc(8 * var(--width-multiplier));
   width: -moz-max-content;
   width: max-content;
   padding: calc(18 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
@@ -285,6 +286,12 @@ textarea {
 
 .button:disabled {
   opacity: 0.4;
+}
+
+.button svg {
+  width: calc(16 * var(--width-multiplier));
+  height: calc(16 * var(--width-multiplier));
+  pointer-events: none;
 }
 
 .button-primary {
@@ -595,6 +602,28 @@ textarea {
   justify-content: space-between;
 }
 
+.header__mobile-lang .lk-lang {
+  display: inline-block;
+}
+
+.header__mobile-lang .lk-lang__drop {
+  top: auto;
+  bottom: calc(100% + 8 * var(--width-multiplier));
+  transform: translateY(calc(8 * var(--width-multiplier)));
+}
+
+.header__mobile-lang .is-open .lk-lang__drop {
+  transform: translateY(0);
+}
+
+.header__mobile-lang .lk-lang__arrow {
+  transform: rotate(-90deg);
+}
+
+.header__mobile-lang .is-open .lk-lang__arrow {
+  transform: rotate(90deg);
+}
+
 .header__mobile-close {
   display: flex;
   align-items: center;
@@ -692,8 +721,12 @@ textarea {
 }
 
 .header__mobile-profile {
-  flex-grow: 1;
   justify-content: center;
+  margin-top: calc(-24 * var(--width-multiplier));
+}
+
+.header__mobile .header__tel {
+  flex-grow: 1;
 }
 
 .header--lk {
@@ -714,8 +747,8 @@ textarea {
 }
 
 .header--lk .header__user-avatar {
-  width: calc(28 * var(--width-multiplier));
-  height: calc(28 * var(--width-multiplier));
+  width: calc(24 * var(--width-multiplier));
+  height: calc(24 * var(--width-multiplier));
   border-radius: calc(4 * var(--width-multiplier));
   overflow: hidden;
   flex-shrink: 0;
@@ -726,6 +759,10 @@ textarea {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.header--lk .header__mobile-user {
+  margin-top: calc(-24 * var(--width-multiplier));
 }
 
 .header .lk-lang__current {
@@ -754,7 +791,7 @@ textarea {
 
 .header .lk-lang__drop {
   left: auto;
-  right: 0;
+  right: calc(-8 * var(--width-multiplier));
 }
 
 .footer {
@@ -1527,6 +1564,13 @@ textarea {
   padding-top: calc(32 * var(--width-multiplier));
 }
 
+.projects__top {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 * var(--width-multiplier));
+  margin-bottom: calc(24 * var(--width-multiplier));
+}
+
 .projects__cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1627,6 +1671,10 @@ textarea {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.map__btn {
+  margin-left: auto;
 }
 
 .banner {
@@ -2558,11 +2606,14 @@ textarea {
 .filters-trigger {
   display: inline-flex;
   align-items: center;
-  gap: calc(6 * var(--width-multiplier));
-  padding: calc(10 * var(--width-multiplier)) calc(20 * var(--width-multiplier));
-  border: 1px solid var(--light-grey);
-  border-radius: calc(100px * var(--width-multiplier));
-  background-color: var(--light);
+  justify-content: center;
+  gap: calc(8 * var(--width-multiplier));
+  width: 100%;
+  padding: calc(12 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+  border: 1px solid transparent;
+  border-radius: calc(8 * var(--width-multiplier));
+  color: var(--dark);
+  background-color: var(--light-grey);
   font-size: calc(14 * var(--width-multiplier));
   cursor: pointer;
 }
@@ -2585,7 +2636,6 @@ textarea {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: calc(8 * var(--width-multiplier));
-  margin-bottom: calc(24 * var(--width-multiplier));
 }
 
 .filters__group {
@@ -5143,6 +5193,10 @@ textarea {
     display: none;
   }
 
+  .header .lk-lang__drop {
+    right: 0;
+  }
+
   .footer__wrap {
     grid-template-columns: 1fr;
   }
@@ -5611,6 +5665,15 @@ textarea {
     padding-top: calc(24 * var(--width-multiplier));
   }
 
+  .projects__top {
+    flex-direction: row;
+    gap: calc(8 * var(--width-multiplier));
+  }
+
+  .projects__filter {
+    flex-grow: 1;
+  }
+
   .projects__cards {
     grid-template-columns: 1fr;
     gap: calc(16 * var(--width-multiplier));
@@ -5644,6 +5707,11 @@ textarea {
 
   .project-gallery__slider .swiper-slide {
     border-radius: calc(12 * var(--width-multiplier));
+  }
+
+  .map__btn {
+    flex-grow: 1;
+    width: auto;
   }
 
   .banner__container {
@@ -5798,7 +5866,7 @@ textarea {
   .projects__topbar {
     display: flex;
     gap: calc(8 * var(--width-multiplier));
-    margin-bottom: calc(16 * var(--width-multiplier));
+    width: 100%;
   }
 
   .filter-overlay {
@@ -5916,7 +5984,6 @@ textarea {
   .filters {
     flex-direction: column;
     gap: calc(20 * var(--width-multiplier));
-    margin-bottom: 0;
   }
 
   .filters__btns {

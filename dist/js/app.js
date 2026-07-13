@@ -733,39 +733,43 @@
   // Переключатель языка
   // ======================
   const initLkLang = () => {
-    const lang = $("[data-lang]");
-    if (!lang) return;
+    const langs = $$("[data-lang]");
+    if (!langs.length) return;
 
-    const toggle = $("[data-lang-toggle]", lang);
-    const currentFlag = $(".lk-lang__current .lk-lang__flag", lang);
-    const currentName = $(".lk-lang__current .lk-lang__name", lang);
-    const options = $$("[data-lang-value]", lang);
-    if (!toggle) return;
+    const closeAll = () => langs.forEach((l) => l.classList.remove("is-open"));
 
-    const close = () => lang.classList.remove("is-open");
+    langs.forEach((lang) => {
+      const toggle = $("[data-lang-toggle]", lang);
+      const currentFlag = $(".lk-lang__current .lk-lang__flag", lang);
+      const currentName = $(".lk-lang__current .lk-lang__name", lang);
+      const options = $$("[data-lang-value]", lang);
+      if (!toggle) return;
 
-    toggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      lang.classList.toggle("is-open");
-    });
+      toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const willOpen = !lang.classList.contains("is-open");
+        closeAll();
+        lang.classList.toggle("is-open", willOpen);
+      });
 
-    options.forEach((option) => {
-      option.addEventListener("click", () => {
-        const flag = $(".lk-lang__flag", option);
-        const name = $(".lk-lang__name", option);
-        if (flag && currentFlag) currentFlag.innerHTML = flag.innerHTML;
-        if (name && currentName) currentName.textContent = name.textContent;
-        options.forEach((o) => o.classList.toggle("is-active", o === option));
-        close();
+      options.forEach((option) => {
+        option.addEventListener("click", () => {
+          const flag = $(".lk-lang__flag", option);
+          const name = $(".lk-lang__name", option);
+          if (flag && currentFlag) currentFlag.innerHTML = flag.innerHTML;
+          if (name && currentName) currentName.textContent = name.textContent;
+          options.forEach((o) => o.classList.toggle("is-active", o === option));
+          lang.classList.remove("is-open");
+        });
       });
     });
 
     document.addEventListener("click", (e) => {
-      if (!e.target.closest("[data-lang]")) close();
+      if (!e.target.closest("[data-lang]")) closeAll();
     });
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") closeAll();
     });
   };
 

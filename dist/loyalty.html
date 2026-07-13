@@ -7,10 +7,10 @@
   <title>Программа лояльности</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260713140610" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260713163117" />
   <!-- intl-tel-input -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260713140610" />
-  <link rel="stylesheet" href="css/style.css?_v=20260713140610" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260713163117" />
+  <link rel="stylesheet" href="css/style.css?_v=20260713163117" />
 </head>
 
   <body class="lk-page">
@@ -25,7 +25,7 @@
           <ul class="header__menu">
             <li class="header__menu-item header__menu-item--has-drop">
               <a href="" class="header__menu-trigger">
-                Жилые комплексы
+                Проекты
                 <svg class="header__menu-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -76,6 +76,7 @@
             </li>
             <li><a href="about.html">О компании</a></li>
             <li><a href="news.html">Новости</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </nav>
       </div>
@@ -101,70 +102,72 @@
           </svg>
         </a>
       </div>
-      <div class="header__group header__group--user">
+      <div class="header__group">
         <div class="lk-lang" data-lang>
-          <button class="lk-lang__current" type="button" data-lang-toggle>
-            <span class="lk-lang__flag">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <rect y="0" width="24" height="8" fill="#fff"/>
-                <rect y="8" width="24" height="8" fill="#0039A6"/>
-                <rect y="16" width="24" height="8" fill="#D52B1E"/>
-              </svg>
-            </span>
-            <span class="lk-lang__name">RU</span>
-            <svg class="lk-lang__arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+  <button class="lk-lang__current" type="button" data-lang-toggle>
+    <span class="lk-lang__flag">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <rect y="0" width="24" height="8" fill="#fff"/>
+        <rect y="8" width="24" height="8" fill="#0039A6"/>
+        <rect y="16" width="24" height="8" fill="#D52B1E"/>
+      </svg>
+    </span>
+    <span class="lk-lang__name">RU</span>
+    <svg class="lk-lang__arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 
-          <div class="lk-lang__drop">
-            <button class="lk-lang__option is-active" type="button" data-lang-value="ru">
-              <span class="lk-lang__flag">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <rect y="0" width="24" height="8" fill="#fff"/>
-                  <rect y="8" width="24" height="8" fill="#0039A6"/>
-                  <rect y="16" width="24" height="8" fill="#D52B1E"/>
-                </svg>
-              </span>
-              <span class="lk-lang__name">RU</span>
-              <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <button class="lk-lang__option" type="button" data-lang-value="ky">
-              <span class="lk-lang__flag">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" fill="#E8112D"/>
-                  <circle cx="12" cy="12" r="4.5" fill="#FFEF00"/>
-                  <g stroke="#FFEF00" stroke-width="1.2" stroke-linecap="round">
-                    <path d="M12 3V5.5"/><path d="M12 18.5V21"/><path d="M3 12H5.5"/><path d="M18.5 12H21"/>
-                    <path d="M5.5 5.5L7.2 7.2"/><path d="M16.8 16.8L18.5 18.5"/><path d="M18.5 5.5L16.8 7.2"/><path d="M7.2 16.8L5.5 18.5"/>
-                  </g>
-                </svg>
-              </span>
-              <span class="lk-lang__name">KG</span>
-              <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <button class="lk-lang__option" type="button" data-lang-value="en">
-              <span class="lk-lang__flag">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="24" height="24" fill="#012169"/>
-                  <path d="M0 0L24 24M24 0L0 24" stroke="#fff" stroke-width="4"/>
-                  <path d="M0 0L24 24M24 0L0 24" stroke="#C8102E" stroke-width="2"/>
-                  <path d="M12 0V24M0 12H24" stroke="#fff" stroke-width="6"/>
-                  <path d="M12 0V24M0 12H24" stroke="#C8102E" stroke-width="3.5"/>
-                </svg>
-              </span>
-              <span class="lk-lang__name">EN</span>
-              <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
+  <div class="lk-lang__drop">
+    <button class="lk-lang__option is-active" type="button" data-lang-value="ru">
+      <span class="lk-lang__flag">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect y="0" width="24" height="8" fill="#fff"/>
+          <rect y="8" width="24" height="8" fill="#0039A6"/>
+          <rect y="16" width="24" height="8" fill="#D52B1E"/>
+        </svg>
+      </span>
+      <span class="lk-lang__name">RU</span>
+      <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lk-lang__option" type="button" data-lang-value="ky">
+      <span class="lk-lang__flag">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" fill="#E8112D"/>
+          <circle cx="12" cy="12" r="4.5" fill="#FFEF00"/>
+          <g stroke="#FFEF00" stroke-width="1.2" stroke-linecap="round">
+            <path d="M12 3V5.5"/><path d="M12 18.5V21"/><path d="M3 12H5.5"/><path d="M18.5 12H21"/>
+            <path d="M5.5 5.5L7.2 7.2"/><path d="M16.8 16.8L18.5 18.5"/><path d="M18.5 5.5L16.8 7.2"/><path d="M7.2 16.8L5.5 18.5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="lk-lang__name">KG</span>
+      <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lk-lang__option" type="button" data-lang-value="en">
+      <span class="lk-lang__flag">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" fill="#012169"/>
+          <path d="M0 0L24 24M24 0L0 24" stroke="#fff" stroke-width="4"/>
+          <path d="M0 0L24 24M24 0L0 24" stroke="#C8102E" stroke-width="2"/>
+          <path d="M12 0V24M0 12H24" stroke="#fff" stroke-width="6"/>
+          <path d="M12 0V24M0 12H24" stroke="#C8102E" stroke-width="3.5"/>
+        </svg>
+      </span>
+      <span class="lk-lang__name">EN</span>
+      <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
 
+      </div>
+      <div class="header__group header__group--user">
         <button class="header__user" type="button">
           <span class="header__user-avatar"><img src="img/user.png" alt="" /></span>
           <span class="header__user-name">Амантай</span>
@@ -191,9 +194,33 @@
     </div>
     <nav>
       <ul class="header__mobile-menu">
-        <li class="header__mobile-item"><a href="profile.html" class="header__mobile-link">Профиль</a></li>
-        <li class="header__mobile-item"><a href="about.html" class="header__mobile-link">О компании</a></li>
-        <li class="header__mobile-item"><a href="news.html" class="header__mobile-link">Новости</a></li>
+        <li class="header__mobile-item header__mobile-item--has-drop">
+          <button class="header__mobile-trigger" type="button">
+            Проекты
+            <svg class="header__mobile-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="header__mobile-drop">
+            <ul class="header__mobile-drop-list">
+              <li><a href="">London Square</a></li>
+              <li><a href="">БЦ Seoul</a></li>
+              <li><a href="">Urpaq Park</a></li>
+              <li><a href="">Esentai</a></li>
+              <li><a href="">Hayat</a></li>
+              <li><a href="">Boston Tower</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="header__mobile-item">
+          <a href="about.html" class="header__mobile-link">О компании</a>
+        </li>
+        <li class="header__mobile-item">
+          <a href="news.html" class="header__mobile-link">Новости</a>
+        </li>
+        <li class="header__mobile-item">
+          <a href="contacts.html" class="header__mobile-link">Контакты</a>
+        </li>
       </ul>
     </nav>
     <div class="header__mobile-contacts">
@@ -203,8 +230,94 @@
         </svg>
         <span>8000</span>
       </a>
-      <a href="profile.html" class="header__profile header__mobile-profile">Личный кабинет</a>
+      <a href="" class="header__social" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_lk_mob)">
+            <mask id="mask0_lk_mob" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18">
+              <path d="M0 1.90735e-06H18V18H0V1.90735e-06Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_lk_mob)">
+              <path d="M1.60464 13.1284C0.918598 11.908 0.527344 10.4997 0.527344 8.99997C0.527344 4.34005 4.34011 0.527315 9 0.527315C13.6599 0.527315 17.4727 4.34005 17.4727 8.99997C17.4727 13.6599 13.6599 17.4726 9 17.4726C7.5003 17.4726 6.09202 17.0813 4.8716 16.3953L0.527344 17.4726L1.60464 13.1284Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.0063 9.99365C7.6566 9.64282 6.25299 8.08519 6.76374 7.57444C6.90411 7.43406 7.46542 7.05065 7.68441 6.83166C8.43018 6.08589 7.57454 5.16255 7.02586 4.61386C6.98104 4.56904 6.13641 3.66 5.01506 4.78138C3.01028 6.78617 5.86788 10.3809 6.7392 11.2607C7.61905 12.1321 11.2138 14.9897 13.2186 12.9849C14.34 11.8635 13.4309 11.0189 13.3861 10.9741C12.8374 10.4254 11.9141 9.5698 11.1683 10.3156C10.9493 10.5346 10.5659 11.0958 10.4255 11.2362C9.91476 11.747 8.35712 10.3434 8.0063 9.99365Z" stroke="#1E9139" stroke-width="1.5" stroke-miterlimit="10"/>
+            </g>
+          </g>
+          <defs>
+            <clipPath id="clip0_lk_mob">
+              <rect width="18" height="18" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+      </a>
+      <div class="header__mobile-lang">
+        <div class="lk-lang" data-lang>
+  <button class="lk-lang__current" type="button" data-lang-toggle>
+    <span class="lk-lang__flag">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <rect y="0" width="24" height="8" fill="#fff"/>
+        <rect y="8" width="24" height="8" fill="#0039A6"/>
+        <rect y="16" width="24" height="8" fill="#D52B1E"/>
+      </svg>
+    </span>
+    <span class="lk-lang__name">RU</span>
+    <svg class="lk-lang__arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="lk-lang__drop">
+    <button class="lk-lang__option is-active" type="button" data-lang-value="ru">
+      <span class="lk-lang__flag">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect y="0" width="24" height="8" fill="#fff"/>
+          <rect y="8" width="24" height="8" fill="#0039A6"/>
+          <rect y="16" width="24" height="8" fill="#D52B1E"/>
+        </svg>
+      </span>
+      <span class="lk-lang__name">RU</span>
+      <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lk-lang__option" type="button" data-lang-value="ky">
+      <span class="lk-lang__flag">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" fill="#E8112D"/>
+          <circle cx="12" cy="12" r="4.5" fill="#FFEF00"/>
+          <g stroke="#FFEF00" stroke-width="1.2" stroke-linecap="round">
+            <path d="M12 3V5.5"/><path d="M12 18.5V21"/><path d="M3 12H5.5"/><path d="M18.5 12H21"/>
+            <path d="M5.5 5.5L7.2 7.2"/><path d="M16.8 16.8L18.5 18.5"/><path d="M18.5 5.5L16.8 7.2"/><path d="M7.2 16.8L5.5 18.5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="lk-lang__name">KG</span>
+      <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lk-lang__option" type="button" data-lang-value="en">
+      <span class="lk-lang__flag">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" fill="#012169"/>
+          <path d="M0 0L24 24M24 0L0 24" stroke="#fff" stroke-width="4"/>
+          <path d="M0 0L24 24M24 0L0 24" stroke="#C8102E" stroke-width="2"/>
+          <path d="M12 0V24M0 12H24" stroke="#fff" stroke-width="6"/>
+          <path d="M12 0V24M0 12H24" stroke="#C8102E" stroke-width="3.5"/>
+        </svg>
+      </span>
+      <span class="lk-lang__name">EN</span>
+      <svg class="lk-lang__opt-arrow" width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+      </div>
     </div>
+    <a href="profile.html" class="header__user header__mobile-user">
+      <span class="header__user-avatar"><img src="img/user.png" alt="" /></span>
+      <span class="header__user-name">Амантай</span>
+    </a>
   </div>
 </header>
 
@@ -360,11 +473,11 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260713140610"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260713140610"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260713140610"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260713140610"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260713140610"></script>
-<script src="js/app.js?_v=20260713140610"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260713163117"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260713163117"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260713163117"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260713163117"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260713163117"></script>
+<script src="js/app.js?_v=20260713163117"></script>
   </body>
 </html>

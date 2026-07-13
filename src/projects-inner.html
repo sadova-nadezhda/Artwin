@@ -426,84 +426,99 @@
         <div class="container">
           <div class="premises__container">
             <h2 class="premises__title title-indent">Доступные помещения</h2>
-            <div class="projects__topbar">
-              <label for="filter-open" class="filters-trigger">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                Фильтр
-              </label>
-            </div>
-
-            <input type="checkbox" id="filter-open" class="filter-drawer-toggle">
-            <label for="filter-open" class="filter-overlay"></label>
-
-            <div class="filter-drawer">
-              <div class="filter-drawer__header">
-                <label for="filter-open" class="filter-drawer__back">
-                  <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  Назад
-                </label>
-                <div class="filter-drawer__title">Фильтр</div>
-                <button type="reset" form="filter-form" class="filter-drawer__reset">Сбросить</button>
-              </div>
-              <div class="filter-drawer__body">
-                <form id="filter-form">
-                  <div class="projects__filters filters">
-                    <div class="filters__group">
-                      <div class="filters__label text-s">Цена</div>
-                      <div class="filters__btns">
-                        <input type="checkbox" id="f-price-1" class="filter-check" name="price" value="low">
-                        <label for="f-price-1" class="filter-button">от 2,19 млн сом</label>
-                        <input type="checkbox" id="f-price-2" class="filter-check" name="price" value="mid">
-                        <label for="f-price-2" class="filter-button">2,19–3,50 млн сом</label>
-                        <input type="checkbox" id="f-price-3" class="filter-check" name="price" value="high">
-                        <label for="f-price-3" class="filter-button">от 3,50 млн сом</label>
-                      </div>
-                    </div>
-                    <div class="filters__group">
-                      <div class="filters__label text-s">Комнатность</div>
-                      <div class="filters__btns">
-                        <input type="checkbox" id="f-rooms-1" class="filter-check" name="rooms" value="1">
-                        <label for="f-rooms-1" class="filter-button">1-комн</label>
-                        <input type="checkbox" id="f-rooms-2" class="filter-check" name="rooms" value="2">
-                        <label for="f-rooms-2" class="filter-button">2-комн</label>
-                        <input type="checkbox" id="f-rooms-3" class="filter-check" name="rooms" value="3">
-                        <label for="f-rooms-3" class="filter-button">3-комн</label>
-                        <input type="checkbox" id="f-rooms-4" class="filter-check" name="rooms" value="4">
-                        <label for="f-rooms-4" class="filter-button">4-комн</label>
-                      </div>
-                    </div>
-                    <div class="filters__group">
-                      <div class="filters__label text-s">Срок сдачи</div>
-                      <div class="filters__btns">
-                        <input type="checkbox" id="f-date-1" class="filter-check" name="date" value="done">
-                        <label for="f-date-1" class="filter-button">Сдан</label>
-                        <input type="checkbox" id="f-date-2" class="filter-check" name="date" value="2026">
-                        <label for="f-date-2" class="filter-button">2026</label>
-                        <input type="checkbox" id="f-date-3" class="filter-check" name="date" value="2027">
-                        <label for="f-date-3" class="filter-button">2027+</label>
-                      </div>
-                    </div>
-                    <div class="filters__group">
-                      <div class="filters__label text-s">Условия</div>
-                      <div class="filters__btns">
-                        <input type="checkbox" id="f-pay-1" class="filter-check" name="pay" value="installment">
-                        <label for="f-pay-1" class="filter-button filter-button_accent">% Рассрочка</label>
-                        <input type="checkbox" id="f-pay-2" class="filter-check" name="pay" value="full">
-                        <label for="f-pay-2" class="filter-button">100% оплата</label>
-                        <input type="checkbox" id="f-pay-3" class="filter-check" name="pay" value="barter">
-                        <label for="f-pay-3" class="filter-button">Бартер</label>
-                      </div>
-                    </div>
+            <div class="projects__top">
+              <div class="projects__filter">
+                <div class="projects__topbar">
+                  <label for="filter-open" class="filters-trigger">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Фильтр
+                  </label>
+                </div>
+                <input type="checkbox" id="filter-open" class="filter-drawer-toggle">
+                <label for="filter-open" class="filter-overlay"></label>
+                <div class="filter-drawer">
+                  <div class="filter-drawer__header">
+                    <label for="filter-open" class="filter-drawer__back">
+                      <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      Назад
+                    </label>
+                    <div class="filter-drawer__title">Фильтр</div>
+                    <button type="reset" form="filter-form" class="filter-drawer__reset">Сбросить</button>
                   </div>
-                </form>
+                  <div class="filter-drawer__body">
+                    <form id="filter-form">
+                      <div class="projects__filters filters">
+                        <div class="filters__group">
+                          <div class="filters__label text-s">Цена</div>
+                          <div class="filters__btns">
+                            <input type="checkbox" id="f-price-1" class="filter-check" name="price" value="low">
+                            <label for="f-price-1" class="filter-button">от 2,19 млн сом</label>
+                            <input type="checkbox" id="f-price-2" class="filter-check" name="price" value="mid">
+                            <label for="f-price-2" class="filter-button">2,19–3,50 млн сом</label>
+                            <input type="checkbox" id="f-price-3" class="filter-check" name="price" value="high">
+                            <label for="f-price-3" class="filter-button">от 3,50 млн сом</label>
+                          </div>
+                        </div>
+                        <div class="filters__group">
+                          <div class="filters__label text-s">Комнатность</div>
+                          <div class="filters__btns">
+                            <input type="checkbox" id="f-rooms-1" class="filter-check" name="rooms" value="1">
+                            <label for="f-rooms-1" class="filter-button">1-комн</label>
+                            <input type="checkbox" id="f-rooms-2" class="filter-check" name="rooms" value="2">
+                            <label for="f-rooms-2" class="filter-button">2-комн</label>
+                            <input type="checkbox" id="f-rooms-3" class="filter-check" name="rooms" value="3">
+                            <label for="f-rooms-3" class="filter-button">3-комн</label>
+                            <input type="checkbox" id="f-rooms-4" class="filter-check" name="rooms" value="4">
+                            <label for="f-rooms-4" class="filter-button">4-комн</label>
+                          </div>
+                        </div>
+                        <div class="filters__group">
+                          <div class="filters__label text-s">Срок сдачи</div>
+                          <div class="filters__btns">
+                            <input type="checkbox" id="f-date-1" class="filter-check" name="date" value="done">
+                            <label for="f-date-1" class="filter-button">Сдан</label>
+                            <input type="checkbox" id="f-date-2" class="filter-check" name="date" value="2026">
+                            <label for="f-date-2" class="filter-button">2026</label>
+                            <input type="checkbox" id="f-date-3" class="filter-check" name="date" value="2027">
+                            <label for="f-date-3" class="filter-button">2027+</label>
+                          </div>
+                        </div>
+                        <div class="filters__group">
+                          <div class="filters__label text-s">Условия</div>
+                          <div class="filters__btns">
+                            <input type="checkbox" id="f-pay-1" class="filter-check" name="pay" value="installment">
+                            <label for="f-pay-1" class="filter-button filter-button_accent">% Рассрочка</label>
+                            <input type="checkbox" id="f-pay-2" class="filter-check" name="pay" value="full">
+                            <label for="f-pay-2" class="filter-button">100% оплата</label>
+                            <input type="checkbox" id="f-pay-3" class="filter-check" name="pay" value="barter">
+                            <label for="f-pay-3" class="filter-button">Бартер</label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="filter-drawer__footer">
+                    <label for="filter-open" class="filter-drawer__apply button button-primary">Показать проекты</label>
+                  </div>
+                </div>
               </div>
-              <div class="filter-drawer__footer">
-                <label for="filter-open" class="filter-drawer__apply button button-primary">Показать проекты</label>
-              </div>
+              <a href="#" class="map__btn button button-light" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_970_1006)">
+                  <path d="M12 4.5L6 1.5L0.75 4.5V16.5L6 13.5M12 4.5L17.25 1.5V13.5L12 16.5L6 13.5M6 13.5V1.5M12 16.5V4.5" stroke="#1E1E1E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_970_1006">
+                  <rect width="18" height="18" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+                На карте
+              </a>
             </div>
             <div class="premises__cards">
               <a href="" class="premises__card plan-card">

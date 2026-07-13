@@ -154,34 +154,6 @@ input:focus-visible {
   outline: none;
 }
 
-// input:not([type="checkbox"]):not([type="radio"]), select, textarea {
-//   width: 100%;
-//   padding: calc(20 * var(--width-multiplier)) calc(30 * var(--width-multiplier));
-//   border: 1px solid var(--border-color, $border-color);
-//   border-radius: 0;
-//   color: var(--dark, $dark);
-//   background-color: var(--white, $white);
-//   font: inherit;
-//   &::placeholder {
-//     color: var(--border-color, $border-color);
-//   }
-//   &:focus, &:focus-visible {
-//     outline: none;
-//   }
-//   @media (max-width: 767px) {
-//     padding: calc(14 * var(--width-multiplier)) calc(18 * var(--width-multiplier));
-//   }
-// }
-
-// input:-webkit-autofill,
-// input:-webkit-autofill:hover,
-// input:-webkit-autofill:focus {
-//   -webkit-box-shadow: 0 0 0 1000px var(--white, $white) inset !important;
-//   box-shadow: 0 0 0 1000px var(--white, $white) inset !important;
-//   -webkit-text-fill-color: var(--dark, $dark) !important;
-//   transition: background-color 9999s ease-in-out 0s;
-// }
-
 textarea {
   resize: none;
   height: calc(90 * var(--width-multiplier));

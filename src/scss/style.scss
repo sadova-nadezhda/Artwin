@@ -115,6 +115,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: calc(8 * var(--width-multiplier));
   width: max-content;
   padding: calc(18 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
   border: 1px solid transparent;
@@ -126,6 +127,11 @@
   overflow: hidden;
   &:disabled {
     opacity: 0.4;
+  }
+  svg {
+    width: calc(16 * var(--width-multiplier));
+    height: calc(16 * var(--width-multiplier));
+    pointer-events: none;
   }
   &-primary {
     color: var(--dark);
@@ -962,6 +968,21 @@
   @media(max-width: 767px) {
     padding-top: calc(24 * var(--width-multiplier));
   }
+  &__top {
+    display: flex;
+    flex-direction: column;
+    gap: calc(16 * var(--width-multiplier));
+    margin-bottom: calc(24 * var(--width-multiplier));
+    @media(max-width: 767px) {
+      flex-direction: row;
+      gap: calc(8 * var(--width-multiplier));
+    }
+  }
+  &__filter {
+    @media(max-width: 767px) {
+      flex-grow: 1;
+    }
+  }
   &__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1086,6 +1107,14 @@
         }
       }
     }
+  }
+}
+
+.map__btn {
+  margin-left: auto;
+  @media(max-width: 767px) {
+    flex-grow: 1;
+    width: auto;
   }
 }
 
@@ -2024,7 +2053,7 @@
   @media(max-width: 767px) {
     display: flex;
     gap: calc(8 * var(--width-multiplier));
-    margin-bottom: calc(16 * var(--width-multiplier));
+    width: 100%;
   }
 }
 
@@ -2032,11 +2061,14 @@
   &-trigger {
     display: inline-flex;
     align-items: center;
-    gap: calc(6 * var(--width-multiplier));
-    padding: calc(10 * var(--width-multiplier)) calc(20 * var(--width-multiplier));
-    border: 1px solid var(--light-grey);
-    border-radius: calc(100px * var(--width-multiplier));
-    background-color: var(--light);
+    justify-content: center;
+    gap: calc(8 * var(--width-multiplier));
+    width: 100%;
+    padding: calc(12 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+    border: 1px solid transparent;
+    border-radius: calc(8 * var(--width-multiplier));
+    color: var(--dark);
+    background-color: var(--light-grey);
     font-size: calc(14 * var(--width-multiplier));
     cursor: pointer;
   }
@@ -2165,11 +2197,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: calc(8 * var(--width-multiplier));
-  margin-bottom: calc(24 * var(--width-multiplier));
   @media(max-width: 767px) {
     flex-direction: column;
     gap: calc(20 * var(--width-multiplier));
-    margin-bottom: 0;
   }
   &__group {
     display: flex;
