@@ -1064,8 +1064,20 @@
     // Если атрибута нет — полоса не рисуется.
     let base = null;
     try { base = JSON.parse(floorsEl.dataset.base || "null"); } catch (e) {}
+    // Необязательная верхняя полоса «крыша / тех. этаж».
+    // data-roof = { height (% высоты фасада) } — просто «отрезает» верх фасада:
+    // это неинтерактивный спейсер (не кликается, без тултипа), чтобы полосы
+    // жилых этажей не залезали на крышу. Если атрибута нет — не рисуется.
+    let roof = null;
+    try { roof = JSON.parse(floorsEl.dataset.roof || "null"); } catch (e) {}
     if (!floorsEl.childElementCount && count > 0) {
       const rows = [];
+      // Крыша / тех. этаж — самой верхней полосой с фикс. высотой в %.
+      if (roof && roof.height) {
+        rows.push(
+          `<span class="floor__cap" style="flex:0 0 ${roof.height}%" aria-hidden="true"></span>`
+        );
+      }
       for (let f = top; f >= start; f--) { // сверху вниз: верхний этаж первым
         const free = freeMap[f] != null ? freeMap[f] : 0;
         const h = heightMap[f]; // своя высота этажа в %, если задана

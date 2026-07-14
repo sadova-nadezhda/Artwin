@@ -4449,6 +4449,11 @@ textarea {
   background-color: rgba(60, 120, 200, 0.5);
 }
 
+.floor__cap {
+  display: block;
+  pointer-events: none;
+}
+
 .floor__tooltip {
   position: absolute;
   top: 0;
