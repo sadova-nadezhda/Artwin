@@ -1594,12 +1594,17 @@
     const animated = new WeakSet();
     const claim = (el) => (animated.has(el) ? false : (animated.add(el), true));
 
+    // clearProps: после появления убираем инлайновый transform, который GSAP
+    // оставляет на элементе. Иначе он перебивает по специфичности CSS-ный
+    // :hover transform, и карточки перестают подниматься при наведении.
+    const REVEAL = { ease: "power2.out", clearProps: "transform" };
+
     const fadeUp = (selector, vars = {}) => {
       gsap.utils.toArray(selector).forEach((el) => {
         if (!claim(el)) return;
         gsap.from(el, {
-          opacity: 0, y: 24, duration: 0.8, ease: "power2.out",
-          scrollTrigger: st(el), ...vars,
+          opacity: 0, y: 24, duration: 0.8,
+          scrollTrigger: st(el), ...REVEAL, ...vars,
         });
       });
     };
@@ -1610,8 +1615,8 @@
         const items = gsap.utils.toArray(box.children).filter(claim);
         if (!items.length) return;
         gsap.from(items, {
-          opacity: 0, y: 24, duration: 0.8, stagger: 0.08, ease: "power2.out",
-          scrollTrigger: st(box), ...vars,
+          opacity: 0, y: 24, duration: 0.8, stagger: 0.08,
+          scrollTrigger: st(box), ...REVEAL, ...vars,
         });
       });
     };

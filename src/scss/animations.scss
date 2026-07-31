@@ -1,11 +1,3 @@
-// ======================
-// Микро-интерактив (hover)
-// ======================
-// Появление блоков при скролле убрано — остался только параллакс фонов
-// (см. initParallax в js/app.js). Здесь только hover-эффекты карточек.
-
-// --- Микро-интерактив: карточки «оживают» при наведении ---
-// Только для пользователей, которым ок движение.
 @media (prefers-reduced-motion: no-preference) {
   .how-card {
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
@@ -15,7 +7,6 @@
     }
   }
 
-  // project-card, news-card, plan-card — только лёгкий подъём, без тени
   .project-card,
   .news-card,
   .plan-card {
@@ -25,7 +16,6 @@
     }
   }
 
-  // Плавный зум картинки внутри карточки (контейнеры с overflow: hidden)
   .project-card__top img,
   .news-card__img img {
     transition: transform 0.5s ease-out;
