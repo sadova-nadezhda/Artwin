@@ -6471,3 +6471,36 @@ textarea {
     scroll-behavior: auto !important;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .how-card {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+
+  .how-card:hover {
+    transform: translateY(calc(-4 * var(--width-multiplier)));
+    box-shadow: 0 calc(12 * var(--width-multiplier)) calc(32 * var(--width-multiplier)) rgba(0, 0, 0, 0.1);
+  }
+
+  .project-card,
+  .news-card,
+  .plan-card {
+    transition: transform 0.3s ease-out;
+  }
+
+  .project-card:hover,
+  .news-card:hover,
+  .plan-card:hover {
+    transform: translateY(calc(-4 * var(--width-multiplier)));
+  }
+
+  .project-card__top img,
+  .news-card__img img {
+    transition: transform 0.5s ease-out;
+  }
+
+  .project-card:hover .project-card__top img,
+  .news-card:hover .news-card__img img {
+    transform: scale(1.05);
+  }
+}

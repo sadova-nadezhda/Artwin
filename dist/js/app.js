@@ -53,8 +53,22 @@
   // ======================
   const initLenis = () => {
     if (typeof Lenis === "undefined") return null;
-    const lenis = new Lenis({ autoRaf: true });
+
+    // Если есть GSAP — гоним Lenis и GSAP по ОДНОМУ RAF-циклу. Иначе Lenis
+    // крутит свой цикл, а ScrollTrigger обновляется отдельно, и параллакс со
+    // scrub дёргается (отстаёт на кадр). autoRaf выключаем и вызываем raf сами.
+    const useGsapTicker = typeof gsap !== "undefined";
+    const lenis = new Lenis({ autoRaf: !useGsapTicker });
     window.lenis = lenis;
+
+    if (useGsapTicker) {
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+      if (typeof ScrollTrigger !== "undefined") {
+        lenis.on("scroll", ScrollTrigger.update);
+      }
+    }
+
     return lenis;
   };
 
@@ -1525,6 +1539,151 @@
   };
 
   // ======================
+  // Parallax (лёгкое смещение фоновых картинок при скролле)
+  // ======================
+  // Картинку слегка увеличиваем (scale), чтобы при сдвиге не оголялись края,
+  // и двигаем по вертикали в привязке к скроллу (scrub). Контейнеры у всех
+  // этих элементов уже с overflow: hidden.
+  const initParallax = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const targets = [
+      ".hero__container > img", ".hero__container > video",
+      ".main-about__top .back", ".main-about__box .back",
+      ".banner__container .back", ".feedback__container .back",
+      ".charity__content > img",
+    ].join(",");
+
+    $$(targets).forEach((el) => {
+      const box = el.parentElement;
+      if (!box) return;
+      gsap.set(el, { scale: 1.15, transformOrigin: "center center", willChange: "transform" });
+      gsap.fromTo(
+        el,
+        { yPercent: -6 },
+        {
+          yPercent: 6,
+          ease: "none",
+          scrollTrigger: {
+            trigger: box,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+  };
+
+  // ======================
+  // Scroll-анимации появления секций (GSAP + ScrollTrigger)
+  // ======================
+  const initScrollAnimations = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (window.lenis) window.lenis.on("scroll", ScrollTrigger.update);
+
+    const st = (trigger) => ({ trigger, start: "top 88%", once: true });
+
+    const animated = new WeakSet();
+    const claim = (el) => (animated.has(el) ? false : (animated.add(el), true));
+
+    const fadeUp = (selector, vars = {}) => {
+      gsap.utils.toArray(selector).forEach((el) => {
+        if (!claim(el)) return;
+        gsap.from(el, {
+          opacity: 0, y: 24, duration: 0.8, ease: "power2.out",
+          scrollTrigger: st(el), ...vars,
+        });
+      });
+    };
+
+    const stagger = (containerSelector, vars = {}) => {
+      gsap.utils.toArray(containerSelector).forEach((box) => {
+        if (!claim(box)) return;
+        const items = gsap.utils.toArray(box.children).filter(claim);
+        if (!items.length) return;
+        gsap.from(items, {
+          opacity: 0, y: 24, duration: 0.8, stagger: 0.08, ease: "power2.out",
+          scrollTrigger: st(box), ...vars,
+        });
+      });
+    };
+
+    // ---- Заголовки секций ----
+    fadeUp([
+      ".overview__title", ".about__title", ".benefits__title", ".how__title",
+      ".main-about__title", ".main-news__title", ".news__title", ".news-inner__title",
+      ".news-other__title", ".contacts__title", ".charity__title", ".banner__title",
+      ".worth__title", ".live__title", ".experience__title", ".projects__title",
+      ".calc__title", ".reports__title", ".plan__title", ".quickview__title",
+      ".premises__title", ".loyalty-more__title", ".how-levels__title", ".referral__title",
+      ".perks__title", ".docs__title", ".history__title", ".bonuses__title",
+    ].join(","));
+
+    // ---- Hero: контент ----
+    fadeUp(".hero__content", { x: -40, y: 0, duration: 0.8, delay: 0.1 });
+
+    fadeUp(".overview__content", { x: -40, y: 0, duration: 0.8 });
+    gsap.utils.toArray(".overview__media").forEach((el) => {
+      gsap.from(el, { opacity: 0, x: 40, duration: 0.8, ease: "power2.out", scrollTrigger: st(el) });
+    });
+
+    // ---- Секции «текст / картинка» (about) ----
+    gsap.utils.toArray(".about__row").forEach((row) => {
+      const flipped = row.classList.contains("right");
+      const content = row.querySelector(".about__content");
+      const img = row.querySelector(".about__img");
+      if (content) gsap.from(content, {
+        opacity: 0, x: flipped ? 50 : -50, duration: 0.8, ease: "power2.out",
+        scrollTrigger: st(row),
+      });
+      if (img) gsap.from(img, {
+        opacity: 0, x: flipped ? -50 : 50, duration: 0.8, ease: "power2.out",
+        scrollTrigger: st(row),
+      });
+    });
+
+    // ---- Калькулятор: колонки въезжают слева/справа ----
+    fadeUp(".calc__left", { x: -40, y: 0, duration: 0.8 });
+    fadeUp(".calc__right", { x: 40, y: 0, duration: 0.8 });
+
+    // ---- Сетки карточек — каскадом ----
+    [
+      ".overview__cards", ".overview__grid", ".worth__cards", ".reports__cards",
+      ".charity__grid", ".charity__cards", ".contacts__cards", ".contacts__list",
+      ".contacts__grid", ".bonuses__grid", ".main-about__cards", ".main-news__cards",
+      ".news__cards", ".news-other__cards", ".projects__cards", ".premises__cards",
+      ".how-levels__list", ".history__list", ".docs__list", ".perks__list",
+      ".lk__grid", ".quickview__grid",
+    ].forEach((sel) => stagger(sel));
+
+    // ---- Слайдеры (swiper) — появляются целым блоком ----
+    fadeUp([
+      ".benefits__slider", ".how__slider", ".experience__slider", ".project-gallery__slider",
+    ].join(","), { y: 24, duration: 0.8 });
+
+    // ---- Одиночные блоки — мягкий fade-up ----
+    fadeUp([
+      ".main-about__top", ".main-about__box", ".charity__content",
+      ".banner__content", ".live__content",
+    ].join(","));
+
+    // ---- Нижние CTA секций — короткий fade-up ----
+    fadeUp([
+      ".projects__bottom", ".main-news__bottom", ".news__bottom",
+    ].join(","), { y: 15, duration: 0.5, ease: "power1.out" });
+
+    window.addEventListener("load", () => ScrollTrigger.refresh());
+  };
+
+  // ======================
   // Preloader
   // ======================
   const initPreloader = () => {
@@ -1619,6 +1778,8 @@
     initMore();
     initFloorplan();
     initQuickview();
+    initParallax();
+    initScrollAnimations();
 
   });
 })();
