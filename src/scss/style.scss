@@ -3850,7 +3850,7 @@
 
 .widjet {
   position: fixed;
-  right: calc(8 * var(--width-multiplier));
+  right: calc(16 * var(--width-multiplier));
   bottom: calc(16 * var(--width-multiplier));
   display: flex;
   flex-direction: column;
@@ -3889,7 +3889,11 @@
       background-color: #06C73B;
     }
     &--call {
+      display: none;
       background-color: #2348DB;
+      @media(max-width: 768px) {
+        display: flex;
+      }
     }
   }
   &__toggle {

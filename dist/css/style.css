@@ -4308,7 +4308,7 @@ textarea {
 
 .widjet {
   position: fixed;
-  right: calc(8 * var(--width-multiplier));
+  right: calc(16 * var(--width-multiplier));
   bottom: calc(16 * var(--width-multiplier));
   display: flex;
   flex-direction: column;
@@ -4354,6 +4354,7 @@ textarea {
 }
 
 .widjet__item--call {
+  display: none;
   background-color: #2348DB;
 }
 
@@ -5575,6 +5576,12 @@ textarea {
 
   .quickview__media-img {
     height: calc(420 * var(--width-multiplier));
+  }
+}
+
+@media (max-width: 768px) {
+  .widjet__item--call {
+    display: flex;
   }
 }
 
