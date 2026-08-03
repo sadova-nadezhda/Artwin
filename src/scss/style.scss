@@ -3850,13 +3850,18 @@
 
 .widjet {
   position: fixed;
-  right: calc(16 * var(--width-multiplier));
-  bottom: calc(16 * var(--width-multiplier));
+  right: calc(24 * var(--width-multiplier));
+  bottom: calc(24 * var(--width-multiplier));
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(12 * var(--width-multiplier));
   z-index: 100;
+  @media(max-width: 1024px) {
+    right: calc(8 * var(--width-multiplier));
+    bottom: calc(8 * var(--width-multiplier));
+    gap: calc(8 * var(--width-multiplier));
+  }
   &__list {
     display: flex;
     flex-direction: column;
@@ -3866,6 +3871,9 @@
     transform: translateY(calc(16 * var(--width-multiplier)));
     pointer-events: none;
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    @media(max-width: 1024px) {
+      gap: calc(8 * var(--width-multiplier));
+    }
   }
   &__item {
     display: flex;
