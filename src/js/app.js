@@ -1756,6 +1756,69 @@
   };
 
   // ======================
+  // Widjet — плавающие контакты
+  // ======================
+  const initWidjet = () => {
+    const widjet = $("[data-widjet]");
+    if (!widjet) return;
+
+    const toggle = $("[data-widjet-toggle]", widjet);
+    if (!toggle) return;
+
+    const open = () => {
+      widjet.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+    };
+
+    const close = () => {
+      widjet.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    };
+
+    toggle.addEventListener("click", () => {
+      widjet.classList.contains("is-open") ? close() : open();
+    });
+
+    $$(".widjet__item", widjet).forEach((item) => {
+      item.addEventListener("click", close);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!widjet.contains(e.target)) close();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && widjet.classList.contains("is-open")) close();
+    });
+
+    // Кнопка «наверх»: показывается, начиная со второй секции
+    const up = $("[data-widjet-up]", widjet);
+    if (!up) return;
+
+    const anchor = $$("main > section")[1] || null;
+
+    const updateUp = () => {
+      const isScrolled = anchor
+        ? anchor.getBoundingClientRect().top <= 0
+        : window.scrollY > window.innerHeight * 0.6;
+      widjet.classList.toggle("is-scrolled", isScrolled);
+    };
+
+    up.addEventListener("click", () => {
+      close();
+      if (window.lenis && typeof window.lenis.scrollTo === "function") {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+
+    window.addEventListener("scroll", updateUp, { passive: true });
+    window.addEventListener("resize", debounce(updateUp, 100));
+    updateUp();
+  };
+
+  // ======================
   // Boot
   // ======================
   document.addEventListener("DOMContentLoaded", () => {
@@ -1785,6 +1848,7 @@
     initQuickview();
     initParallax();
     initScrollAnimations();
+    initWidjet();
 
   });
 })();

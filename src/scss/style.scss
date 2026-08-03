@@ -3846,6 +3846,149 @@
   }
 }
 
+// ====== Widjet ======
+
+.widjet {
+  position: fixed;
+  right: calc(8 * var(--width-multiplier));
+  bottom: calc(16 * var(--width-multiplier));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(12 * var(--width-multiplier));
+  z-index: 100;
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(12 * var(--width-multiplier));
+    opacity: 0;
+    transform: translateY(calc(16 * var(--width-multiplier)));
+    pointer-events: none;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: calc(48 * var(--width-multiplier));
+    height: calc(48 * var(--width-multiplier));
+    border: 0;
+    border-radius: 50%;
+    color: var(--white);
+    background-color: #000000;
+    cursor: pointer;
+    transform: scale(0);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    svg {
+      width: calc(24 * var(--width-multiplier));
+      height: calc(24 * var(--width-multiplier));
+    }
+    &--whatsapp {
+      background-color: #06C73B;
+    }
+    &--call {
+      background-color: #2348DB;
+    }
+  }
+  &__toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: calc(48 * var(--width-multiplier));
+    height: calc(48 * var(--width-multiplier));
+    border: 0;
+    border-radius: 50%;
+    color: var(--dark);
+    background-color: var(--primary);
+    cursor: pointer;
+    transition: transform 0.3s ease-out, border-color 0.3s ease-out, background-color 0.3s ease-out;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  &__icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    svg {
+      width: calc(24 * var(--width-multiplier));
+      height: calc(24 * var(--width-multiplier));
+    }
+    &--chat {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+    &--close {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.6);
+    }
+  }
+  // ====== Открытое состояние ======
+  &.is-open {
+    .widjet__list {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .widjet__item {
+      transform: scale(1);
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    .widjet__icon--chat {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.6);
+    }
+    .widjet__icon--close {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+  // ====== Кнопка «наверх» ======
+  &__up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: calc(48 * var(--width-multiplier));
+    height: 0;
+    margin-top: calc(-12 * var(--width-multiplier));
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: var(--dark);
+    background-color: var(--light);
+    box-shadow: 0 calc(2 * var(--width-multiplier)) calc(8 * var(--width-multiplier)) rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    transition: height 0.3s ease-out, margin-top 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+    svg {
+      width: calc(24 * var(--width-multiplier));
+      height: calc(24 * var(--width-multiplier));
+    }
+  }
+  &.is-scrolled {
+    .widjet__up {
+      height: calc(48 * var(--width-multiplier));
+      margin-top: 0;
+      opacity: 1;
+      pointer-events: auto;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
 // ====== Floor select ======
 
 // ====== Объединённая страница: фасад дома + планировка этажа ======
