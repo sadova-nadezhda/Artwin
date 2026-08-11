@@ -724,6 +724,7 @@
     const titleEl = $("[data-bank-title]", bankView);
     const qrImg = $("[data-bank-qr]", bankView);
     const qrSave = $(".requisites__save", bankView);
+    const subtitleEl = $("[data-bank-subtitle]", bankView);
     const qrTab = $('[data-tab="qr"]', bankView);
     const currencySwitch = $("[data-currency-switch]", bankView);
     const currencyBtns = $$("[data-currency]", bankView);
@@ -788,7 +789,12 @@
       });
       if (currencySwitch) currencySwitch.hidden = codes.length < 2;
 
-      // Набор полей может отличаться от валюты к валюте — перерисовываем целиком
+      if (subtitleEl) {
+        subtitleEl.textContent = payload.subtitle || "";
+        subtitleEl.hidden = !payload.subtitle;
+      }
+
+      // Заголовок и набор полей могут отличаться от валюты к валюте — перерисовываем целиком
       fieldsBox.innerHTML = "";
       (payload.fields || []).forEach((field) => fieldsBox.appendChild(createField(field)));
 
