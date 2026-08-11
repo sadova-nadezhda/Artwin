@@ -7,10 +7,10 @@
   <title>Реквизиты ARTWIN</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260803155229" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260811121123" />
   <!-- intl-tel-input -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260803155229" />
-  <link rel="stylesheet" href="css/style.css?_v=20260803155229" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260811121123" />
+  <link rel="stylesheet" href="css/style.css?_v=20260811121123" />
 </head>
 
   <body class="lk-page">
@@ -370,225 +370,425 @@
 
             <!-- Content -->
             <div class="lk__content">
-              <div class="requisites" data-tabs>
-                <h1 class="requisites__title">Реквизиты ARTWIN</h1>
+              <div class="requisites" data-requisites>
 
-                <div class="tabs">
-                  <button class="tabs__btn is-active" type="button" data-tab="qr">QR-коде</button>
-                  <button class="tabs__btn" type="button" data-tab="details">Реквизиты</button>
-                </div>
+                <!-- Шаг 1: список недвижимости и банков -->
+                <div class="requisites__view is-active" data-view="list">
+                  <h1 class="requisites__title">Реквизиты ARTWIN</h1>
+                  <div class="requisites__subtitle">Выберите объект и банк</div>
 
-                <!-- Вкладка: QR -->
-                <div class="requisites__panel is-active" data-tab-panel="qr">
-                  <div class="requisites__subtitle">Выберите объект и оплатите по QR</div>
+                  <div class="estates accordion" data-accordion>
 
-                  <div class="qr-list accordion" data-accordion>
-                    <div class="qr-item accordion__item is-open">
-                      <button class="qr-item__head accordion__head" type="button">
-                        <span class="qr-item__icon">
+                    <!-- Объект -->
+                    <div class="estate accordion__item is-open">
+                      <button class="estate__head accordion__head" type="button">
+                        <span class="estate__icon">
                           <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="42" height="42" rx="21" fill="#2348DB"/>
                             <path d="M23.0417 10.7917H14.875C13.7521 10.7917 12.8435 11.7104 12.8435 12.8333L12.8333 29.1667C12.8333 30.2896 13.7419 31.2083 14.8648 31.2083H27.125C28.2479 31.2083 29.1667 30.2896 29.1667 29.1667V16.9167L23.0417 10.7917ZM25.0833 27.125H16.9167V25.0833H25.0833V27.125ZM25.0833 23.0417H16.9167V21H25.0833V23.0417ZM22.0208 17.9375V12.3229L27.6354 17.9375H22.0208Z" fill="white"/>
                           </svg>
                         </span>
-                        <span class="qr-item__info">
-                          <span class="qr-item__name">1-комн. квартира в ЖК, Токио Блок А, кв. 8</span>
-                          <span class="qr-item__code">TLT-A-12-ASAS33</span>
+                        <span class="estate__info">
+                          <span class="estate__name">London Square</span>
+                          <span class="estate__meta">Квартира №42 &middot; Договор № Д-2026-0456</span>
                         </span>
-                        <svg class="qr-item__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="estate__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M17 10L12 15L7 10L17 10Z" fill="#1D1B20"/>
                         </svg>
                       </button>
-                      <div class="qr-item__body accordion__body">
-                        <div class="qr-item__content">
-                          <div class="qr-item__qr">
-                            <img src="img/qr.png" alt="QR-код для оплаты">
+
+                      <!-- Прогресс оплаты — виден и в свёрнутом состоянии -->
+                      <div class="estate__summary">
+                        <div class="estate__payment">
+                          <div class="estate__payment-title">Оплачено 30%</div>
+                          <div class="estate__bar">
+                            <span class="estate__bar-fill" style="width: 30%;"></span>
                           </div>
-                          <button class="qr-item__save button button-primary" type="button">Сохранить QR</button>
+                          <div class="estate__payment-foot">
+                            <span class="estate__paid">5 400 000 сом из 18 000 000 сом</span>
+                            <span class="estate__rest">Осталось: 12 600 000 сом</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="estate__body accordion__body">
+                        <div class="estate__content">
+
+                          <div class="estate__date">Дата договора: 15.03.2026</div>
+
+                          <!-- Банки, доступные в этом ЖК -->
+                          <div class="estate__banks">
+                            <div class="estate__banks-title">Выберите банк для оплаты</div>
+
+                            <div class="bank-list">
+                              <div class="bank-card" data-gradient-from="#021F47" data-gradient-to="#811E3B">
+                                <div class="bank-card__name">Bakai</div>
+                                <div class="bank-card__actions">
+                                  <!-- href — внешняя ссылка банка на онлайн-оплату -->
+                                  <a class="bank-card__pay" href="#" rel="noopener">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M5 12.5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    Онлайн оплата
+                                  </a>
+                                  <button
+                                    class="bank-card__details"
+                                    type="button"
+                                    data-bank="Bakai Bank"
+                                    data-bank-name='ОАО "БАКАЙ БАНК"'
+                                    data-bank-bik="124034"
+                                    data-bank-account-kgs="KGS 1240020001612024"
+                                    data-bank-account-usd="USD 1240020001612088"
+                                    data-bank-qr-kgs="img/QR.png"
+                                    data-bank-qr-usd="img/QR.png"
+                                  >Реквизиты</button>
+                                </div>
+                              </div>
+
+                              <div class="bank-card" data-gradient-from="#00886E" data-gradient-to="#009C4C">
+                                <div class="bank-card__name">Mbank</div>
+                                <div class="bank-card__actions">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M5 12.5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    Онлайн оплата
+                                  </a>
+                                  <button
+                                    class="bank-card__details"
+                                    type="button"
+                                    data-bank="Mbank"
+                                    data-bank-name='ЗАО "Коммерческий банк КЫРГЫЗСТАН"'
+                                    data-bank-bik="103001"
+                                    data-bank-account-kgs="KGS 1030120001234567"
+                                    data-bank-account-usd="USD 1030120001234599"
+                                    data-bank-qr-kgs="img/QR.png"
+                                    data-bank-qr-usd="img/QR.png"
+                                  >Реквизиты</button>
+                                </div>
+                              </div>
+
+                              <div class="bank-card" data-gradient-from="#0046AA" data-gradient-to="#4A91F5">
+                                <div class="bank-card__name">Kicb</div>
+                                <div class="bank-card__actions">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M5 12.5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    Онлайн оплата
+                                  </a>
+                                  <button
+                                    class="bank-card__details"
+                                    type="button"
+                                    data-bank="KICB"
+                                    data-bank-name='ЗАО "Кыргызский Инвестиционно-Кредитный Банк"'
+                                    data-bank-bik="128001"
+                                    data-bank-account-kgs="KGS 1280120007654321"
+                                    data-bank-account-usd="USD 1280120007654399"
+                                    data-bank-qr-kgs="img/QR.png"
+                                    data-bank-qr-usd="img/QR.png"
+                                  >Реквизиты</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                     </div>
 
-                    <div class="qr-item accordion__item">
-                      <button class="qr-item__head accordion__head" type="button">
-                        <span class="qr-item__icon">
+                    <!-- Объект -->
+                    <div class="estate accordion__item">
+                      <button class="estate__head accordion__head" type="button">
+                        <span class="estate__icon">
                           <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="42" height="42" rx="21" fill="#2348DB"/>
                             <path d="M23.0417 10.7917H14.875C13.7521 10.7917 12.8435 11.7104 12.8435 12.8333L12.8333 29.1667C12.8333 30.2896 13.7419 31.2083 14.8648 31.2083H27.125C28.2479 31.2083 29.1667 30.2896 29.1667 29.1667V16.9167L23.0417 10.7917ZM25.0833 27.125H16.9167V25.0833H25.0833V27.125ZM25.0833 23.0417H16.9167V21H25.0833V23.0417ZM22.0208 17.9375V12.3229L27.6354 17.9375H22.0208Z" fill="white"/>
                           </svg>
                         </span>
-                        <span class="qr-item__info">
-                          <span class="qr-item__name">1-комн. квартира в ЖК, Токио Блок А, кв. 8</span>
-                          <span class="qr-item__code">TLT-A-12-ASAS33</span>
+                        <span class="estate__info">
+                          <span class="estate__name">Tokyo</span>
+                          <span class="estate__meta">Квартира №8, Блок А &middot; Договор № Д-2025-0117</span>
                         </span>
-                        <svg class="qr-item__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="estate__arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M17 10L12 15L7 10L17 10Z" fill="#1D1B20"/>
                         </svg>
                       </button>
-                      <div class="qr-item__body accordion__body">
-                        <div class="qr-item__content">
-                          <div class="qr-item__qr">
-                            <img src="img/qr.png" alt="QR-код для оплаты">
+
+                      <div class="estate__summary">
+                        <div class="estate__payment">
+                          <div class="estate__payment-title">Оплачено 65%</div>
+                          <div class="estate__bar">
+                            <span class="estate__bar-fill" style="width: 65%;"></span>
                           </div>
-                          <button class="qr-item__save button button-primary" type="button">Сохранить QR</button>
+                          <div class="estate__payment-foot">
+                            <span class="estate__paid">7 800 000 сом из 12 000 000 сом</span>
+                            <span class="estate__rest">Осталось: 4 200 000 сом</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="estate__body accordion__body">
+                        <div class="estate__content">
+
+                          <div class="estate__date">Дата договора: 04.11.2025</div>
+
+                          <div class="estate__banks">
+                            <div class="estate__banks-title">Выберите банк для оплаты</div>
+
+                            <div class="bank-list">
+                              <div class="bank-card" data-gradient-from="#7A2B06" data-gradient-to="#E0651A">
+                                <div class="bank-card__name">Optima</div>
+                                <div class="bank-card__actions">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M5 12.5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    Онлайн оплата
+                                  </a>
+                                  <button
+                                    class="bank-card__details"
+                                    type="button"
+                                    data-bank="Optima Bank"
+                                    data-bank-name='ОАО "Оптима Банк"'
+                                    data-bank-bik="109009"
+                                    data-bank-account-kgs="KGS 1090920004455661"
+                                    data-bank-account-usd="USD 1090920004455699"
+                                    data-bank-qr-kgs="img/QR.png"
+                                    data-bank-qr-usd="img/QR.png"
+                                  >Реквизиты</button>
+                                </div>
+                              </div>
+
+                              <div class="bank-card" data-gradient-from="#0E2338" data-gradient-to="#1C6E8C">
+                                <div class="bank-card__name">Demir</div>
+                                <div class="bank-card__actions">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
+                                      <path d="M5 12.5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    Онлайн оплата
+                                  </a>
+                                  <button
+                                    class="bank-card__details"
+                                    type="button"
+                                    data-bank="Demir Bank"
+                                    data-bank-name='ЗАО "Демир Кыргыз Интернэшнл Банк"'
+                                    data-bank-bik="119001"
+                                    data-bank-account-kgs="KGS 1190120009988771"
+                                    data-bank-account-usd="USD 1190120009988799"
+                                    data-bank-qr-kgs="img/QR.png"
+                                    data-bank-qr-usd="img/QR.png"
+                                  >Реквизиты</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
 
-                <!-- Вкладка: Реквизиты -->
-                <div class="requisites__panel" data-tab-panel="details" data-copy-scope>
-                  <div class="requisites__subtitle">Реквизиты Артвин Девелопмент</div>
+                <!-- Шаг 2: реквизиты выбранного банка (без перезагрузки страницы) -->
+                <div class="requisites__view" data-view="bank" data-tabs>
+                  <div class="requisites__head">
+                    <button class="requisites__back" type="button" aria-label="Назад" data-bank-back>
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                    <h1 class="requisites__title">Реквизиты ARTWIN <span data-bank-title>(Название банка)</span></h1>
+                  </div>
 
-                  <div class="requisites__fields">
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">Название</span>
-                        <span class="copy-field__value" data-copy-value>ООО «Артвин Девелопмент»</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
+                  <div class="requisites__toolbar">
+                    <div class="tabs">
+                      <button class="tabs__btn" type="button" data-tab="qr">QR-коде</button>
+                      <button class="tabs__btn is-active" type="button" data-tab="details">Реквизиты</button>
                     </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">Юридический адрес:</span>
-                        <span class="copy-field__value" data-copy-value>г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
 
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">ИНН</span>
-                        <span class="copy-field__value" data-copy-value>00103202310062</span>
+                    <div class="currency">
+                      <span class="currency__label">Валюта:</span>
+                      <div class="currency__switch">
+                        <button class="currency__btn is-active" type="button" data-currency="kgs">KGS</button>
+                        <button class="currency__btn" type="button" data-currency="usd">USD</button>
                       </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">ОКПО</span>
-                        <span class="copy-field__value" data-copy-value>31824025</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">Реквизиты счета:</span>
-                        <span class="copy-field__value" data-copy-value>KGS 1240020001612024</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">Банк получателя:</span>
-                        <span class="copy-field__value" data-copy-value>ОАО "БАКАЙ БАНК"</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">БИК банка получателя:</span>
-                        <span class="copy-field__value" data-copy-value>124034</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">Кон.телефон:</span>
-                        <span class="copy-field__value" data-copy-value>0228 880 000</span>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                    </div>
-                    <div class="copy-field">
-                      <div class="copy-field__info">
-                        <span class="copy-field__label">email</span>
-                        <a class="copy-field__value copy-field__value_link" href="mailto:office@artwin.kg" data-copy-value>office@artwin.kg</a>
-                      </div>
-                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
                     </div>
                   </div>
 
-                  <button class="requisites__copy-all button button-primary" type="button" data-copy-all>Скопировать все</button>
+                  <!-- Вкладка: QR -->
+                  <div class="requisites__panel" data-tab-panel="qr">
+                    <div class="requisites__qr">
+                      <img src="img/QR.png" alt="QR-код для оплаты" data-bank-qr>
+                    </div>
+                    <a class="requisites__save button button-primary" href="img/QR.png" download>Сохранить QR</a>
+                  </div>
+
+                  <!-- Вкладка: Реквизиты -->
+                  <div class="requisites__panel is-active" data-tab-panel="details" data-copy-scope>
+                    <div class="requisites__subtitle">Реквизиты Артвин Девелопмент</div>
+
+                    <div class="requisites__fields">
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">Название</span>
+                          <span class="copy-field__value" data-copy-value>ООО «Артвин Девелопмент»</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">Юридический адрес:</span>
+                          <span class="copy-field__value" data-copy-value>г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">ИНН</span>
+                          <span class="copy-field__value" data-copy-value>00103202310062</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">ОКПО</span>
+                          <span class="copy-field__value" data-copy-value>31824025</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">Реквизиты счета:</span>
+                          <span class="copy-field__value" data-copy-value data-bank-field="account">KGS 1240020001612024</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">Банк получателя:</span>
+                          <span class="copy-field__value" data-copy-value data-bank-field="bank">ОАО "БАКАЙ БАНК"</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">БИК банка получателя:</span>
+                          <span class="copy-field__value" data-copy-value data-bank-field="bik">124034</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">Кон.телефон:</span>
+                          <span class="copy-field__value" data-copy-value>0228 880 000</span>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                      <div class="copy-field">
+                        <div class="copy-field__info">
+                          <span class="copy-field__label">email</span>
+                          <a class="copy-field__value copy-field__value_link" href="mailto:office@artwin.kg" data-copy-value>office@artwin.kg</a>
+                        </div>
+                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                      </div>
+                    </div>
+
+                    <button class="requisites__copy-all button button-primary" type="button" data-copy-all>Скопировать все</button>
+                  </div>
                 </div>
 
               </div>
@@ -599,11 +799,11 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260803155229"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260803155229"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260803155229"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260803155229"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260803155229"></script>
-<script src="js/app.js?_v=20260803155229"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260811121123"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260811121123"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260811121123"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260811121123"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260811121123"></script>
+<script src="js/app.js?_v=20260811121123"></script>
   </body>
 </html>

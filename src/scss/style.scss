@@ -3501,18 +3501,73 @@
   }
 }
 
+@keyframes requisites-fade {
+  from {
+    opacity: 0;
+    transform: translateY(calc(8 * var(--width-multiplier)));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .requisites {
   padding: calc(24 * var(--width-multiplier));
   border-radius: calc(20 * var(--width-multiplier));
   background-color: var(--light);
+  // Шаги: список объектов / реквизиты банка — переключаются без перезагрузки
+  &__view {
+    display: none;
+    &.is-active {
+      display: block;
+      animation: requisites-fade 0.3s ease-out;
+    }
+  }
   &__title {
     margin-bottom: calc(16 * var(--width-multiplier));
     font: 500 calc(20 * var(--width-multiplier))/1.2 GolosText;
   }
-  &__subtitle {
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--width-multiplier));
     margin-bottom: calc(16 * var(--width-multiplier));
-    font-weight: 600;
-    font-size: calc(16 * var(--width-multiplier));
+    .requisites__title {
+      margin-bottom: 0;
+    }
+  }
+  &__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(24 * var(--width-multiplier));
+    height: calc(24 * var(--width-multiplier));
+    padding: 0;
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    color: var(--dark);
+    cursor: pointer;
+    transition: opacity 0.2s ease-out;
+    &:hover {
+      opacity: 0.6;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(16 * var(--width-multiplier));
+    flex-wrap: wrap;
+    margin-bottom: calc(16 * var(--width-multiplier));
+    .tabs {
+      margin-bottom: 0;
+    }
   }
   &__panel {
     display: none;
@@ -3520,11 +3575,32 @@
       display: block;
     }
   }
+  &__subtitle {
+    margin-bottom: calc(16 * var(--width-multiplier));
+    font-weight: 600;
+    font-size: calc(16 * var(--width-multiplier));
+  }
   &__fields {
     display: flex;
     flex-direction: column;
     gap: calc(8 * var(--width-multiplier));
     margin-bottom: calc(16 * var(--width-multiplier));
+  }
+  &__qr {
+    width: calc(290 * var(--width-multiplier));
+    max-width: 100%;
+    margin: calc(24 * var(--width-multiplier)) auto calc(24 * var(--width-multiplier));
+    aspect-ratio: 1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  &__save {
+    width: calc(226 * var(--width-multiplier));
+    max-width: 100%;
+    margin: 0 auto calc(24 * var(--width-multiplier));
   }
   &__copy-all {
     width: 100%;
@@ -3535,19 +3611,56 @@
   }
 }
 
+.currency {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--width-multiplier));
+  &__label {
+    color: rgba(21, 21, 21, 0.5);
+    font-size: calc(14 * var(--width-multiplier));
+  }
+  &__switch {
+    display: inline-flex;
+    gap: calc(2 * var(--width-multiplier));
+    padding: calc(2 * var(--width-multiplier));
+    border-radius: calc(8 * var(--width-multiplier));
+    background-color: var(--bg);
+  }
+  &__btn {
+    padding: calc(10 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+    border: none;
+    border-radius: calc(6 * var(--width-multiplier));
+    background: none;
+    color: var(--dark);
+    font: 500 calc(14 * var(--width-multiplier))/1.2 GolosText;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+    &:hover {
+      background-color: var(--light-grey);
+    }
+    &.is-active {
+      background-color: #1B9749;
+      color: var(--light);
+    }
+  }
+}
+
 .copy-field__value_link {
   color: var(--dark);
   text-decoration: underline;
   text-underline-offset: calc(3 * var(--width-multiplier));
 }
 
-.qr-list {
+// ====== Список объектов недвижимости с банками ======
+
+.estates {
   display: flex;
   flex-direction: column;
   gap: calc(8 * var(--width-multiplier));
 }
 
-.qr-item {
+.estate {
+  padding: calc(16 * var(--width-multiplier));
   border: none;
   border-radius: calc(16 * var(--width-multiplier));
   background-color: rgba(0, 0, 0, 0.03);
@@ -3557,7 +3670,8 @@
     align-items: center;
     gap: calc(16 * var(--width-multiplier));
     width: 100%;
-    padding: calc(16 * var(--width-multiplier));
+    margin-bottom: calc(16 * var(--width-multiplier));
+    padding: 0;
     border: none;
     background: none;
     text-align: left;
@@ -3571,10 +3685,10 @@
     height: calc(42 * var(--width-multiplier));
     flex-shrink: 0;
     border-radius: 50%;
-    svg {
-      width: 100%;
-      height: 100%;
-    }
+  }
+  .accordion__head .estate__icon svg {
+    width: 100%;
+    height: 100%;
   }
   &__info {
     display: flex;
@@ -3586,48 +3700,159 @@
   &__name {
     font-weight: 500;
     font-size: calc(16 * var(--width-multiplier));
-    @media(max-width: 767px) {
-      font-size: calc(14 * var(--width-multiplier));
-    }
   }
-  &__code {
+  &__meta {
     color: rgba(21, 21, 21, 0.5);
     font-size: calc(14 * var(--width-multiplier));
   }
-  .accordion__head .qr-item__arrow {
+  .accordion__head .estate__arrow {
     width: calc(24 * var(--width-multiplier));
     height: calc(24 * var(--width-multiplier));
     flex-shrink: 0;
+    transition: transform 0.3s ease-out;
   }
-  &.accordion__item.is-open &__icon svg {
+  &.accordion__item.is-open svg {
     transform: none;
+  }
+  &.accordion__item.is-open &__arrow {
+    transform: rotate(180deg);
   }
   &__content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: calc(16 * var(--width-multiplier));
-    padding: 0 calc(16 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
-  }
-  &__qr {
-    width: calc(220 * var(--width-multiplier));
-    max-width: 100%;
-    aspect-ratio: 1;
-    border-radius: calc(8 * var(--width-multiplier));
-    overflow: hidden;
-    background-color: var(--light);
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+    gap: calc(32 * var(--width-multiplier));
     @media(max-width: 767px) {
-      margin: 0 auto;
+      gap: calc(16 * var(--width-multiplier));
+    }  
+  }
+  &__summary {
+    padding: calc(16 * var(--width-multiplier));
+    border-radius: calc(12 * var(--width-multiplier));
+    background-color: rgba(0, 0, 0, 0.02);
+    @media(max-width: 767px) {
+      padding: 0;
+      border-radius: 0;
+      background-color: transparent;
     }
   }
-  &__save {
-    width: calc(220 * var(--width-multiplier));
-    max-width: 100%;
+  &__payment-title {
+    margin-bottom: calc(8 * var(--width-multiplier));
+    font-weight: 500;
+  }
+  &__bar {
+    height: calc(8 * var(--width-multiplier));
+    margin-bottom: calc(16 * var(--width-multiplier));
+    border-radius: calc(100px * var(--width-multiplier));
+    background-color: rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    @media(max-width: 767px) {
+      height: calc(6 * var(--width-multiplier));
+      margin-bottom: calc(12 * var(--width-multiplier));
+    }
+  }
+  &__bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--primary);
+  }
+  &__payment-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(8 * var(--width-multiplier));
+    font-size: calc(14 * var(--width-multiplier));
+    font-weight: 500;
+    @media(max-width: 767px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: calc(4 * var(--width-multiplier));
+    }
+  }
+  &__date {
+    margin-top: calc(16 * var(--width-multiplier));
+    padding-bottom: calc(32 * var(--width-multiplier));
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(21, 21, 21, 0.5);
+    font-size: calc(14 * var(--width-multiplier));
+    font-weight: 500;
+    @media(max-width: 767px) {
+      margin-top: calc(12 * var(--width-multiplier));
+      padding-bottom: calc(16 * var(--width-multiplier));
+    }
+  }
+  &__banks-title {
+    margin-bottom: calc(12 * var(--width-multiplier));
+    color: rgba(21, 21, 21, 0.5);
+    font-size: calc(14 * var(--width-multiplier));
+    font-weight: 500;
+  }
+}
+
+.bank-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(8 * var(--width-multiplier));
+  @media(max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media(max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bank-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: calc(24 * var(--width-multiplier));
+  min-height: calc(140 * var(--width-multiplier));
+  padding: calc(16 * var(--width-multiplier));
+  border-radius: calc(20 * var(--width-multiplier));
+  background: linear-gradient(100.08deg, var(--bank-from, #021F47) 14.39%, var(--bank-to, #811E3B) 107.7%);
+  color: var(--light);
+  &__name {
+    font: 500 calc(20 * var(--width-multiplier))/1.2 GolosText;
+  }
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: calc(16 * var(--width-multiplier));
+    flex-wrap: wrap;
+  }
+  &__pay {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(4 * var(--width-multiplier));
+    padding: calc(10 * var(--width-multiplier)) calc(12 * var(--width-multiplier));
+    border-radius: calc(200 * var(--width-multiplier));
+    background-color: rgba(255, 255, 255, 0.15);
+    color: inherit;
+    font-weight: 500;
+    font-size: calc(14 * var(--width-multiplier));
+    transition: background-color 0.2s ease-out;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+    svg {
+      width: calc(16 * var(--width-multiplier));
+      height: calc(16 * var(--width-multiplier));
+      flex-shrink: 0;
+    }
+  }
+  &__details {
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: 500 calc(14 * var(--width-multiplier))/1.2 GolosText;
+    text-decoration: underline;
+    text-underline-offset: calc(3 * var(--width-multiplier));
+    cursor: pointer;
+    transition: opacity 0.2s ease-out;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
 

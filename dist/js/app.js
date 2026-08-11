@@ -6,7 +6,7 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const debounce = (fn, ms) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; };
-  // Пересчёт размеров Lenis после изменения высоты контента (аккордеон, табы и т.п.)
+
   const refreshLenis = () => {
     if (window.lenis && typeof window.lenis.resize === "function") window.lenis.resize();
   };
@@ -54,9 +54,6 @@
   const initLenis = () => {
     if (typeof Lenis === "undefined") return null;
 
-    // Если есть GSAP — гоним Lenis и GSAP по ОДНОМУ RAF-циклу. Иначе Lenis
-    // крутит свой цикл, а ScrollTrigger обновляется отдельно, и параллакс со
-    // scrub дёргается (отстаёт на кадр). autoRaf выключаем и вызываем raf сами.
     const useGsapTicker = typeof gsap !== "undefined";
     const lenis = new Lenis({ autoRaf: !useGsapTicker });
     window.lenis = lenis;
@@ -712,6 +709,95 @@
   };
 
   // ======================
+  // Реквизиты: список объектов -> реквизиты банка (без перезагрузки страницы)
+  // ======================
+  const initBankRequisites = () => {
+    const root = $("[data-requisites]");
+    if (!root) return;
+
+    const views = $$("[data-view]", root);
+    const bankView = $('[data-view="bank"]', root);
+    const triggers = $$("[data-bank]", root);
+    if (!bankView || !triggers.length) return;
+
+    const back = $("[data-bank-back]", root);
+    const titleEl = $("[data-bank-title]", bankView);
+    const qrImg = $("[data-bank-qr]", bankView);
+    const qrSave = $(".requisites__save", bankView);
+    const currencyBtns = $$("[data-currency]", bankView);
+    const fields = $$("[data-bank-field]", bankView);
+    const tabBtns = $$("[data-tab]", bankView);
+    const panels = $$("[data-tab-panel]", bankView);
+
+    $$(".bank-card", root).forEach((card) => {
+      const { gradientFrom, gradientTo } = card.dataset;
+      if (gradientFrom) card.style.setProperty("--bank-from", gradientFrom);
+      if (gradientTo) card.style.setProperty("--bank-to", gradientTo);
+    });
+
+    let current = null;
+
+    const getValue = (data, key, suffix) => {
+      if (key === "account") return data[`bankAccount${suffix}`];
+      if (key === "bank") return data.bankName;
+      if (key === "bik") return data.bankBik;
+      return "";
+    };
+
+    const render = (currency) => {
+      currencyBtns.forEach((b) => b.classList.toggle("is-active", b.dataset.currency === currency));
+      if (!current) return;
+
+      const data = current.dataset;
+      const suffix = currency === "usd" ? "Usd" : "Kgs";
+
+      fields.forEach((el) => {
+        const value = getValue(data, el.dataset.bankField, suffix);
+        if (value) el.textContent = value;
+      });
+
+      const qr = data[`bankQr${suffix}`];
+      if (qr) {
+        if (qrImg) qrImg.src = qr;
+        if (qrSave) qrSave.href = qr;
+      }
+    };
+
+    const activateTab = (name) => {
+      tabBtns.forEach((b) => b.classList.toggle("is-active", b.dataset.tab === name));
+      panels.forEach((p) => p.classList.toggle("is-active", p.dataset.tabPanel === name));
+    };
+
+    const showView = (name) => {
+      views.forEach((v) => v.classList.toggle("is-active", v.dataset.view === name));
+      refreshLenis();
+
+      const top = Math.max(0, root.getBoundingClientRect().top + window.scrollY - 100);
+      if (window.lenis && typeof window.lenis.scrollTo === "function") {
+        window.lenis.scrollTo(top);
+      } else {
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    };
+
+    triggers.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        current = btn;
+        if (titleEl) titleEl.textContent = `(${btn.dataset.bank})`;
+        activateTab("details");
+        render("kgs");
+        showView("bank");
+      });
+    });
+
+    back?.addEventListener("click", () => showView("list"));
+
+    currencyBtns.forEach((btn) => {
+      btn.addEventListener("click", () => render(btn.dataset.currency));
+    });
+  };
+
+  // ======================
   // Сайдбар личного кабинета (сворачивание на мобилке)
   // ======================
   const initLkAside = () => {
@@ -858,7 +944,6 @@
     const modals = $$(".modal", wrapper);
     const getModalByType = (type) => wrapper.querySelector(`.modal[data-type="${type}"]`);
 
-    // Телефон с флагом и кодом страны внутри модалок (общий модуль)
     $$("[data-modal-phone]", wrapper).forEach((input) => createPhoneInput(input));
 
     const showWrapper = () => {
@@ -955,12 +1040,7 @@
   // ======================
   // Обвязка планировки: голый <svg> с <path> → группы .plan__unit
   // ======================
-  // Бэк отдаёт простой SVG (только контуры-<path>) + PNG + (опционально)
-  // массив данных в <script type="application/json" data-plan-units>.
-  // Здесь каждый path оборачивается в <g class="plan__unit" data-plan-unit>,
-  // получает класс .plan__unit-shape и data-* поля из массива.
-  // Связка path ↔ данные: по id (path.id / data-id) либо по порядку.
-  // enum статуса → человекочитаемая подпись для карточки
+
   const PLAN_STATUS_LABEL = {
     free: "Свободна",
     reserved: "Забронирована",
@@ -968,24 +1048,20 @@
   };
 
   const buildPlanUnits = (planRoot) => {
-    // на этаже может быть несколько канвасов (.plan__plan) — обрабатываем каждый
     $$(".plan__plan", planRoot).forEach((canvas) => {
       const svg = $("svg", canvas);
       if (!svg) return;
-      // приводим вставленный svg к нужному виду оверлея
+
       svg.classList.add("plan__svg");
       svg.setAttribute("preserveAspectRatio", "none");
 
-      // берём только ещё НЕ обёрнутые пути (прямые дети svg).
-      // если разметка уже с готовыми <g data-plan-unit> — список пустой, no-op.
       const paths = $$(":scope > path", svg);
       if (!paths.length) return;
 
-      // необязательные данные с бэка (свой массив у каждого канваса)
       let data = [];
       const dataEl = $("[data-plan-units]", canvas);
       if (dataEl) { try { data = JSON.parse(dataEl.textContent || "[]"); } catch (e) {} }
-      // связка по порядку: i-й путь ↔ i-й элемент массива
+
       const SVGNS = "http://www.w3.org/2000/svg";
       paths.forEach((path, i) => {
         const u = data[i] || {};
@@ -994,11 +1070,10 @@
         g.setAttribute("class", "plan__unit");
         g.setAttribute("data-plan-unit", "");
         path.setAttribute("class", "plan__unit-shape");
-        path.removeAttribute("fill"); // цвет заливки — из CSS, не инлайном
+        path.removeAttribute("fill"); 
         svg.replaceChild(g, path);
         g.appendChild(path);
 
-        // данные из массива → data-* (их читают карточка и бейдж комнат)
         g.dataset.num = u.num != null ? u.num : i + 1;
         if (u.block != null) g.dataset.block = u.block;
         if (u.rooms != null) g.dataset.rooms = u.rooms;
@@ -1006,7 +1081,6 @@
         if (u.price != null) g.dataset.price = u.price;
         if (u.status != null) g.dataset.status = PLAN_STATUS_LABEL[u.status] || u.status;
 
-        // продано → серым и без интерактива; иначе делаем фокусируемым
         if (u.status === "sold" || u.sold === true) {
           g.setAttribute("data-sold", "");
         } else {
@@ -1028,7 +1102,6 @@
     const planRoot = $("[data-plan]", app);  // вид «планировка этажа»
     if (!root) return;
 
-    // Состояние в URL-хэше (#plan-5), чтобы при перезагрузке остаться на плане
     const setPlanHash = (f) => {
       try {
         history.replaceState(null, "",
@@ -1124,15 +1197,13 @@
       const tipRect = tooltip.getBoundingClientRect();
       const gap = s(16);
 
-      // Справа от зоны этажа, по центру по вертикали
       let left = zoneRect.right - sceneRect.left + gap;
       let top = zoneRect.top - sceneRect.top + zoneRect.height / 2 - tipRect.height / 2;
 
-      // Если не помещается справа — показываем слева
       if (left + tipRect.width > sceneRect.width) {
         left = zoneRect.left - sceneRect.left - tipRect.width - gap;
       }
-      // Держим в пределах сцены по вертикали
+
       top = Math.max(s(8), Math.min(top, sceneRect.height - tipRect.height - s(8)));
 
       tooltip.style.left = `${left}px`;
@@ -1541,9 +1612,6 @@
   // ======================
   // Parallax (лёгкое смещение фоновых картинок при скролле)
   // ======================
-  // Картинку слегка увеличиваем (scale), чтобы при сдвиге не оголялись края,
-  // и двигаем по вертикали в привязке к скроллу (scrub). Контейнеры у всех
-  // этих элементов уже с overflow: hidden.
   const initParallax = () => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
@@ -1594,9 +1662,6 @@
     const animated = new WeakSet();
     const claim = (el) => (animated.has(el) ? false : (animated.add(el), true));
 
-    // clearProps: после появления убираем инлайновый transform, который GSAP
-    // оставляет на элементе. Иначе он перебивает по специфичности CSS-ный
-    // :hover transform, и карточки перестают подниматься при наведении.
     const REVEAL = { ease: "power2.out", clearProps: "transform" };
 
     const fadeUp = (selector, vars = {}) => {
@@ -1840,6 +1905,7 @@
     initLkActive();
     initCopy();
     initTabs();
+    initBankRequisites();
     initLkAside();
     initLkLang();
     initAccordion();
