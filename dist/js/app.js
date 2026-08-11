@@ -633,10 +633,6 @@
   // Копирование в буфер
   // ======================
   const initCopy = () => {
-    const buttons = $$("[data-copy]");
-    const allButtons = $$("[data-copy-all]");
-    if (!buttons.length && !allButtons.length) return;
-
     const copyText = async (text) => {
       try {
         await navigator.clipboard.writeText(text);
@@ -653,38 +649,42 @@
       }
     };
 
-    // Копирование одного поля
-    buttons.forEach((btn) => {
-      let timer = null;
-      btn.addEventListener("click", async () => {
+    // Подсветка на 1.5 сек
+    const flash = (el, toggle) => {
+      clearTimeout(el.copyTimer);
+      toggle(true);
+      el.copyTimer = setTimeout(() => toggle(false), 1500);
+    };
+
+    // Делегирование: поля могут отрисовываться динамически
+    document.addEventListener("click", async (e) => {
+      const btn = e.target.closest("[data-copy]");
+      if (btn) {
         const field = btn.closest(".copy-field");
         const valueEl = field && $("[data-copy-value]", field);
         const text = valueEl ? valueEl.textContent.trim() : "";
         if (!text) return;
 
         await copyText(text);
-        btn.classList.add("is-copied");
-        clearTimeout(timer);
-        timer = setTimeout(() => btn.classList.remove("is-copied"), 1500);
-      });
-    });
+        flash(btn, (on) => btn.classList.toggle("is-copied", on));
+        return;
+      }
 
-    // Копировать все поля в области кнопки
-    allButtons.forEach((btn) => {
-      let timer = null;
-      const label = btn.textContent.trim();
-      btn.addEventListener("click", async () => {
-        const scope = btn.closest("[data-copy-scope]") || document;
-        const values = $$("[data-copy-value]", scope)
-          .map((el) => el.textContent.trim())
-          .filter(Boolean);
-        if (!values.length) return;
+      // Копировать все поля в области кнопки
+      const allBtn = e.target.closest("[data-copy-all]");
+      if (!allBtn) return;
 
-        await copyText(values.join("\n"));
-        btn.textContent = "Скопировано";
-        clearTimeout(timer);
-        timer = setTimeout(() => { btn.textContent = label; }, 1500);
-      });
+      const scope = allBtn.closest("[data-copy-scope]") || document;
+      const values = $$("[data-copy-value]", scope)
+        .map((el) => el.textContent.trim())
+        .filter(Boolean);
+      if (!values.length) return;
+
+      if (!allBtn.dataset.copyLabel) allBtn.dataset.copyLabel = allBtn.textContent.trim();
+      const label = allBtn.dataset.copyLabel;
+
+      await copyText(values.join("\n"));
+      flash(allBtn, (on) => { allBtn.textContent = on ? "Скопировано" : label; });
     });
   };
 
@@ -724,43 +724,83 @@
     const titleEl = $("[data-bank-title]", bankView);
     const qrImg = $("[data-bank-qr]", bankView);
     const qrSave = $(".requisites__save", bankView);
+    const qrTab = $('[data-tab="qr"]', bankView);
+    const currencySwitch = $("[data-currency-switch]", bankView);
     const currencyBtns = $$("[data-currency]", bankView);
-    const fields = $$("[data-bank-field]", bankView);
+    const fieldsBox = $("[data-bank-fields]", bankView);
+    const template = $("[data-field-template]", bankView);
     const tabBtns = $$("[data-tab]", bankView);
     const panels = $$("[data-tab-panel]", bankView);
+    if (!fieldsBox || !template) return;
 
+    // Градиент карточки банка приходит из data-атрибутов
     $$(".bank-card", root).forEach((card) => {
       const { gradientFrom, gradientTo } = card.dataset;
       if (gradientFrom) card.style.setProperty("--bank-from", gradientFrom);
       if (gradientTo) card.style.setProperty("--bank-to", gradientTo);
     });
 
-    let current = null;
+    // Реквизиты текущего банка: { kgs: { qr, fields: [...] }, usd: {...} }
+    let currentData = null;
 
-    const getValue = (data, key, suffix) => {
-      if (key === "account") return data[`bankAccount${suffix}`];
-      if (key === "bank") return data.bankName;
-      if (key === "bik") return data.bankBik;
-      return "";
+    const readBankData = (btn) => {
+      const source = $("[data-bank-json]", btn.closest(".bank-card") || root);
+      if (!source) return null;
+      try {
+        return JSON.parse(source.textContent);
+      } catch (e) {
+        return null;
+      }
+    };
+
+    const createField = ({ label, value, type }) => {
+      const node = template.content.firstElementChild.cloneNode(true);
+      $(".copy-field__label", node).textContent = label || "";
+
+      const valueEl = $("[data-copy-value]", node);
+      if (type === "email" || type === "tel") {
+        const link = document.createElement("a");
+        link.className = "copy-field__value copy-field__value_link";
+        link.href = type === "email" ? `mailto:${value}` : `tel:${value.replace(/\s/g, "")}`;
+        link.setAttribute("data-copy-value", "");
+        link.textContent = value;
+        valueEl.replaceWith(link);
+      } else {
+        valueEl.textContent = value || "";
+      }
+
+      return node;
     };
 
     const render = (currency) => {
-      currencyBtns.forEach((b) => b.classList.toggle("is-active", b.dataset.currency === currency));
-      if (!current) return;
+      if (!currentData) return;
 
-      const data = current.dataset;
-      const suffix = currency === "usd" ? "Usd" : "Kgs";
+      const codes = Object.keys(currentData);
+      const code = currentData[currency] ? currency : codes[0];
+      const payload = currentData[code];
+      if (!payload) return;
 
-      fields.forEach((el) => {
-        const value = getValue(data, el.dataset.bankField, suffix);
-        if (value) el.textContent = value;
+      // Показываем только те валюты, что есть у банка
+      currencyBtns.forEach((btn) => {
+        const available = !!currentData[btn.dataset.currency];
+        btn.hidden = !available;
+        btn.classList.toggle("is-active", available && btn.dataset.currency === code);
       });
+      if (currencySwitch) currencySwitch.hidden = codes.length < 2;
 
-      const qr = data[`bankQr${suffix}`];
-      if (qr) {
-        if (qrImg) qrImg.src = qr;
-        if (qrSave) qrSave.href = qr;
+      // Набор полей может отличаться от валюты к валюте — перерисовываем целиком
+      fieldsBox.innerHTML = "";
+      (payload.fields || []).forEach((field) => fieldsBox.appendChild(createField(field)));
+
+      if (qrTab) qrTab.hidden = !payload.qr;
+      if (payload.qr) {
+        if (qrImg) qrImg.src = payload.qr;
+        if (qrSave) qrSave.href = payload.qr;
+      } else {
+        activateTab("details");
       }
+
+      refreshLenis();
     };
 
     const activateTab = (name) => {
@@ -782,10 +822,13 @@
 
     triggers.forEach((btn) => {
       btn.addEventListener("click", () => {
-        current = btn;
+        const data = readBankData(btn);
+        if (!data) return;
+
+        currentData = data;
         if (titleEl) titleEl.textContent = `(${btn.dataset.bank})`;
         activateTab("details");
-        render("kgs");
+        render(Object.keys(data)[0]);
         showView("bank");
       });
     });

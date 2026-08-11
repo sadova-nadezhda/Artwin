@@ -3615,6 +3615,10 @@
   display: flex;
   align-items: center;
   gap: calc(8 * var(--width-multiplier));
+  // валюта у банка может быть одна — тогда переключатель скрыт
+  &[hidden] {
+    display: none;
+  }
   &__label {
     color: rgba(21, 21, 21, 0.5);
     font-size: calc(14 * var(--width-multiplier));

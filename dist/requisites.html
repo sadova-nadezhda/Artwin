@@ -7,10 +7,10 @@
   <title>Реквизиты ARTWIN</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260811125120" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20260811132213" />
   <!-- intl-tel-input -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260811125120" />
-  <link rel="stylesheet" href="css/style.css?_v=20260811125120" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20260811132213" />
+  <link rel="stylesheet" href="css/style.css?_v=20260811132213" />
 </head>
 
   <body class="lk-page">
@@ -425,7 +425,7 @@
                                 <div class="bank-card__name">Bakai</div>
                                 <div class="bank-card__actions">
                                   <!-- href — внешняя ссылка банка на онлайн-оплату -->
-                                  <a class="bank-card__pay" href="#" rel="noopener" target="_blank">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
                                       <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
@@ -433,24 +433,48 @@
                                     </svg>
                                     Онлайн оплата
                                   </a>
-                                  <button
-                                    class="bank-card__details"
-                                    type="button"
-                                    data-bank="Bakai Bank"
-                                    data-bank-name='ОАО "БАКАЙ БАНК"'
-                                    data-bank-bik="124034"
-                                    data-bank-account-kgs="KGS 1240020001612024"
-                                    data-bank-account-usd="USD 1240020001612088"
-                                    data-bank-qr-kgs="img/QR.png"
-                                    data-bank-qr-usd="img/QR.png"
-                                  >Реквизиты</button>
+                                  <button class="bank-card__details" type="button" data-bank="Bakai Bank">Реквизиты</button>
                                 </div>
+                                <!-- Реквизиты банка: ключ = код валюты, свой набор полей и QR на каждую валюту -->
+                                <script type="application/json" data-bank-json>
+                                  {
+                                    "kgs": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "ООО «Артвин Девелопмент»" },
+                                        { "label": "Юридический адрес:", "value": "г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "ОКПО", "value": "31824025" },
+                                        { "label": "Реквизиты счета:", "value": "KGS 1240020001612024" },
+                                        { "label": "Банк получателя:", "value": "ОАО «БАКАЙ БАНК»" },
+                                        { "label": "БИК банка получателя:", "value": "124034" },
+                                        { "label": "Кон.телефон:", "value": "0228 880 000", "type": "tel" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    },
+                                    "usd": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "Artwin Development LLC" },
+                                        { "label": "Юридический адрес:", "value": "Kyrgyz Republic, Bishkek, Ch. Aitmatov ave. 243" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "Реквизиты счета:", "value": "USD 1240020001612088" },
+                                        { "label": "Банк получателя:", "value": "OJSC «BAKAI BANK»" },
+                                        { "label": "SWIFT банка получателя:", "value": "BAKAKG22" },
+                                        { "label": "Банк-корреспондент:", "value": "Raiffeisen Bank International AG, Vienna" },
+                                        { "label": "SWIFT банка-корреспондента:", "value": "RZBAATWW" },
+                                        { "label": "Счет в банке-корреспонденте:", "value": "55.089.174" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    }
+                                  }
+                                </script>
                               </div>
 
                               <div class="bank-card" data-gradient-from="#00886E" data-gradient-to="#009C4C">
                                 <div class="bank-card__name">Mbank</div>
                                 <div class="bank-card__actions">
-                                  <a class="bank-card__pay" href="#" rel="noopener" target="_blank">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
                                       <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
@@ -458,24 +482,47 @@
                                     </svg>
                                     Онлайн оплата
                                   </a>
-                                  <button
-                                    class="bank-card__details"
-                                    type="button"
-                                    data-bank="Mbank"
-                                    data-bank-name='ЗАО "Коммерческий банк КЫРГЫЗСТАН"'
-                                    data-bank-bik="103001"
-                                    data-bank-account-kgs="KGS 1030120001234567"
-                                    data-bank-account-usd="USD 1030120001234599"
-                                    data-bank-qr-kgs="img/QR.png"
-                                    data-bank-qr-usd="img/QR.png"
-                                  >Реквизиты</button>
+                                  <button class="bank-card__details" type="button" data-bank="Mbank">Реквизиты</button>
                                 </div>
+                                <script type="application/json" data-bank-json>
+                                  {
+                                    "kgs": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "ООО «Артвин Девелопмент»" },
+                                        { "label": "Юридический адрес:", "value": "г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "ОКПО", "value": "31824025" },
+                                        { "label": "Реквизиты счета:", "value": "KGS 1030120001234567" },
+                                        { "label": "Банк получателя:", "value": "ЗАО «Коммерческий банк КЫРГЫЗСТАН»" },
+                                        { "label": "БИК банка получателя:", "value": "103001" },
+                                        { "label": "Кон.телефон:", "value": "0228 880 000", "type": "tel" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    },
+                                    "usd": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "Artwin Development LLC" },
+                                        { "label": "Юридический адрес:", "value": "Kyrgyz Republic, Bishkek, Ch. Aitmatov ave. 243" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "Реквизиты счета:", "value": "USD 1030120001234599" },
+                                        { "label": "Банк получателя:", "value": "CJSC «Commercial Bank KYRGYZSTAN»" },
+                                        { "label": "SWIFT банка получателя:", "value": "KYRZKG22" },
+                                        { "label": "Банк-корреспондент:", "value": "Commerzbank AG, Frankfurt am Main" },
+                                        { "label": "SWIFT банка-корреспондента:", "value": "COBADEFF" },
+                                        { "label": "Счет в банке-корреспонденте:", "value": "400886754401" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    }
+                                  }
+                                </script>
                               </div>
 
                               <div class="bank-card" data-gradient-from="#0046AA" data-gradient-to="#4A91F5">
                                 <div class="bank-card__name">Kicb</div>
                                 <div class="bank-card__actions">
-                                  <a class="bank-card__pay" href="#" rel="noopener" target="_blank">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
                                       <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
@@ -483,18 +530,27 @@
                                     </svg>
                                     Онлайн оплата
                                   </a>
-                                  <button
-                                    class="bank-card__details"
-                                    type="button"
-                                    data-bank="KICB"
-                                    data-bank-name='ЗАО "Кыргызский Инвестиционно-Кредитный Банк"'
-                                    data-bank-bik="128001"
-                                    data-bank-account-kgs="KGS 1280120007654321"
-                                    data-bank-account-usd="USD 1280120007654399"
-                                    data-bank-qr-kgs="img/QR.png"
-                                    data-bank-qr-usd="img/QR.png"
-                                  >Реквизиты</button>
+                                  <button class="bank-card__details" type="button" data-bank="KICB">Реквизиты</button>
                                 </div>
+                                <!-- У этого банка доступна только одна валюта — переключатель скрывается -->
+                                <script type="application/json" data-bank-json>
+                                  {
+                                    "kgs": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "ООО «Артвин Девелопмент»" },
+                                        { "label": "Юридический адрес:", "value": "г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "ОКПО", "value": "31824025" },
+                                        { "label": "Реквизиты счета:", "value": "KGS 1280120007654321" },
+                                        { "label": "Банк получателя:", "value": "ЗАО «Кыргызский Инвестиционно-Кредитный Банк»" },
+                                        { "label": "БИК банка получателя:", "value": "128001" },
+                                        { "label": "Кон.телефон:", "value": "0228 880 000", "type": "tel" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    }
+                                  }
+                                </script>
                               </div>
                             </div>
                           </div>
@@ -546,7 +602,7 @@
                               <div class="bank-card" data-gradient-from="#7A2B06" data-gradient-to="#E0651A">
                                 <div class="bank-card__name">Optima</div>
                                 <div class="bank-card__actions">
-                                  <a class="bank-card__pay" href="#" rel="noopener" target="_blank">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
                                       <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
@@ -554,24 +610,47 @@
                                     </svg>
                                     Онлайн оплата
                                   </a>
-                                  <button
-                                    class="bank-card__details"
-                                    type="button"
-                                    data-bank="Optima Bank"
-                                    data-bank-name='ОАО "Оптима Банк"'
-                                    data-bank-bik="109009"
-                                    data-bank-account-kgs="KGS 1090920004455661"
-                                    data-bank-account-usd="USD 1090920004455699"
-                                    data-bank-qr-kgs="img/QR.png"
-                                    data-bank-qr-usd="img/QR.png"
-                                  >Реквизиты</button>
+                                  <button class="bank-card__details" type="button" data-bank="Optima Bank">Реквизиты</button>
                                 </div>
+                                <script type="application/json" data-bank-json>
+                                  {
+                                    "kgs": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "ООО «Артвин Девелопмент»" },
+                                        { "label": "Юридический адрес:", "value": "г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "ОКПО", "value": "31824025" },
+                                        { "label": "Реквизиты счета:", "value": "KGS 1090920004455661" },
+                                        { "label": "Банк получателя:", "value": "ОАО «Оптима Банк»" },
+                                        { "label": "БИК банка получателя:", "value": "109009" },
+                                        { "label": "Кон.телефон:", "value": "0228 880 000", "type": "tel" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    },
+                                    "usd": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "Artwin Development LLC" },
+                                        { "label": "Юридический адрес:", "value": "Kyrgyz Republic, Bishkek, Ch. Aitmatov ave. 243" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "Реквизиты счета:", "value": "USD 1090920004455699" },
+                                        { "label": "Банк получателя:", "value": "OJSC «Optima Bank»" },
+                                        { "label": "SWIFT банка получателя:", "value": "ENEJKG22" },
+                                        { "label": "Банк-корреспондент:", "value": "Raiffeisen Bank International AG, Vienna" },
+                                        { "label": "SWIFT банка-корреспондента:", "value": "RZBAATWW" },
+                                        { "label": "Счет в банке-корреспонденте:", "value": "70.055.123" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    }
+                                  }
+                                </script>
                               </div>
 
                               <div class="bank-card" data-gradient-from="#0E2338" data-gradient-to="#1C6E8C">
                                 <div class="bank-card__name">Demir</div>
                                 <div class="bank-card__actions">
-                                  <a class="bank-card__pay" href="#" rel="noopener" target="_blank">
+                                  <a class="bank-card__pay" href="#" rel="noopener">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <rect x="2" y="4.5" width="16" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
                                       <path d="M2 8.5H18" stroke="currentColor" stroke-width="1.5"/>
@@ -579,18 +658,41 @@
                                     </svg>
                                     Онлайн оплата
                                   </a>
-                                  <button
-                                    class="bank-card__details"
-                                    type="button"
-                                    data-bank="Demir Bank"
-                                    data-bank-name='ЗАО "Демир Кыргыз Интернэшнл Банк"'
-                                    data-bank-bik="119001"
-                                    data-bank-account-kgs="KGS 1190120009988771"
-                                    data-bank-account-usd="USD 1190120009988799"
-                                    data-bank-qr-kgs="img/QR.png"
-                                    data-bank-qr-usd="img/QR.png"
-                                  >Реквизиты</button>
+                                  <button class="bank-card__details" type="button" data-bank="Demir Bank">Реквизиты</button>
                                 </div>
+                                <script type="application/json" data-bank-json>
+                                  {
+                                    "kgs": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "ООО «Артвин Девелопмент»" },
+                                        { "label": "Юридический адрес:", "value": "г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "ОКПО", "value": "31824025" },
+                                        { "label": "Реквизиты счета:", "value": "KGS 1190120009988771" },
+                                        { "label": "Банк получателя:", "value": "ЗАО «Демир Кыргыз Интернэшнл Банк»" },
+                                        { "label": "БИК банка получателя:", "value": "119001" },
+                                        { "label": "Кон.телефон:", "value": "0228 880 000", "type": "tel" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    },
+                                    "usd": {
+                                      "qr": "img/QR.png",
+                                      "fields": [
+                                        { "label": "Название", "value": "Artwin Development LLC" },
+                                        { "label": "Юридический адрес:", "value": "Kyrgyz Republic, Bishkek, Ch. Aitmatov ave. 243" },
+                                        { "label": "ИНН", "value": "00103202310062" },
+                                        { "label": "Реквизиты счета:", "value": "USD 1190120009988799" },
+                                        { "label": "Банк получателя:", "value": "CJSC «Demir Kyrgyz International Bank»" },
+                                        { "label": "SWIFT банка получателя:", "value": "DEMIKG22" },
+                                        { "label": "Банк-корреспондент:", "value": "Deutsche Bank Trust Company Americas, New York" },
+                                        { "label": "SWIFT банка-корреспондента:", "value": "BKTRUS33" },
+                                        { "label": "Счет в банке-корреспонденте:", "value": "04412345" },
+                                        { "label": "email", "value": "office@artwin.kg", "type": "email" }
+                                      ]
+                                    }
+                                  }
+                                </script>
                               </div>
                             </div>
                           </div>
@@ -615,11 +717,11 @@
 
                   <div class="requisites__toolbar">
                     <div class="tabs">
-                      <button class="tabs__btn" type="button" data-tab="qr">QR-Код</button>
+                      <button class="tabs__btn" type="button" data-tab="qr">QR-коде</button>
                       <button class="tabs__btn is-active" type="button" data-tab="details">Реквизиты</button>
                     </div>
 
-                    <div class="currency">
+                    <div class="currency" data-currency-switch>
                       <span class="currency__label">Валюта:</span>
                       <div class="currency__switch">
                         <button class="currency__btn is-active" type="button" data-currency="kgs">KGS</button>
@@ -636,159 +738,34 @@
                     <a class="requisites__save button button-primary" href="img/QR.png" download>Сохранить QR</a>
                   </div>
 
-                  <!-- Вкладка: Реквизиты -->
+                  <!-- Вкладка: Реквизиты — поля рендерятся из данных банка -->
                   <div class="requisites__panel is-active" data-tab-panel="details" data-copy-scope>
                     <div class="requisites__subtitle">Реквизиты Артвин Девелопмент</div>
 
-                    <div class="requisites__fields">
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">Название</span>
-                          <span class="copy-field__value" data-copy-value>ООО «Артвин Девелопмент»</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">Юридический адрес:</span>
-                          <span class="copy-field__value" data-copy-value>г. Бишкек, пр. Ч.Айтматова, 243, Первомайский УГНС</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">ИНН</span>
-                          <span class="copy-field__value" data-copy-value>00103202310062</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">ОКПО</span>
-                          <span class="copy-field__value" data-copy-value>31824025</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">Реквизиты счета:</span>
-                          <span class="copy-field__value" data-copy-value data-bank-field="account">KGS 1240020001612024</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">Банк получателя:</span>
-                          <span class="copy-field__value" data-copy-value data-bank-field="bank">ОАО "БАКАЙ БАНК"</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">БИК банка получателя:</span>
-                          <span class="copy-field__value" data-copy-value data-bank-field="bik">124034</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">Кон.телефон:</span>
-                          <span class="copy-field__value" data-copy-value>0228 880 000</span>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                      <div class="copy-field">
-                        <div class="copy-field__info">
-                          <span class="copy-field__label">email</span>
-                          <a class="copy-field__value copy-field__value_link" href="mailto:office@artwin.kg" data-copy-value>office@artwin.kg</a>
-                        </div>
-                        <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
-  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
-    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-  </svg>
-  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-                      </div>
-                    </div>
+                    <div class="requisites__fields" data-bank-fields></div>
 
                     <button class="requisites__copy-all button button-primary" type="button" data-copy-all>Скопировать все</button>
                   </div>
+
+                  <!-- Шаблон одного поля -->
+                  <template data-field-template>
+                    <div class="copy-field">
+                      <div class="copy-field__info">
+                        <span class="copy-field__label"></span>
+                        <span class="copy-field__value" data-copy-value></span>
+                      </div>
+                      <button class="copy-field__btn" type="button" data-copy aria-label="Скопировать">
+  <svg class="copy-field__icon-copy" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="7" y="7" width="11" height="11" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M13 5.5V4.5C13 3.4 12.1 2.5 11 2.5H4.5C3.4 2.5 2.5 3.4 2.5 4.5V11C2.5 12.1 3.4 13 4.5 13H5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="copy-field__icon-done" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 10.5L8 14.5L16 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+                    </div>
+                  </template>
                 </div>
 
               </div>
@@ -799,11 +776,11 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260811125120"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260811125120"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260811125120"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260811125120"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260811125120"></script>
-<script src="js/app.js?_v=20260811125120"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260811132213"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20260811132213"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260811132213"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260811132213"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20260811132213"></script>
+<script src="js/app.js?_v=20260811132213"></script>
   </body>
 </html>

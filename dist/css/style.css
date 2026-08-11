@@ -4052,6 +4052,10 @@ textarea {
   gap: calc(8 * var(--width-multiplier));
 }
 
+.currency[hidden] {
+  display: none;
+}
+
 .currency__label {
   color: rgba(21, 21, 21, 0.5);
   font-size: calc(14 * var(--width-multiplier));
