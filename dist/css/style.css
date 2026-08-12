@@ -1430,6 +1430,45 @@ textarea {
   gap: calc(8 * var(--width-multiplier));
 }
 
+.teams .swiper {
+  overflow: visible;
+}
+
+.teams-card {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+}
+
+.teams-card__img {
+  height: calc(360 * var(--width-multiplier));
+  border-radius: calc(12 * var(--width-multiplier));
+  overflow: hidden;
+}
+
+.teams-card__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.teams-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--width-multiplier));
+  padding: calc(8 * var(--width-multiplier)) 0;
+}
+
+.teams-card__name {
+  font-size: calc(18 * var(--width-multiplier));
+}
+
+.teams-card__post {
+  font-size: calc(14 * var(--width-multiplier));
+}
+
 .reports__cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -6043,6 +6082,10 @@ textarea {
   .worth-card {
     grid-template-columns: calc(64 * var(--width-multiplier)) 1fr;
     border-radius: calc(12 * var(--width-multiplier));
+  }
+
+  .teams-card__img {
+    height: calc(320 * var(--width-multiplier));
   }
 
   .reports__cards {

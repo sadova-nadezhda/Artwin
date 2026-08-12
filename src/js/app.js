@@ -216,6 +216,22 @@
       });
     }
 
+    if (document.querySelector(".teamsSwiper")) {
+      state.swipers.teams = new Swiper('.teamsSwiper', {
+        slidesPerView: 1.3,
+        spaceBetween: s(8),
+        grabCursor: true,
+        breakpoints: {
+          768: {
+            slidesPerView: 2.5,
+          },
+          1025: {
+            slidesPerView: 4,
+          },
+        }
+      });
+    }
+
     if (document.querySelector(".gallerySwiper")) {
       state.swipers.gallery = new Swiper('.gallerySwiper', {
         slidesPerView: 1.2,
@@ -1786,6 +1802,7 @@
     // ---- Слайдеры (swiper) — появляются целым блоком ----
     fadeUp([
       ".benefits__slider", ".how__slider", ".experience__slider", ".project-gallery__slider",
+      ".teams__slider",
     ].join(","), { y: 24, duration: 0.8 });
 
     // ---- Одиночные блоки — мягкий fade-up ----

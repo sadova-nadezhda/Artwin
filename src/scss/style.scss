@@ -815,6 +815,43 @@
   }
 }
 
+.teams {
+  .swiper {
+    overflow: visible;
+  }
+  &-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow: hidden;
+    &__img {
+      height: calc(360 * var(--width-multiplier));
+      border-radius: calc(12 * var(--width-multiplier));
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      @media (max-width: 767px) {
+        height: calc(320 * var(--width-multiplier));
+      }
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: calc(8 * var(--width-multiplier));
+      padding: calc(8 * var(--width-multiplier)) 0;
+    }
+    &__name {
+      font-size: calc(18 * var(--width-multiplier));
+    }
+    &__post {
+      font-size: calc(14 * var(--width-multiplier));
+    }
+  }
+}
+
 .reports {
   &__cards {
     display: grid;
