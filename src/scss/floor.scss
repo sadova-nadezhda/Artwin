@@ -23,6 +23,13 @@
 }
 .floorplan-page {
   overflow-x: hidden; // страница не едет вбок — горизонтальный скролл только внутри плана
+  // Без увеличения по двойному тапу (скролл и щипок-зум остаются).
+  // touch-action не наследуется, поэтому задаём всем элементам —
+  // иначе внутри скролл-контейнеров (.floor__scroll, .plan__canvas) зум по двойному тапу остаётся.
+  &,
+  * {
+    touch-action: manipulation;
+  }
   main {
     flex: 1;
     display: flex;
@@ -114,20 +121,26 @@
     cursor: pointer;
     outline: none;
     transition: fill 0.25s ease-out;
-    &:hover,
-    &:focus-visible,
-    &.is-active {
-      fill: rgba(30, 145, 57, 0.5);
-    }
-    // Нет квартир в продаже — приглушённо, без «продающей» подсветки
-    &.is-empty {
-      cursor: default;
+    // Десктоп: подсветка по наведению. На мобилке её нет — после тапа
+    // :hover и is-active «залипают» и подсвечивается второй этаж.
+    @media(min-width: 768px) {
       &:hover,
+      &:focus-visible,
       &.is-active {
-        fill: rgba(21, 21, 21, 0.5);
+        fill: rgba(30, 145, 57, 0.5);
+      }
+      // Нет квартир в продаже — приглушённо, без «продающей» подсветки
+      &.is-empty {
+        &:hover,
+        &.is-active {
+          fill: rgba(21, 21, 21, 0.5);
+        }
       }
     }
-    // Выбранный этаж на мобилке — подсвеченный контур (на десктопе — по наведению)
+    &.is-empty {
+      cursor: default;
+    }
+    // Мобилка: подсвечен только выбранный этаж (из табов)
     &.is-current {
       @media(max-width: 767px) {
         fill: rgba(30, 145, 57, 0.5);
@@ -137,9 +150,11 @@
   // Коммерция / паркинг: подсвечивается иначе, чем жилые этажи. Продаж нет.
   &__band--base {
     cursor: default;
-    &:hover,
-    &.is-active {
-      fill: rgba(60, 120, 200, 0.5);
+    @media(min-width: 768px) {
+      &:hover,
+      &.is-active {
+        fill: rgba(60, 120, 200, 0.5);
+      }
     }
   }
 

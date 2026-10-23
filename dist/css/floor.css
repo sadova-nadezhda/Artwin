@@ -29,6 +29,11 @@
   overflow-x: hidden;
 }
 
+.floorplan-page,
+.floorplan-page * {
+  touch-action: manipulation;
+}
+
 .floorplan-page main {
   flex: 1;
   display: flex;
@@ -118,28 +123,12 @@
   transition: fill 0.25s ease-out;
 }
 
-.floor__band:hover,
-.floor__band:focus-visible,
-.floor__band.is-active {
-  fill: rgba(30, 145, 57, 0.5);
-}
-
 .floor__band.is-empty {
   cursor: default;
 }
 
-.floor__band.is-empty:hover,
-.floor__band.is-empty.is-active {
-  fill: rgba(21, 21, 21, 0.5);
-}
-
 .floor__band--base {
   cursor: default;
-}
-
-.floor__band--base:hover,
-.floor__band--base.is-active {
-  fill: rgba(60, 120, 200, 0.5);
 }
 
 .floor__tooltip {
@@ -621,6 +610,22 @@
 }
 
 @media (min-width: 768px) {
+  .floor__band:hover,
+  .floor__band:focus-visible,
+  .floor__band.is-active {
+    fill: rgba(30, 145, 57, 0.5);
+  }
+
+  .floor__band.is-empty:hover,
+  .floor__band.is-empty.is-active {
+    fill: rgba(21, 21, 21, 0.5);
+  }
+
+  .floor__band--base:hover,
+  .floor__band--base.is-active {
+    fill: rgba(60, 120, 200, 0.5);
+  }
+
   .floor.is-night .floor__theme-label {
     padding: calc(8 * var(--width-multiplier));
     padding-left: calc(14 * var(--width-multiplier));

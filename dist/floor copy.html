@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Выбор этажа и планировка</title>
+  <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20261023180145" />
+  <!-- intl-tel-input -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20261023180145" />
+  <link rel="stylesheet" href="css/style.css?_v=20261023180145" />
+  
+  <!-- Стили только этой страницы -->
+  <link rel="stylesheet" href="css/floor.css?_v=20261023180145" />
+  
+</head>
+
+  <body class="floorplan-page">
+    <main>
+      <!-- Одна страница = два вида: фасад (выбор этажа) и планировка этажа.
+      Модель этажей общая, задаётся на [data-floor-floors] ниже. Клик по этажу
+      переключает на вид планировки; кнопка «Вернуться назад» возвращает к фасаду. -->
+      <section class="floorplan" data-floorplan>
+
+        <!-- ===================== ВИД 1: ФАСАД ===================== -->
+        <section class="floor floorplan__view floorplan__view--building" data-floor>
+          <!-- Сцена: фото (фон + здание) + SVG с контурами этажей поверх -->
+          <div class="floor__scene">
+            <!-- Десктопная сцена (≥ 768px): фото на весь экран, лишнее обрезается по краям -->
+            <div class="floor__stage floor__stage--desktop" style="--floor-ratio: 1920 / 911">
+              <img class="floor__photo" src="img/london-day.webp" data-night="img/london-night.webp" alt="ЖК LONDON">
+
+              <!-- SVG в размере фото 
+              Атрибуты path:
+                data-floor="5" data-free="3" — жилой этаж и квартир в продаже (0 = этаж недоступен);
+                data-base data-label data-caption — нежилой уровень (коммерция / паркинг), без продаж. -->
+              <svg class="floor__svg" data-floor-svg viewBox="0 0 1920 911" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Этаж 1 — коммерция -->
+                <path data-base data-label="Коммерция" data-caption="1 этаж" d="M664 709L376.5 711V767L1047.5 769.5L1440.5 775.5C1448.67 775.667 1465.1 775.9 1465.5 775.5C1466 775 1474.5 774 1475 773.5C1475.4 773.1 1480.83 772.333 1483.5 772L1493 770.5C1496 770.167 1502.1 769.5 1502.5 769.5C1502.9 769.5 1508 768.833 1510.5 768.5L1521 763.5L1529.5 759.5L1540 754.5L1548.5 753L1565.5 752L1591.5 753L1603.5 755L1614 758L1617 757L1620 760L1632.5 764.5L1636.5 763.5V708L1052 705.5L909 705L891 707.5L854.5 707H835H800L739.5 707.5L727.5 708.5H682.5L664 709Z"/>
+                <!-- Этаж 2 -->
+                <path data-floor="2" data-free="1" d="M452.5 709H377V660L370.5 657V648.5L366 643.5L405.5 641.5H464.5H468H488V639L905.5 629.5L919 631.5L1005 629.5L1006 626.5L1228 623.5L1435 629.5L1447.5 630.5L1644 636.5L1640.5 642V651L1635.5 652L1636.5 706H1589L1419 704.5L1331 703.5H1266.5H1216H1131.5H1046.5H908.5L890.5 705H854H834.5H800H771L736.5 705.5L717 706.5H682.5L663.5 707.5H611H560L503.5 708L477 709H452.5Z"/>
+                <!-- Этаж 3 -->
+                <path data-floor="3" data-free="2" d="M385.5 608L385 642L413.5 640.5H464H475.5H486.5V637.5H497L556.5 636H562L669.5 633.5L723 632.5L764 631.5L844.5 630L902.5 628.5L917.5 630L1003.5 628L1004.5 625H1015L1095 624H1098.5L1224.5 622L1239 623H1247.5H1265L1303.5 624.5L1338 625.5L1393.5 627L1443 628.5L1528 632.5L1633 635L1632 600.5H1634.5V593L1528 587.5L1443 584L1393.5 582.5L1338 580L1303.5 579L1265.5 577.5L1265 577L1247.5 576H1239L1224.5 574L1098.5 577.5L1095 577L1015 579V585.5H917.5L902.5 582.5L849.5 584L844.5 583.5L764 587H723L669.5 589.5L562 593L556.5 592.5L497 595L496.5 598L475.5 598.5L464 598H413.5L386.5 599.5H382.5L383 607H385.5V608Z"/>
+                <!-- Этаж 4 -->
+                <path data-floor="4" data-free="4" d="M412.5 550.5L388 552L387 598.5L413.5 596H456H466L476.5 597H495.5L497 593H499.5H511.5L543.5 591L600 589L656 587L710.5 586L765.5 584.5L830 582.5L902 581L916.5 583L1013.5 584.5V577H1016.5H1036L1078.5 576L1143.5 575L1210.5 573H1223.5L1236 574L1293 577L1333.5 579L1384 581L1421.5 582L1555.5 588L1631.5 592L1630.5 543.5L1555.5 539L1421.5 530L1384 526.5L1333.5 523.5L1293 522L1236 520L1223.5 517.5H1210.5L1143.5 519.5L1078.5 523L1036 524L1016.5 534H916L902 528.5H890L830 530.5L765.5 533L710.5 536L656 537.5L600 540.5L543.5 543.5L511.5 544.5L499.5 553H476.5L466 550H456L412.5 550.5Z"/>
+                <!-- Этаж 5 -->
+                <path data-floor="5" data-free="3" d="M415.5 502L388.5 504.5V549.5H415.5L466 548.5L477.5 551.5H500L512.5 543L546.5 542L601 539L657.5 536.5L711 534L765.5 532L831 529L888 527H901.5L917 533H1016L1036 522H1078.5L1104 519.5L1141.5 517.5L1170.5 516.5L1210.5 515.5H1223.5L1235 517.5H1259L1294 520L1331 522L1382 525.5L1421 528.5L1556 538L1589 540.5L1630.5 542L1630 492L1589 490.5L1556 488.5L1421 477L1382 475L1331 471L1294 468.5L1259 467.5H1235L1223.5 464H1210.5H1170.5L1142.5 466L1104 467.5L1078.5 469.5L1036 470.5L1016 476.5L917 479.5L901.5 476.5H888L831 479.5L765.5 482.5L711 486L657.5 488.5L601 492L546.5 493.5L512.5 494.5L500 504.5H477.5L466 502H415.5Z"/>
+                <!-- Этаж 6 -->
+                <path data-floor="6" data-free="0" d="M417 451L389 456.5L388.5 502.5L417 501H458H467L477.5 503.5H499.5L513 493L545.5 491.5L601.5 490L657.5 487L711 484L766.5 481L831 477.5L889.5 475H902.5L915.5 478L1015 475L1036 468.5L1077 466.5L1144 464.5L1211 462.5H1223L1234.5 466L1294 467L1332.5 470L1380.5 473L1421 476L1590 490L1629.5 491L1628.5 441.5L1590 438.5L1421 422.5L1380.5 419.5L1332.5 414L1294 410.5L1234.5 407L1223 403.5H1211L1144 408L1077 410L1036 412.5L1015 420.5L915.5 425L902.5 420.5H889.5L831 425L766.5 428L711 432.5L657.5 436L601.5 438.5L545.5 442.5L513 444L501 455H477.5L467 452.5H458L417 451Z"/>
+                <!-- Этаж 7 -->
+                <path data-floor="7" data-free="5" d="M416.5 400.5L388 407.5L390 411L389 455.5L416.5 450.5H466.5L478 454.5L500.5 454L511.5 442.5L564 439.5L671.5 433H674.5L727.5 429L845 422L903.5 419.5L917.5 424.5L1005 419.5H1015L1035.5 411L1094 407.5H1098L1223.5 401.5L1235.5 405.5H1245.5L1419 421L1425.5 423H1439.5L1516.5 431H1521.5L1628 440.5L1627.5 397L1630.5 395V392L1521.5 381H1516.5L1439.5 372.5V370.5L1425.5 369.5L1419 370.5L1245.5 349.5L1235.5 351.5L1223.5 347.5L1098 355L1094 354.5L1015 360L1005 372L917.5 374.5L903.5 367L845 370.5L727.5 380H725L674.5 384.5L671.5 383L564 391.5L559 390.5L511.5 394.5L501 396V402L477.5 404L469 401.5L416.5 400.5Z"/>
+                <!-- Этаж 8 -->
+                <path data-floor="8" data-free="3" d="M416.5 352.5L388.5 360.5L390.5 363V365V402.5L388 403.5V405.5L415.5 399L468.5 399.5L477 402.5L499.5 400V395.5L501 394.5L558.5 389L564.5 390.5L671 381.5L674.5 383.5L725 378.5L844.5 369L903.5 366L917.5 373L1004 371L1013.5 358.5L1093.5 353L1098.5 354L1223 345.5L1235.5 350.5L1245.5 348L1418.5 369.5L1425 367.5L1440.5 369.5L1441.5 371L1516.5 380H1522L1532 381.5L1599 388L1628 390.5L1627 350L1630 348V344.5L1599 340.5L1532 331.5L1516.5 331L1462.5 325L1440 320L1425 318.5L1420 319.5L1393.5 316.5L1351 311.5L1306.5 306L1260.5 301.5V299L1245.5 297L1237 299L1224 294.5L1204 293L1176 294L1165.5 299L1099 304.5L1094 302.5L1076.5 304.5L1062.5 302L1036.5 303.5L1018 309L1000 317.5L975.5 320L917 324.5L906 319L849.5 323L844.5 322L830 323.5L813.5 322L789 324.5L781 328L737.5 331.5L725 330.5L685.5 335L674 337L672 335L605 341L584.5 338.5L559 341L557 344L502.5 348.5L501 352.5L478.5 355L470 352.5H416.5Z"/>
+                <!-- Этаж 9 -->
+                <path data-floor="9" data-free="4" d="M417.5 294C408.5 297.167 390.4 303.7 390 304.5L392.5 305.5L393 308L393.5 354.5L388.5 356.5V359L417 350.5H469.5L478.5 354L498.5 351L502 346.5L555 343L559 339L584 337L603.5 339L671.5 333L674.5 334.5L703.5 331L725 328.5L737.5 330.5L780 327L789 322L814 320L829.5 322L844.5 320L849.5 321.5L905.5 317.5L918 323L1000 316.5L1017 308L1028 304.5L1036 302.5L1062 300.5L1076 303L1093.5 301L1098.5 303L1165 298L1176 293L1204 291.5L1224 293.5L1237.5 298L1245 296L1261 297.5L1261.5 300.5L1419.5 318.5L1425 317.5L1440.5 318.5L1462.5 324L1516.5 330H1531.5L1627 343.5H1630L1631.5 340.5L1627 339.5L1625 291.5H1627L1628.5 289L1630.5 286.5L1585 280L1532 273.5L1529.5 271H1517L1440 261.5L1438.5 259.5L1427 257L1416.5 258L1381.5 253.5L1345 249L1301.5 243L1264.5 238L1263.5 236L1243.5 233.5L1237.5 234.5L1223.5 230L1204 228L1178 230.5L1166 234.5L1153.5 236L1098.5 242.5L1096.5 241.5L1079 242.5L1062.5 240L1037.5 241.5L1011.5 247.5L1015 257L954.5 263.5L918 266L906 259.5L862.5 263L846.5 263.5L831 264L814.5 263.5L789.5 264L782 270L727.5 273.5H717.5L704 276.5L674.5 279L673 276.5L654 279L606 284L585.5 281L563 282.5L559.5 286.5L545.5 288L502 292.5L504 297L479.5 298.5L473 296L417.5 294Z"/>
+              </svg>
+            </div>
+
+            <!-- Мобильная сцена: своё фото и свой SVG. Фото на всю высоту экрана;
+            если оно шире экрана — листается по горизонтали вместе с контурами.
+            data-floor-scroll — стартовая позиция скролла: 0 (слева) … 0.5 (центр) … 1 (справа). -->
+            <div class="floor__scroll" data-floor-scroll="0.5">
+              <div class="floor__stage floor__stage--mobile" style="--floor-ratio: 460 / 852">
+                <img class="floor__photo" src="img/london-day-mb.webp" data-night="img/london-night-mb.webp" alt="ЖК LONDON" loading="lazy">
+
+                <!-- SVG в размере мобильного фото. Атрибуты path те же, что у десктопного SVG;
+                data-free можно не дублировать — берётся из десктопного SVG по номеру этажа. -->
+                <svg class="floor__svg" data-floor-svg viewBox="0 0 460 852" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Этаж 1 — коммерция -->
+                  <path data-base data-label="Коммерция" data-caption="1 этаж" d="M39 614H28.5V635.5L206 639H248.5L303.5 640.5H369.5H399.5L410.5 640L428.5 639.5L431.5 640.5H438V612.5H424.5H369.5L303.5 611.5H248.5L206 614.5L201 614H182H162H143.5H125.5H108H90.5H71.5H54.5H39Z"/>
+                  <!-- Этаж 2 -->
+                  <path data-floor="2" d="M26.5 590.5L25.5 593L29 593.5L28.5 613H201L206 614L241 611.5L306.5 610.5L379 611.5H438L437.5 591H440.5V587L441.5 586L379 584.5V583.5L306.5 581L235.5 582V583.5L210.5 584L206 583L67 586.5V587.5H59H38.5L24 588L26.5 590.5Z"/>
+                  <!-- Этаж 3 -->
+                  <path data-floor="3" d="M42 571L29.5 571.5L30.5 574H31.5V587H42H66L66.5 586L90 585.5H92.5L128 584.5L146 584L186 583L205 582.5H211H234.5V581H238.5L264.5 581.5L306 580L313.5 580.5L360 582H377.5H380V583.5L406 584L437 584.5V571.5H438V569L406 567L377.5 565.5H360V565L313.5 562.5H311.5L306 562L264.5 563.5L238.5 564L211 566L205 565.5L186 566L146 567.5L128 568L92.5 569.5H90L69.5 570V571H58.5H42Z"/>
+                  <!-- Этаж 4 -->
+                  <path data-floor="4" d="M42 553L31.5 553.5V570.5L56 570H59L62.5 570.5H68.5V569H75L106 568L123 567.5L142 567L160 566.5L180.5 565.5L205 565L209.5 565.5L246.5 563H258.5L282 562L303 561.5H305.5L329.5 563L358.5 564H360.5V565H371L437 568.5V550L371 545.5L329.5 542.5L305.5 541H303L282 542.5L258.5 543.5H246.5L209.5 547L205 546L180.5 547H160L142 548L123.5 548.5L106 550L75 551L62.5 553.5L59 553H56H42Z"/>
+                  <!-- Этаж 5 -->
+                  <path data-floor="5" d="M42 534L32.5 534.5V552.5H42H55.5H59L63 553L75 550.5L107.5 549.5L123.5 548L141 547.5L160.5 546.5H181L200.5 545.5H204.5L209.5 546.5L245.5 543L305 540.5H312L340.5 542.5L437 549.5V530.5L340.5 522.5L311.5 521.5L305 520.5L245.5 523L209.5 527L204.5 526H200.5L180.5 526.5L160 528L141.5 529L123.5 530L105 531L75 532L63 535L59 534H55.5H42Z"/>
+                  <!-- Этаж 6 -->
+                  <path data-floor="6" d="M42.5 516.5H32.5V534L42.5 533.5H55H58.5L63 534.5L75 531.5L106 530.5L124 529.5L141.5 528.5L160 527.5L180 526L201 525.5H204.5L209 526.5L245.5 522.5L280.5 521L302.5 520H305L328.5 521.5L369.5 524.5L413 528L424.5 529L436.5 530V512H424L413 510.5L369 506L327 501.5L305 499H302.5L280.5 500.5L245.5 502.5L209 507L204 506H201L180.5 507.5L160 509L141.5 510L124 511.5L106 512.5L75 514L63 517.5L58.5 516.5H55H42.5Z"/>
+                  <!-- Этаж 7 -->
+                  <path data-floor="7" d="M42.5 497.5L32 499.5L33 501L32.5 516H58.5L63 517L75 513.5L81.5 513L90.5 512.5L99.5 512L114.5 511L128.5 510L135 509.5L147 508.5L156 508L186 506H188L205 505.5L210 506.5L232.5 503.5L239.5 502.5L265 500.5L305.5 498L311 499L314 499.5L322.5 500L369.5 505L377 506L401.5 508.5L416 510L426.5 511.5H436.5L436 496H437L437.5 494L427.5 493L427 492L416 491L401.5 489.5L377.5 486.5L377 486L369.5 485.5L322.5 479.5L314 478L311 478.5L305.5 477.5L265 480L239.5 482.5L232.5 486.5L210 487L205 485.5L188 486.5H186L156 489L147 489.5L135 490.5L128.5 491L98.5 494H91L81.5 494.5L71 495.5V498L64 498.5L60 498L42.5 497.5Z"/>
+                  <!-- Этаж 8 -->
+                  <path data-floor="8" d="M42.5 479.5L32.5 482V483.5H33L32.5 499L42.5 497H48.5L64 498L70.5 497.5V495L90.5 493.5H98L146.5 489L186 486L205 485L210 486.5L232.5 486L239 482L264.5 479.5L305.5 477L311.5 477.5L314 477L369 484.5L376.5 485L378 486L401.5 489H404.5L406 489.5L415 490.5L427 491L428 492.5L436.5 493.5L436 477.5H437L437.5 476L430 475.5L427 474.5L415 473L406 471.5L404.5 471L401.5 471.5L394 470L382.5 468.5L376.5 467H371L363.5 466L356 465L344 463L334.5 462L324 460.5L317 459H310L306.5 458L299.5 457.5H290L285.5 459.5L276.5 460L272 461L266 461.5L264.5 460.5L259 461H253.5H246.5L243 462.5L238.5 463.5L232.5 467L210 468.5L205 467L187 468H186H182H177L167.5 468.5L164.5 470L149 471.5H146.5L129.5 473.5L128.5 473L105.5 475L99 474.5L91 475L90.5 476L87 476.5L71.5 478V480.5H68.5H63.5L42.5 479.5Z"/>
+                  <!-- Этаж 9 -->
+                  <path data-floor="9" d="M42.5 458L33.5 462L34 481L43 479L62 480H71V477.5L90 475.5L91 474.5L99.5 474L105.5 474.5L128.5 472.5L129.5 473L147 471L164.5 469.5L167.5 468L175 467.5H186.5L205 466.5L210 468L232 466.5L238 463L242.5 462L246.5 460.5H254H257.5L264.5 460L266.5 461L272 460.5L276.5 459.5L285.5 459L290 457H299H307L310.5 458.5H317L326 460L329 460.5L371 466.5H377L401.5 471L404.5 470.5L418 473L427.5 474L430.5 475L437.5 475.5L438 474.5L436 474V456.5L437.5 456L438 454.5L435 454L426 452L418 450.5L401.5 448.5L378 445L377 443.5H369.5L357 441.5L319 435L311 434.5L300 433L290.5 433.5L282 436L270 437.5L265 438H259L254 437.5L245.5 438L242.5 440L238 440.5L237.5 444.5L210.5 446.5L205.5 445L189 447L186.5 446.5H181.5L175 446L167 446.5L163.5 449H155.5L147 450L129.688 451H123.5L121.5 453L107 453.5L99.5 453H93L90.5 455L85.5 456L71.5 457.5L71 459L66 460L62 459.5L42.5 458Z"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Плавающая карточка выбранного этажа -->
+            <a class="floor__tooltip" href="#" data-floor-tooltip>
+              <div class="floor__tooltip-row">
+                <div class="floor__tooltip-label text-s" data-floor-tooltip-caption>Этаж</div>
+                <div class="floor__tooltip-value" data-floor-tooltip-num>0</div>
+              </div>
+              <span class="floor__tooltip-divider" data-floor-tooltip-divider></span>
+              <div class="floor__tooltip-row" data-floor-tooltip-sale>
+                <div class="floor__tooltip-label text-s">В продаже</div>
+                <div class="floor__tooltip-value" data-floor-tooltip-available>0</div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Мобильный выбор этажа: верхний таб-бар (табы заполняются из JS) -->
+          <div class="floor__tabs" data-floor-tabs>
+            <div class="floor__tabs-title">Этажи</div>
+            <div class="floor__tabs-bar">
+              <button class="floor__tabs-arrow" type="button" data-floor-tabs-prev aria-label="Предыдущий этаж">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 7L9 12L14 17" stroke="#1D1B20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="floor__tabs-list" data-floor-tabs-list></div>
+              <button class="floor__tabs-arrow" type="button" data-floor-tabs-next aria-label="Следующий этаж">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 7L15 12L10 17" stroke="#1D1B20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Верхняя панель -->
+          <a href="projects-inner.html" class="floor__back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 7L9 12L14 17L14 7Z" fill="#1D1B20"/>
+            </svg>
+            <span>ЖК LONDON</span>
+          </a>
+
+          <button class="floor__theme" type="button" data-floor-theme>
+            <span class="floor__theme-label" data-floor-theme-label>день</span>
+            <span class="floor__theme-knob">
+              <svg class="floor__theme-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" rx="12" fill="#1405E2"/>
+                <path d="M12.5625 17.75C11.6875 17.75 10.8672 17.5833 10.1016 17.25C9.33594 16.9167 8.66927 16.4661 8.10156 15.8984C7.53385 15.3307 7.08333 14.6641 6.75 13.8984C6.41667 13.1328 6.25 12.3125 6.25 11.4375C6.25 9.91667 6.73438 8.57552 7.70312 7.41406C8.67188 6.2526 9.90625 5.53125 11.4062 5.25C11.2188 6.28125 11.276 7.28906 11.5781 8.27344C11.8802 9.25781 12.401 10.1198 13.1406 10.8594C13.8802 11.599 14.7422 12.1198 15.7266 12.4219C16.7109 12.724 17.7188 12.7812 18.75 12.5938C18.4792 14.0938 17.7604 15.3281 16.5938 16.2969C15.4271 17.2656 14.0833 17.75 12.5625 17.75ZM12.5625 16.5C13.4792 16.5 14.3281 16.2708 15.1094 15.8125C15.8906 15.3542 16.5052 14.724 16.9531 13.9219C16.0573 13.8385 15.2083 13.612 14.4062 13.2422C13.6042 12.8724 12.8854 12.3698 12.25 11.7344C11.6146 11.099 11.1094 10.3802 10.7344 9.57812C10.3594 8.77604 10.1354 7.92708 10.0625 7.03125C9.26042 7.47917 8.63281 8.09635 8.17969 8.88281C7.72656 9.66927 7.5 10.5208 7.5 11.4375C7.5 12.8438 7.99219 14.0391 8.97656 15.0234C9.96094 16.0078 11.1562 16.5 12.5625 16.5Z" fill="white"/>
+              </svg>
+              <svg class="floor__theme-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" rx="12" fill="#FFD10C"/>
+                <g clip-path="url(#floorSunClip)">
+                  <path d="M11.4163 7.33337V5.58337H12.583V7.33337H11.4163ZM11.4163 18.4167V16.6667H12.583V18.4167H11.4163ZM16.6663 12.5834V11.4167H18.4163V12.5834H16.6663ZM5.58301 12.5834V11.4167H7.33301V12.5834H5.58301ZM15.908 8.90837L15.0913 8.09171L16.1122 7.04171L16.958 7.88754L15.908 8.90837ZM7.88717 16.9584L7.04134 16.1125L8.09134 15.0917L8.90801 15.9084L7.88717 16.9584ZM16.1122 16.9584L15.0913 15.9084L15.908 15.0917L16.958 16.1125L16.1122 16.9584ZM8.09134 8.90837L7.04134 7.88754L7.88717 7.04171L8.90801 8.09171L8.09134 8.90837ZM9.52051 14.4792C8.83995 13.7987 8.49967 12.9723 8.49967 12C8.49967 11.0278 8.83995 10.2014 9.52051 9.52087C10.2011 8.84032 11.0275 8.50004 11.9997 8.50004C12.9719 8.50004 13.7983 8.84032 14.4788 9.52087C15.1594 10.2014 15.4997 11.0278 15.4997 12C15.4997 12.9723 15.1594 13.7987 14.4788 14.4792C13.7983 15.1598 12.9719 15.5 11.9997 15.5C11.0275 15.5 10.2011 15.1598 9.52051 14.4792ZM13.6549 13.6552C14.107 13.2032 14.333 12.6514 14.333 12C14.333 11.3487 14.107 10.7969 13.6549 10.3448C13.2028 9.89275 12.6511 9.66671 11.9997 9.66671C11.3483 9.66671 10.7965 9.89275 10.3445 10.3448C9.89238 10.7969 9.66634 11.3487 9.66634 12C9.66634 12.6514 9.89238 13.2032 10.3445 13.6552C10.7965 14.1073 11.3483 14.3334 11.9997 14.3334C12.6511 14.3334 13.2028 14.1073 13.6549 13.6552Z" fill="white"/>
+                </g>
+                <defs>
+                  <clipPath id="floorSunClip"><rect width="14" height="14" fill="white" transform="translate(5 5)"/></clipPath>
+                </defs>
+              </svg>
+            </span>
+          </button>
+
+          <!-- Карточка параметров объекта (на мобилке — выдвижная плашка снизу) -->
+          <div class="floor__info" data-floor-info>
+            <span class="floor__info-handle" data-floor-info-handle></span>
+            <div class="floor__info-item">
+              <div class="floor__info-label text-s">Класс объекта</div>
+              <div class="floor__info-value">Бизнес-плюс</div>
+            </div>
+            <div class="floor__info-item">
+              <div class="floor__info-label text-s">Срок сдачи</div>
+              <div class="floor__info-value">1 этап строительства</div>
+              <div class="floor__info-value">II квартал 2027</div>
+              <div class="floor__info-value">2 этап строительства</div>
+              <div class="floor__info-value">IV квартал 2028</div>
+            </div>
+            <div class="floor__info-item">
+              <div class="floor__info-label text-s">Форматы помещений</div>
+              <div class="floor__info-value">Квартиры и коммерческие помещения</div>
+            </div>
+            <div class="floor__info-item">
+              <div class="floor__info-label text-s">Этаж</div>
+              <div class="floor__info-value">16-18</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== ВИД 2: ПЛАНИРОВКА ===================== -->
+        <section class="plan floorplan__view floorplan__view--plan" data-plan hidden>
+          <!-- Кнопка «назад» для мобилки — поднимается в самый верх (над планом).
+          На десктопе скрыта, там работает та, что внутри карточки. -->
+          <a href="#" class="plan__back plan__back--top" data-floorplan-back>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="6" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="#F5F5F5"/>
+              <path d="M12.75 8.25L9 12L12.75 15.75L12.75 8.25Z" fill="#1D1B20"/>
+            </svg>
+            <span>Вернуться назад</span>
+          </a>
+
+          <!-- ===== Левая карточка ===== -->
+          <aside class="plan__aside">
+            <!-- Назад к фасаду дома (в пределах той же страницы) -->
+            <a href="#" class="plan__back" data-floorplan-back>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" rx="6" transform="matrix(-4.37114e-08 1 1 4.37114e-08 1.04907e-06 0)" fill="#F5F5F5"/>
+                <path d="M12.75 8.25L9 12L12.75 15.75L12.75 8.25Z" fill="#1D1B20"/>
+              </svg>
+              <span>Вернуться назад</span>
+            </a>
+
+            <h1 class="plan__title">ЖК LONDON</h1>
+            <div class="plan__unit-name" data-plan-name>Квартира&nbsp;#1</div>
+
+            <div class="plan__fields">
+              <div class="plan__field">
+                <span class="plan__field-label">Блок</span>
+                <span class="plan__field-value" data-plan-block>-</span>
+              </div>
+              <div class="plan__field">
+                <span class="plan__field-label">Этаж</span>
+                <span class="plan__field-value" data-plan-floor>-</span>
+              </div>
+              <div class="plan__field">
+                <span class="plan__field-label">Комнатность</span>
+                <span class="plan__field-value" data-plan-rooms>-</span>
+              </div>
+              <div class="plan__field">
+                <span class="plan__field-label">Площадь</span>
+                <span class="plan__field-value" data-plan-area>- м2</span>
+              </div>
+              <div class="plan__field">
+                <span class="plan__field-label">Цена</span>
+                <span class="plan__field-value" data-plan-price>-</span>
+              </div>
+              <div class="plan__field">
+                <span class="plan__field-label">Статус</span>
+                <span class="plan__field-value" data-plan-status>Свободна</span>
+              </div>
+            </div>
+
+            <!-- <a class="plan__submit button button-primary">Оставить заявку</a>
+            <a href="#" class="plan__pdf button button-light" target="_blank">Скачать PDF</a> -->
+          </aside>
+
+          <!-- ===== Правая часть ===== -->
+          <div class="plan__main">
+            <div class="plan__tabs">
+              <div class="plan__tabs-title">Этажи</div>
+              <div class="plan__tabs-bar">
+                <button class="plan__tabs-arrow" type="button" data-plan-prev aria-label="Ниже этажом">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 7L9 12L14 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <div class="plan__tabs-list" data-plan-tabs></div>
+                <button class="plan__tabs-arrow" type="button" data-plan-next aria-label="Выше этажом">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="plan__canvas">
+              <!-- OVERLAY: PNG-подложка + прозрачный SVG с контурами квартир.
+              Каждая квартира — [data-plan-unit] c data-* полями. data-sold — продано. -->
+              <!-- data-plan-floor — какому этажу (или этажам через запятую) соответствует план -->
+              <div class="plan__plan" data-plan-floor="2">
+                <img class="plan__plan-img" src="img/plan.png" alt="Планировка этажа">
+                <svg width="815" height="357" viewBox="0 0 815 357" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path data-id="u1" d="M446 279V259.5L485.5 260L486 170L527.5 169.5L528 312V329.5V337.5L519.56 338H446V283V279Z" fill="#FF0C0C"/>
+                  <path data-id="u2" d="M327 266V170H412V266L366 267L327 266Z" fill="#FF0C0C"/>
+                  <path data-id="u3" d="M248.5 41L128.5 40.5V130L176.5 129.5H239V133.5H245.5H248V131.5L269 132V89V75V53H264.5H258.5H248.5V52.5V41Z" fill="#FF0C0C"/>
+                  <path data-id="u4" d="M239.5 192.5L165.5 192L167 338L287.5 337.5V328V305V207.5L287 191.5H277.5H247.5V190H242.5H239.5V192.5Z" fill="#FF0C0C"/>
+                  <path data-id="u5" d="M18.1221 54.5V41L133 40.5V198H64H18.5V123.5L18.1221 61.5V54.5Z" fill="#FF0C0C"/>
+                  <path data-id="u6" d="M9.79139 295.391L11.5 289.5L18.5 287V198.086H133V226.5V242.5L170.5 242V338H69L67 346L39 356.5L32.8245 353.437L11.5 346L0 317L9.79139 295.391Z" fill="#FF0C0C"/>
+                  <path data-id="u7" d="M290.5 191V170H332V260H373V283V286.5V337.5L331 338L290.5 337.5V237V205V199.5V191Z" fill="#FF0C0C"/>
+                  <path data-id="u8" d="M491.5 170H406.5V266H491.5V170Z" fill="#FF0C0C"/>
+                  <path data-id="u9" d="M532 337.5L531 164L541 154.5L555.5 169L557.5 167.5L605.5 212.5L633.5 185.5L655 206L659 203L675 218.5L683 226.5L694 237.5L594.5 337.5H580H532Z" fill="#FF0C0C"/>
+                  <path data-id="u10" d="M557 173.5L539.5 156L599 96.5L668.5 164L663.049 169.5L655 177.5L646 186L640.5 192L614 218L609.142 222.5L557 173.5Z" fill="#FF0C0C"/>
+                  <path data-id="u11" d="M656 40.5L595 100.5L665 168L676 156.5L683 149L692 140L701.5 130.742L711.215 122L727 106.5L717.5 98.5L716 99L707.5 91L680 64.5L656 40.5Z" fill="#FF0C0C"/>
+                  <path data-id="u12" d="M695.5 0L652 44L714.5 105.5L710 109L705.487 113.5L696 123L688.5 130.5L705.487 147.589L727.54 170.132L745.5 186.5L815 118L695.5 0Z" fill="#FF0C0C"/>
+                </svg>
+                <!-- Данные квартир. Связка с <path> по порядку. Проставьте с бэка: status = free | reserved | sold. -->
+                <script type="application/json" data-plan-units>
+                  [
+                    {"id":"u1","num":1,"block":2,"rooms":2,"area":"54.72 м2","price":"От 2 833 380","status":"reserved"},
+                    {"id":"u2","num":2,"block":2,"rooms":1,"area":"16.98 м2","price":"Продано","status":"sold"},
+                    {"id":"u3","num":3,"block":1,"rooms":2,"area":"71.90 м2","price":"От 3 720 000","status":"reserved"},
+                    {"id":"u4","num":4,"block":1,"rooms":3,"area":"107.2 м2","price":"От 5 420 000","status":"free"},
+                    {"id":"u5","num":5,"block":1,"rooms":3,"area":"110.13 м2","price":"От 5 560 000","status":"free"},
+                    {"id":"u6","num":6,"block":1,"rooms":4,"area":"131.20 м2","price":"От 6 640 000","status":"free"},
+                    {"id":"u7","num":7,"block":2,"rooms":1,"area":"14.94 м2","price":"От 2 833 380","status":"free"},
+                    {"id":"u8","num":8,"block":2,"rooms":1,"area":"16.08 м2","price":"Продано","status":"sold"},
+                    {"id":"u9","num":9,"block":3,"rooms":4,"area":"110.15 м2","price":"От 5 560 000","status":"free"},
+                    {"id":"u10","num":10,"block":3,"rooms":2,"area":"46.86 м2","price":"От 2 430 000","status":"free"},
+                    {"id":"u11","num":11,"block":3,"rooms":1,"area":"34.20 м2","price":"От 2 833 380","status":"free"},
+                    {"id":"u12","num":12,"block":3,"rooms":3,"area":"74.04 м2","price":"От 3 810 000","status":"free"}
+                  ]
+                </script>
+              </div>
+              <div class="plan__plan" data-plan-floor="9">
+                <img class="plan__plan-img" src="img/plan-2.png" alt="Планировка этажа">
+                <svg width="815" height="357" viewBox="0 0 815 357" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path data-id="u1" d="M446 279V259.5L485.5 260L486 170L527.5 169.5L528 312V329.5V337.5L519.56 338H446V283V279Z" fill="#FF0C0C"/>
+                  <path data-id="u2" d="M327 266V170H412V266L366 267L327 266Z" fill="#FF0C0C"/>
+                  <path data-id="u3" d="M248.5 41L128.5 40.5V130L176.5 129.5H239V133.5H245.5H248V131.5L269 132V89V75V53H264.5H258.5H248.5V52.5V41Z" fill="#FF0C0C"/>
+                  <path data-id="u4" d="M239.5 192.5L165.5 192L167 338L287.5 337.5V328V305V207.5L287 191.5H277.5H247.5V190H242.5H239.5V192.5Z" fill="#FF0C0C"/>
+                  <path data-id="u5" d="M18.1221 54.5V41L133 40.5V198H64H18.5V123.5L18.1221 61.5V54.5Z" fill="#FF0C0C"/>
+                  <path data-id="u6" d="M9.79139 295.391L11.5 289.5L18.5 287V198.086H133V226.5V242.5L170.5 242V338H69L67 346L39 356.5L32.8245 353.437L11.5 346L0 317L9.79139 295.391Z" fill="#FF0C0C"/>
+                  <path data-id="u7" d="M290.5 191V170H332V260H373V283V286.5V337.5L331 338L290.5 337.5V237V205V199.5V191Z" fill="#FF0C0C"/>
+                  <path data-id="u8" d="M491.5 170H406.5V266H491.5V170Z" fill="#FF0C0C"/>
+                  <path data-id="u9" d="M532 337.5L531 164L541 154.5L555.5 169L557.5 167.5L605.5 212.5L633.5 185.5L655 206L659 203L675 218.5L683 226.5L694 237.5L594.5 337.5H580H532Z" fill="#FF0C0C"/>
+                  <path data-id="u10" d="M557 173.5L539.5 156L599 96.5L668.5 164L663.049 169.5L655 177.5L646 186L640.5 192L614 218L609.142 222.5L557 173.5Z" fill="#FF0C0C"/>
+                  <path data-id="u11" d="M656 40.5L595 100.5L665 168L676 156.5L683 149L692 140L701.5 130.742L711.215 122L727 106.5L717.5 98.5L716 99L707.5 91L680 64.5L656 40.5Z" fill="#FF0C0C"/>
+                  <path data-id="u12" d="M695.5 0L652 44L714.5 105.5L710 109L705.487 113.5L696 123L688.5 130.5L705.487 147.589L727.54 170.132L745.5 186.5L815 118L695.5 0Z" fill="#FF0C0C"/>
+                </svg>
+                <!-- Данные квартир. Связка с <path> по порядку. Проставьте с бэка: status = free | reserved | sold. -->
+                <script type="application/json" data-plan-units>
+                  [
+                    {"id":"u1","num":13,"block":2,"rooms":2,"area":"46.3 м2","price":"От 2 900 000","status":"free"},
+                    {"id":"u2","num":14,"block":2,"rooms":1,"area":"46.6 м2","price":"От 1 100 000","status":"free"},
+                    {"id":"u3","num":15,"block":1,"rooms":2,"area":"74.7 м2","price":"Продано","status":"sold"},
+                    {"id":"u4","num":16,"block":1,"rooms":3,"area":"114.7 м2","price":"От 5 500 000","status":"free"},
+                    {"id":"u5","num":17,"block":1,"rooms":3,"area":"103.9 м2","price":"От 5 600 000","status":"reserved"},
+                    {"id":"u6","num":18,"block":1,"rooms":4,"area":"103.7 м2","price":"От 6 700 000","status":"free"},
+                    {"id":"u7","num":19,"block":2,"rooms":1,"area":"44.6 м2","price":"От 950 000","status":"free"},
+                    {"id":"u8","num":20,"block":2,"rooms":1,"area":"46.6 м2","price":"От 1 050 000","status":"free"},
+                    {"id":"u9","num":21,"block":3,"rooms":4,"area":"115.0 м2","price":"От 5 600 000","status":"free"},
+                    {"id":"u10","num":22,"block":3,"rooms":2,"area":"62.4 м2","price":"От 2 450 000","status":"free"},
+                    {"id":"u11","num":23,"block":3,"rooms":1,"area":"52.1 м2","price":"Продано","status":"sold"},
+                    {"id":"u12","num":24,"block":3,"rooms":3,"area":"80.1 м2","price":"От 3 850 000","status":"free"}
+                  ]
+                </script>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20261023180145"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20261023180145"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20261023180145"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20261023180145"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20261023180145"></script>
+<script src="js/app.js?_v=20261023180145"></script>
+
+<!-- Скрипт только этой страницы -->
+<script src="js/floor.js?_v=20261023180145"></script>
+
+  </body>
+</html>
