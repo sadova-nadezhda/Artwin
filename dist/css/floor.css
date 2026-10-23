@@ -72,13 +72,6 @@
   aspect-ratio: var(--floor-ratio);
 }
 
-@supports not (aspect-ratio: 1) {
-  .floor__stage--mobile .floor__photo {
-    width: auto;
-    min-width: 100vw;
-  }
-}
-
 .floor__scroll {
   display: none;
   position: absolute;

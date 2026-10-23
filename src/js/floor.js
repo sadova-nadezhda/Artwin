@@ -349,23 +349,60 @@
       if (img.dataset.night && img.offsetParent !== null) new Image().src = img.dataset.night;
     });
 
-    // Мобилка: стартовая позиция горизонтального скролла сцены.
-    // data-floor-scroll="0.5" — по центру (0 — левый край, 1 — правый).
+    // Мобилка: горизонтальный скролл сцены.
+    // Размер сцены считаем здесь, а не в CSS: Safari на iOS не выводит ширину
+    // flex-элемента из aspect-ratio при высоте в %, и скролл пропадает.
+    // Ширина = высота экрана × пропорции фото (--floor-ratio), но не уже экрана.
+    // data-floor-scroll="0.5" — стартовая позиция: по центру (0 — левый край, 1 — правый).
     const sceneScroll = $("[data-floor-scroll]", root);
-    if (sceneScroll) {
-      const scrollToStart = () => {
-        const ratio = parseFloat(sceneScroll.dataset.floorScroll);
-        const max = sceneScroll.scrollWidth - sceneScroll.clientWidth;
-        if (max > 0) sceneScroll.scrollLeft = max * (isNaN(ratio) ? 0.5 : ratio);
+    const sceneStage = sceneScroll && $(".floor__stage--mobile", sceneScroll);
+    if (sceneScroll && sceneStage) {
+      const scrollPhoto = $(".floor__photo", sceneStage);
+
+      // Пропорции: из --floor-ratio ("1372 / 852"), иначе — по самому фото
+      const stageRatio = () => {
+        const [w, h] = getComputedStyle(sceneStage)
+          .getPropertyValue("--floor-ratio")
+          .split("/")
+          .map((v) => parseFloat(v));
+        if (w > 0 && h > 0) return w / h;
+        if (scrollPhoto && scrollPhoto.naturalHeight) {
+          return scrollPhoto.naturalWidth / scrollPhoto.naturalHeight;
+        }
+        return 0;
       };
-      requestAnimationFrame(scrollToStart);
-      // в старом Safari ширина сцены известна только после загрузки фото
-      const scrollPhoto = $(".floor__photo", sceneScroll);
+
+      const sizeStage = () => {
+        const h = sceneScroll.clientHeight;
+        const ratio = stageRatio();
+        if (!h || !ratio) return; // на десктопе сцена скрыта
+        sceneStage.style.height = `${h}px`;
+        sceneStage.style.width = `${Math.max(sceneScroll.clientWidth, Math.round(h * ratio))}px`;
+      };
+
+      const maxScroll = () => sceneScroll.scrollWidth - sceneScroll.clientWidth;
+      const scrollToStart = () => {
+        const pos = parseFloat(sceneScroll.dataset.floorScroll);
+        const max = maxScroll();
+        if (max > 0) sceneScroll.scrollLeft = max * (isNaN(pos) ? 0.5 : pos);
+      };
+      const setup = () => { sizeStage(); scrollToStart(); };
+
+      setup();
+      requestAnimationFrame(setup);
       if (scrollPhoto && !scrollPhoto.complete) {
-        scrollPhoto.addEventListener("load", scrollToStart, { once: true });
+        scrollPhoto.addEventListener("load", setup, { once: true });
       }
-      // при повороте экрана ширина сцены меняется — выставляем заново
-      window.addEventListener("orientationchange", () => setTimeout(scrollToStart, 300));
+      // При ресайзе (в т.ч. когда в iOS прячется адресная строка) — пересчёт
+      // размера с сохранением текущей позиции, без прыжка в центр.
+      window.addEventListener("resize", debounce(() => {
+        const max = maxScroll();
+        const pos = max > 0 ? sceneScroll.scrollLeft / max : null;
+        sizeStage();
+        if (pos != null) sceneScroll.scrollLeft = maxScroll() * pos;
+      }, 150));
+      // при повороте экрана — заново по центру
+      window.addEventListener("orientationchange", () => setTimeout(setup, 300));
     }
     themeBtn?.addEventListener("click", () => {
       const night = root.classList.toggle("is-night");
