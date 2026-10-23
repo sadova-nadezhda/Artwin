@@ -13,14 +13,14 @@
           <!-- Сцена: фото (фон + здание) + SVG с контурами этажей поверх -->
           <div class="floor__scene">
             <!-- Десктопная сцена (≥ 768px): фото на весь экран, лишнее обрезается по краям -->
-            <div class="floor__stage floor__stage--desktop" style="--floor-ratio: 1920 / 911">
+            <div class="floor__stage floor__stage--desktop">
               <img class="floor__photo" src="@img/london-day.webp" data-night="@img/london-night.webp" alt="ЖК LONDON">
 
               <!-- SVG в размере фото 
               Атрибуты path:
                 data-floor="5" data-free="3" — жилой этаж и квартир в продаже (0 = этаж недоступен);
                 data-base data-label data-caption — нежилой уровень (коммерция / паркинг), без продаж. -->
-              <svg class="floor__svg" data-floor-svg viewBox="0 0 1920 911" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class="floor__svg" data-floor-svg viewBox="0 0 1920 911" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- Этаж 1 — коммерция -->
                 <path data-base data-label="Коммерция" data-caption="1 этаж" d="M664 709L376.5 711V767L1047.5 769.5L1440.5 775.5C1448.67 775.667 1465.1 775.9 1465.5 775.5C1466 775 1474.5 774 1475 773.5C1475.4 773.1 1480.83 772.333 1483.5 772L1493 770.5C1496 770.167 1502.1 769.5 1502.5 769.5C1502.9 769.5 1508 768.833 1510.5 768.5L1521 763.5L1529.5 759.5L1540 754.5L1548.5 753L1565.5 752L1591.5 753L1603.5 755L1614 758L1617 757L1620 760L1632.5 764.5L1636.5 763.5V708L1052 705.5L909 705L891 707.5L854.5 707H835H800L739.5 707.5L727.5 708.5H682.5L664 709Z"/>
                 <!-- Этаж 2 -->
@@ -51,7 +51,7 @@
 
                 <!-- SVG в размере мобильного фото. Атрибуты path те же, что у десктопного SVG;
                 data-free можно не дублировать — берётся из десктопного SVG по номеру этажа. -->
-                <svg class="floor__svg" data-floor-svg viewBox="0 0 460 852" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="floor__svg" data-floor-svg viewBox="0 0 460 852" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                   <!-- Этаж 1 — коммерция -->
                   <path data-base data-label="Коммерция" data-caption="1 этаж" d="M39 614H28.5V635.5L206 639H248.5L303.5 640.5H369.5H399.5L410.5 640L428.5 639.5L431.5 640.5H438V612.5H424.5H369.5L303.5 611.5H248.5L206 614.5L201 614H182H162H143.5H125.5H108H90.5H71.5H54.5H39Z"/>
                   <!-- Этаж 2 -->

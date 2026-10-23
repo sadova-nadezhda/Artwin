@@ -359,6 +359,11 @@
         if (max > 0) sceneScroll.scrollLeft = max * (isNaN(ratio) ? 0.5 : ratio);
       };
       requestAnimationFrame(scrollToStart);
+      // в старом Safari ширина сцены известна только после загрузки фото
+      const scrollPhoto = $(".floor__photo", sceneScroll);
+      if (scrollPhoto && !scrollPhoto.complete) {
+        scrollPhoto.addEventListener("load", scrollToStart, { once: true });
+      }
       // при повороте экрана ширина сцены меняется — выставляем заново
       window.addEventListener("orientationchange", () => setTimeout(scrollToStart, 300));
     }

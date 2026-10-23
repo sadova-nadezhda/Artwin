@@ -7,13 +7,13 @@
   <title>Выбор этажа и планировка</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20261023184036" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20261023190436" />
   <!-- intl-tel-input -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20261023184036" />
-  <link rel="stylesheet" href="css/style.css?_v=20261023184036" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20261023190436" />
+  <link rel="stylesheet" href="css/style.css?_v=20261023190436" />
   
   <!-- Стили только этой страницы -->
-  <link rel="stylesheet" href="css/floor.css?_v=20261023184036" />
+  <link rel="stylesheet" href="css/floor.css?_v=20261023190436" />
   
 </head>
 
@@ -29,14 +29,14 @@
           <!-- Сцена: фото (фон + здание) + SVG с контурами этажей поверх -->
           <div class="floor__scene">
             <!-- Десктопная сцена (≥ 768px): фото на весь экран, лишнее обрезается по краям -->
-            <div class="floor__stage floor__stage--desktop" style="--floor-ratio: 1920 / 911">
+            <div class="floor__stage floor__stage--desktop">
               <img class="floor__photo" src="img/hayat-day.webp" data-night="img/hayat-night.webp" alt="ЖК HAYAT">
 
               <!-- SVG в размере фото 
               Атрибуты path:
                 data-floor="5" data-free="3" — жилой этаж и квартир в продаже (0 = этаж недоступен);
                 data-base data-label data-caption — нежилой уровень (коммерция / паркинг), без продаж. -->
-              <svg class="floor__svg" data-floor-svg viewBox="0 0 1920 911" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class="floor__svg" data-floor-svg viewBox="0 0 1920 911" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- Этаж 1 — коммерция -->
                 <path data-base data-label="Коммерция" data-caption="1 этаж" d="M1498 773H1491.38L1413.97 794.129L1267.08 833.086L1118.21 877.986L1054.69 886.569L975.293 881.947C942.431 878.206 876.177 870.722 874.06 870.722C871.943 870.722 850.241 868.962 839.654 868.081L751.654 857.517L698.06 854.876L635.203 852.895L553.158 833.086H494.932L394.361 807.335L379.143 809.316L348.045 817.239L283.203 808.656L273.5 804.5L275.5 833.5L276.586 861.478L337.459 869.402L375.173 856.856L548.526 874.684L713.94 907.699L923.684 911H1198.93L1356.41 854.876H1371.62L1482.78 819.88L1484.77 778.282L1498 773Z"/>
                 <!-- Этаж 2 -->
@@ -81,7 +81,7 @@
 
                 <!-- SVG в размере мобильного фото. Атрибуты path те же, что у десктопного SVG;
                 data-free можно не дублировать — берётся из десктопного SVG по номеру этажа. -->
-                <svg class="floor__svg" data-floor-svg viewBox="0 0 1372 852" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="floor__svg" data-floor-svg viewBox="0 0 1372 852" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                   <!-- Этаж 1 — коммерция -->
                   <path data-base data-label="Коммерция" data-caption="1 этаж" d="M1096.5 748H1091.5L1033 764L922 793.5L809.5 827.5L761.5 834L701.5 830.5C676.667 827.667 626.6 822 625 822C623.4 822 607 820.667 599 820L532.5 812L492 810L444.5 808.5L382.5 793.5H338.5L262.5 774L251 775.5L227.5 781.5L178.5 775L165.5 770V794L173.5 815L219.5 821L248 811.5L379 825L504 850H663H871L989.5 810H1001L1085 783.5L1086.5 752L1096.5 748Z"/>
                   <!-- Этаж 2 -->
@@ -357,15 +357,15 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20261023184036"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20261023184036"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20261023184036"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20261023184036"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20261023184036"></script>
-<script src="js/app.js?_v=20261023184036"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20261023190436"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20261023190436"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20261023190436"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20261023190436"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20261023190436"></script>
+<script src="js/app.js?_v=20261023190436"></script>
 
 <!-- Скрипт только этой страницы -->
-<script src="js/floor.js?_v=20261023184036"></script>
+<script src="js/floor.js?_v=20261023190436"></script>
 
   </body>
 </html>
