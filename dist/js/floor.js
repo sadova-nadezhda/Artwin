@@ -106,24 +106,32 @@
     };
 
     const scene = $(".floor__scene", root);
-    const floorsSvg = $("[data-floor-svg]", root);
+    const floorSvgs = $$("[data-floor-svg]", root); // десктопный и мобильный SVG
     const tooltip = $("[data-floor-tooltip]", root);
     const tipNum = $("[data-floor-tooltip-num]", root);
     const tipCaption = $("[data-floor-tooltip-caption]", root);
     const tipAvailable = $("[data-floor-tooltip-available]", root);
     const tipSale = $("[data-floor-tooltip-sale]", root);
     const tipDivider = $("[data-floor-tooltip-divider]", root);
-    if (!floorsSvg || !tooltip) return;
+    if (!floorSvgs.length || !tooltip) return;
 
     // Этажи — это <path> внутри [data-floor-svg], отрисованные по контуру фасада.
     //   жилой этаж:  data-floor="5" data-free="3"   (data-free="0" → этаж недоступен)
     //   цоколь и пр.: data-base data-label="Коммерция" data-caption="Уровень"
     // Пути без data-floor / data-base не интерактивны (просто игнорируются).
-    const zones = $$("path[data-floor], path[data-base]", floorsSvg);
+    // SVG может быть несколько (десктоп / мобилка) — один и тот же этаж в каждом из них.
+    const zones = floorSvgs.flatMap((svg) => $$("path[data-floor], path[data-base]", svg));
     if (!zones.length) return;
 
-    // Модель этажей для фасада и для планировки берётся из тех же path
+    // Модель этажей для фасада и для планировки берётся из тех же path.
+    // data-free достаточно указать в одном из SVG — остальные берут его по номеру этажа.
     const freeMap = {};
+    zones.forEach((zone) => {
+      const f = parseInt(zone.dataset.floor, 10);
+      if (!isNaN(f) && zone.dataset.free != null && !zone.hasAttribute("data-base")) {
+        freeMap[f] = parseInt(zone.dataset.free, 10) || 0;
+      }
+    });
     zones.forEach((zone) => {
       const isBase = zone.hasAttribute("data-base");
       zone.classList.add("floor__band");
@@ -134,10 +142,10 @@
         return;
       }
       const f = parseInt(zone.dataset.floor, 10);
-      const free = parseInt(zone.dataset.free, 10) || 0;
+      if (!isNaN(f) && freeMap[f] == null) freeMap[f] = 0;
+      const free = freeMap[f] || 0;
       zone.dataset.free = free;
       zone.dataset.caption = zone.dataset.caption || "Этаж";
-      if (!isNaN(f)) freeMap[f] = free;
       if (free === 0) {
         zone.classList.add("is-empty");
       } else {
@@ -245,22 +253,22 @@
     // на фасаде открывает план этого этажа.
     const tabsListEl = $("[data-floor-tabs-list]", root);
     const floorTabs = new Map(); // этаж → элемент таба
-    const floorZones = new Map(); // этаж → контур на фасаде
+    // этаж → контуры на фасаде (по одному в каждом SVG)
+    const floorZones = new Map();
     zones.forEach((z) => {
       if (!z.hasAttribute("data-base")) {
         const f = parseInt(z.dataset.floor, 10);
-        if (!isNaN(f)) floorZones.set(f, z);
+        if (!isNaN(f)) floorZones.set(f, [...(floorZones.get(f) || []), z]);
       }
     });
     const availableFloors = floorNums.filter((f) => !isFloorEmpty(f));
 
     let facadeFloor = null;
     const setFacadeFloor = (f) => {
-      const zone = floorZones.get(f);
-      if (!zone || zone.classList.contains("is-empty")) return;
+      if (!floorZones.has(f) || isFloorEmpty(f)) return;
       facadeFloor = f;
       // подсветка контура на фасаде (только выбранный этаж)
-      floorZones.forEach((z, fl) => z.classList.toggle("is-current", fl === f));
+      floorZones.forEach((list, fl) => list.forEach((z) => z.classList.toggle("is-current", fl === f)));
       // подсветка активного таба + подскролл ленты к нему
       floorTabs.forEach((tab, fl) => tab.classList.toggle("is-active", fl === f));
       const activeTab = floorTabs.get(f);
@@ -336,7 +344,24 @@
       });
     };
     // Подгружаем ночное фото заранее, чтобы переключение было без мигания
-    themeImgs.forEach((img) => { if (img.dataset.night) new Image().src = img.dataset.night; });
+    // (только видимые — мобильное фото на десктопе и наоборот не грузим)
+    themeImgs.forEach((img) => {
+      if (img.dataset.night && img.offsetParent !== null) new Image().src = img.dataset.night;
+    });
+
+    // Мобилка: стартовая позиция горизонтального скролла сцены.
+    // data-floor-scroll="0.5" — по центру (0 — левый край, 1 — правый).
+    const sceneScroll = $("[data-floor-scroll]", root);
+    if (sceneScroll) {
+      const scrollToStart = () => {
+        const ratio = parseFloat(sceneScroll.dataset.floorScroll);
+        const max = sceneScroll.scrollWidth - sceneScroll.clientWidth;
+        if (max > 0) sceneScroll.scrollLeft = max * (isNaN(ratio) ? 0.5 : ratio);
+      };
+      requestAnimationFrame(scrollToStart);
+      // при повороте экрана ширина сцены меняется — выставляем заново
+      window.addEventListener("orientationchange", () => setTimeout(scrollToStart, 300));
+    }
     themeBtn?.addEventListener("click", () => {
       const night = root.classList.toggle("is-night");
       if (themeLabel) themeLabel.textContent = night ? "ночь" : "день";

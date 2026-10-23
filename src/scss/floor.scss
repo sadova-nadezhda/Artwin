@@ -45,38 +45,50 @@
     overflow: hidden;
     background-color: var(--dark);
   }
-  // Размытая подложка — видна только на мобилке, где фото уже экрана по высоте
-  &__blur {
+  // ==== Сцена: фото + SVG этажей в одном контейнере с пропорциями фото ====
+  // Фото и SVG лежат в одном боксе, поэтому контуры этажей всегда точно по фасаду.
+  // Пропорции задаются инлайном: style="--floor-ratio: ширина / высота" (размер фото).
+  &__stage {
+    --floor-ratio: 1920 / 911;
+    aspect-ratio: var(--floor-ratio);
+    // Десктоп: как object-fit: cover — заполняет экран, лишнее обрезается по краям
+    &--desktop {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, calc(100vh * var(--floor-ratio)));
+      width: max(100%, calc(100dvh * var(--floor-ratio)));
+      transform: translate(-50%, -50%);
+      @media(max-width: 767px) {
+        display: none;
+      }
+    }
+    // Мобилка: на всю высоту экрана, ширина по пропорциям фото (но не уже экрана).
+    // Если шире экрана — листается в .floor__scroll
+    &--mobile {
+      --floor-ratio: 460 / 852;
+      position: relative;
+      flex: 0 0 auto;
+      width: max(100%, calc(100vh * var(--floor-ratio)));
+      width: max(100%, calc(100dvh * var(--floor-ratio)));
+    }
+  }
+  // Горизонтальный скролл мобильной сцены (фото + SVG листаются вместе)
+  &__scroll {
     display: none;
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(calc(16 * var(--width-multiplier))) brightness(0.85);
-    transform: scale(1.15);
-    pointer-events: none;
-    user-select: none;
-  }
-
-  // ==== Сцена: фото + SVG этажей в одном контейнере с пропорциями фото ====
-  // Работает как object-fit: cover — заполняет экран, лишнее обрезается по краям.
-  // Фото и SVG лежат в одном боксе, поэтому контуры этажей всегда точно по фасаду.
-  &__stage {
-    --floor-ratio: 1920 / 911;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: max(100%, calc(100vh * var(--floor-ratio)));
-    width: max(100%, calc(100dvh * var(--floor-ratio)));
-    aspect-ratio: var(--floor-ratio);
-    transform: translate(-50%, -50%);
-    // Мобилка: фасад во всю ширину экрана (здание ≈ 2/3 ширины фото),
-    // по высоте — между таб-баром сверху и плашкой снизу
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     @media(max-width: 767px) {
-      width: 144vw;
-      top: calc(171 * var(--width-multiplier) + (100% - 259 * var(--width-multiplier)) / 2);
-      transform: translate(-52.6%, -50%); // центр здания в фото ≈ 52.6% по X
+      display: flex;
     }
   }
   &__photo {
@@ -338,9 +350,6 @@
     // На мобилке выбор — тапом по табу; плавающий тултип прячем
     .floor__tooltip {
       display: none;
-    }
-    .floor__blur {
-      display: block;
     }
     // «Назад» 
     .floor__back {
