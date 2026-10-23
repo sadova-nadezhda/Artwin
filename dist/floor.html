@@ -7,13 +7,13 @@
   <title>Выбор этажа и планировка</title>
   <link rel="shortcut icon" href="img/favicon.png" type="image/png">
   <!-- Link Swiper's CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20261023115205" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?_v=20261023121354" />
   <!-- intl-tel-input -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20261023115205" />
-  <link rel="stylesheet" href="css/style.css?_v=20261023115205" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css?_v=20261023121354" />
+  <link rel="stylesheet" href="css/style.css?_v=20261023121354" />
   
   <!-- Стили только этой страницы -->
-  <link rel="stylesheet" href="css/floor.css?_v=20261023115205" />
+  <link rel="stylesheet" href="css/floor.css?_v=20261023121354" />
   
 </head>
 
@@ -26,17 +26,16 @@
 
         <!-- ===================== ВИД 1: ФАСАД ===================== -->
         <section class="floor floorplan__view floorplan__view--building" data-floor>
-          <!-- Сцена: одно фото (фон + здание) + SVG с контурами этажей поверх -->
+          <!-- Сцена: фото (фон + здание) + SVG с контурами этажей поверх -->
           <div class="floor__scene">
-            <!-- Размытая копия фото — подложка на мобилке, где фото не на весь экран -->
+            <!-- подложка на мобилке, где фото не на весь экран -->
             <img class="floor__blur" src="img/london-day.webp" data-night="img/london-night.webp" alt="" aria-hidden="true">
 
-            <!-- Сцена держит пропорции фото (1920×911), поэтому фото и SVG всегда совпадают.
-            Если фото другого размера — поменяйте --floor-ratio в style и viewBox у svg. -->
+            <!-- Сцена -->
             <div class="floor__stage" style="--floor-ratio: 1920 / 911">
               <img class="floor__photo" src="img/london-day.webp" data-night="img/london-night.webp" alt="ЖК LONDON">
 
-              <!-- SVG в размере фото (viewBox = 1920×911), контуры этажей нарисованы прямо по фото.
+              <!-- SVG в размере фото 
               Атрибуты path:
                 data-floor="5" data-free="3" — жилой этаж и квартир в продаже (0 = этаж недоступен);
                 data-base data-label data-caption — нежилой уровень (коммерция / паркинг), без продаж. -->
@@ -301,15 +300,15 @@
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20261023115205"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20261023115205"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20261023115205"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20261023115205"></script>
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20261023115205"></script>
-<script src="js/app.js?_v=20261023115205"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20261023121354"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js?_v=20261023121354"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20261023121354"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20261023121354"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js?_v=20261023121354"></script>
+<script src="js/app.js?_v=20261023121354"></script>
 
 <!-- Скрипт только этой страницы -->
-<script src="js/floor.js?_v=20261023115205"></script>
+<script src="js/floor.js?_v=20261023121354"></script>
 
   </body>
 </html>
