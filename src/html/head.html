@@ -9,4 +9,8 @@
   <!-- intl-tel-input -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css" />
   <link rel="stylesheet" href="css/style.css" />
+  @@if (context.pageCss) {
+  <!-- Стили только этой страницы -->
+  <link rel="stylesheet" href="css/@@pageCss" />
+  }
 </head>

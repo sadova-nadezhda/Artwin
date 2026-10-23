@@ -16,7 +16,8 @@ export const path = {
   },
   src: {
     html: `${srcFolder}/*.html`,
-    scss: `${srcFolder}/scss/style.scss`,
+    // style.scss — общие стили; остальные — отдельные файлы под конкретные страницы
+    scss: [`${srcFolder}/scss/style.scss`, `${srcFolder}/scss/floor.scss`],
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp,mp4,ico}`,
     svg: `${srcFolder}/img/**/*.svg`,
     js: `${srcFolder}/js/*.js`,
