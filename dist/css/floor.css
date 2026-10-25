@@ -27,10 +27,11 @@
 
 .floorplan-page {
   overflow-x: hidden;
+  touch-action: manipulation;
 }
 
-.floorplan-page,
-.floorplan-page * {
+.floorplan-page .floor__scroll,
+.floorplan-page .plan__canvas {
   touch-action: manipulation;
 }
 
@@ -64,7 +65,6 @@
 }
 
 .floor__stage--mobile {
-  --floor-ratio: 460 / 852;
   position: relative;
   flex: 0 0 auto;
   height: 100%;

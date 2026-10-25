@@ -359,17 +359,17 @@
     if (sceneScroll && sceneStage) {
       const scrollPhoto = $(".floor__photo", sceneStage);
 
-      // Пропорции: из --floor-ratio ("1372 / 852"), иначе — по самому фото
+      // Пропорции: по самому фото, как только оно загрузилось (это всегда верно,
+      // даже если в разметке --floor-ratio от другого ЖК). До загрузки — из --floor-ratio.
       const stageRatio = () => {
+        if (scrollPhoto && scrollPhoto.naturalHeight) {
+          return scrollPhoto.naturalWidth / scrollPhoto.naturalHeight;
+        }
         const [w, h] = getComputedStyle(sceneStage)
           .getPropertyValue("--floor-ratio")
           .split("/")
           .map((v) => parseFloat(v));
-        if (w > 0 && h > 0) return w / h;
-        if (scrollPhoto && scrollPhoto.naturalHeight) {
-          return scrollPhoto.naturalWidth / scrollPhoto.naturalHeight;
-        }
-        return 0;
+        return w > 0 && h > 0 ? w / h : 0;
       };
 
       const sizeStage = () => {
