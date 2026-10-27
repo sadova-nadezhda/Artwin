@@ -336,7 +336,7 @@
       backdrop-filter: none;
       color: var(--dark);
       box-shadow: 0 calc(-8 * var(--width-multiplier)) calc(24 * var(--width-multiplier)) rgba(0, 0, 0, 0.12);
-      max-height: calc(88 * var(--width-multiplier)); // свёрнутый «пик»
+      max-height: calc(34 * var(--width-multiplier)); // свёрнутый «пик»
       overflow: hidden;
       z-index: 5;
       transition: max-height 0.4s ease;
