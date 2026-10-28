@@ -679,8 +679,20 @@
     display: flex;
   }
 
+  .floor__band {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .floor__band.is-current {
     fill: rgba(30, 145, 57, 0.5);
+  }
+
+  .floor__band.is-current.is-empty {
+    fill: rgba(21, 21, 21, 0.5);
+  }
+
+  .floor__band--base.is-current {
+    fill: rgba(60, 120, 200, 0.5);
   }
 
   .floor__tooltip-value {

@@ -148,10 +148,15 @@
     &.is-empty {
       cursor: default;
     }
-    // Мобилка: подсвечен только выбранный этаж (из табов)
-    &.is-current {
-      @media(max-width: 767px) {
+    // Мобилка: подсвечен только выбранный этаж (табы / тап / свайп по фото),
+    // цвета — как у наведения на десктопе
+    @media(max-width: 767px) {
+      -webkit-tap-highlight-color: transparent;
+      &.is-current {
         fill: rgba(30, 145, 57, 0.5);
+        &.is-empty {
+          fill: rgba(21, 21, 21, 0.5);
+        }
       }
     }
   }
@@ -161,6 +166,11 @@
     @media(min-width: 768px) {
       &:hover,
       &.is-active {
+        fill: rgba(60, 120, 200, 0.5);
+      }
+    }
+    @media(max-width: 767px) {
+      &.is-current {
         fill: rgba(60, 120, 200, 0.5);
       }
     }

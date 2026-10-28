@@ -253,19 +253,21 @@
     // на фасаде открывает план этого этажа.
     const tabsListEl = $("[data-floor-tabs-list]", root);
     const floorTabs = new Map(); // этаж → элемент таба
+    // Ключ этажа: номер для жилого, подпись («Коммерция») для data-base
+    const zoneKey = (z) => z.hasAttribute("data-base") ? z.dataset.floor : parseInt(z.dataset.floor, 10);
     // этаж → контуры на фасаде (по одному в каждом SVG)
     const floorZones = new Map();
     zones.forEach((z) => {
-      if (!z.hasAttribute("data-base")) {
-        const f = parseInt(z.dataset.floor, 10);
-        if (!isNaN(f)) floorZones.set(f, [...(floorZones.get(f) || []), z]);
-      }
+      const f = zoneKey(z);
+      if (typeof f === "string" || !isNaN(f)) floorZones.set(f, [...(floorZones.get(f) || []), z]);
     });
     const availableFloors = floorNums.filter((f) => !isFloorEmpty(f));
 
+    // Активный этаж на мобилке — одно состояние для табов, стрелок и жестов по фото.
+    // Недоступные этажи и коммерция тоже подсвечиваются (как наведение на десктопе).
     let facadeFloor = null;
     const setFacadeFloor = (f) => {
-      if (!floorZones.has(f) || isFloorEmpty(f)) return;
+      if (!floorZones.has(f)) return;
       facadeFloor = f;
       // подсветка контура на фасаде (только выбранный этаж)
       floorZones.forEach((list, fl) => list.forEach((z) => z.classList.toggle("is-current", fl === f)));
@@ -277,12 +279,21 @@
         tabsListEl.scrollTo({ left, behavior: "smooth" });
       }
     };
-    // Стрелки: шаг к соседнему доступному этажу (не открывает план)
+    const clearFacadeFloor = () => {
+      facadeFloor = null;
+      zones.forEach((z) => z.classList.remove("is-current"));
+      floorTabs.forEach((tab) => tab.classList.remove("is-active"));
+    };
+    // Стрелки: шаг к соседнему доступному этажу (не открывает план).
+    // С недоступного этажа / коммерции (её считаем ниже жилых) — к ближайшему доступному.
     const stepFacade = (dir) => {
       if (!availableFloors.length) return;
-      const idx = availableFloors.indexOf(facadeFloor);
-      const next = availableFloors[Math.min(availableFloors.length - 1, Math.max(0, idx + dir))];
-      setFacadeFloor(next);
+      if (facadeFloor == null) { setFacadeFloor(availableFloors[0]); return; }
+      const cur = typeof facadeFloor === "number" ? facadeFloor : -Infinity;
+      const next = dir > 0
+        ? availableFloors.find((f) => f > cur)
+        : [...availableFloors].reverse().find((f) => f < cur);
+      if (next != null) setFacadeFloor(next);
     };
 
     if (tabsListEl) {
@@ -295,7 +306,7 @@
         tab.textContent = floor;
         tab.addEventListener("click", (e) => {
           e.preventDefault();
-          if (!empty) openPlan(floor); // тап по табу → открыть план
+          if (!empty) { setFacadeFloor(floor); openPlan(floor); } // тап по табу → открыть план
         });
         tabsListEl.appendChild(tab);
         if (!empty) floorTabs.set(floor, tab);
@@ -307,6 +318,60 @@
 
       // Стартовый активный этаж — самый нижний доступный (напр. 2)
       setFacadeFloor(availableFloors[0]);
+    }
+
+    // Мобилка: жесты по фото. Мобильная сцена на десктопе скрыта — там всё как было.
+    //   тап по этажу — подсветить (общее состояние с табами и стрелками);
+    //   повторный тап по подсвеченному — открыть план (если открывается и на десктопе);
+    //   ведение пальцем вверх/вниз — подсветка едет за пальцем, без перехода;
+    //   тап мимо этажей — снять подсветку.
+    // Направление решаем по первому заметному сдвигу: вертикально и начато на этаже —
+    // свайп по этажам (скролл блокируем), иначе — обычный скролл сцены / страницы.
+    const gestureArea = $("[data-floor-scroll]", root);
+    if (gestureArea) {
+      const zoneAt = (x, y) => {
+        const el = document.elementFromPoint(x, y);
+        const zone = el && el.closest && el.closest(".floor__band");
+        return zone && gestureArea.contains(zone) ? zone : null;
+      };
+      let gesture = null; // { x, y, zone, mode: "tap" | "swipe" | "scroll" }
+
+      gestureArea.addEventListener("touchstart", (e) => {
+        if (e.touches.length > 1) { gesture = null; return; } // щипок — не наш жест
+        const t = e.touches[0];
+        gesture = { x: t.clientX, y: t.clientY, zone: zoneAt(t.clientX, t.clientY), mode: "tap" };
+      }, { passive: true });
+
+      gestureArea.addEventListener("touchmove", (e) => {
+        if (!gesture || gesture.mode === "scroll") return;
+        const t = e.touches[0];
+        if (gesture.mode === "tap") {
+          const dx = Math.abs(t.clientX - gesture.x);
+          const dy = Math.abs(t.clientY - gesture.y);
+          if (dx < 6 && dy < 6) return; // дрожание пальца — ещё тап
+          gesture.mode = gesture.zone && dy > dx && e.cancelable ? "swipe" : "scroll";
+          if (gesture.mode === "scroll") return;
+        }
+        e.preventDefault();
+        const zone = zoneAt(t.clientX, t.clientY);
+        if (zone) setFacadeFloor(zoneKey(zone));
+      }, { passive: false });
+
+      gestureArea.addEventListener("touchend", (e) => {
+        if (!gesture || e.touches.length) return;
+        const { mode, zone } = gesture;
+        gesture = null;
+        if (mode === "scroll") return;
+        // без синтетических mouse/click — иначе клик по этажу сразу откроет план
+        if (e.cancelable) e.preventDefault();
+        if (mode === "swipe") return;
+        if (!zone) { clearFacadeFloor(); return; }
+        const key = zoneKey(zone);
+        if (key !== facadeFloor) setFacadeFloor(key);
+        else if (canOpen(zone)) openPlan(zone.dataset.floor);
+      }, { passive: false });
+
+      gestureArea.addEventListener("touchcancel", () => { gesture = null; });
     }
 
     // Мобилка: нижняя выдвижная плашка с инфо — грабер + свайп
