@@ -339,14 +339,14 @@
       width: 100%;
       max-width: none;
       gap: calc(16 * var(--width-multiplier));
-      padding: calc(8 * var(--width-multiplier)) calc(20 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
+      padding: calc(16 * var(--width-multiplier)) calc(20 * var(--width-multiplier)) calc(24 * var(--width-multiplier));
       border: none;
       border-radius: calc(20 * var(--width-multiplier)) calc(20 * var(--width-multiplier)) 0 0;
       background: var(--bg);
       backdrop-filter: none;
       color: var(--dark);
       box-shadow: 0 calc(-8 * var(--width-multiplier)) calc(24 * var(--width-multiplier)) rgba(0, 0, 0, 0.12);
-      max-height: calc(34 * var(--width-multiplier)); // свёрнутый «пик»
+      max-height: calc(44 * var(--width-multiplier)); // свёрнутый «пик»
       overflow: hidden;
       z-index: 5;
       transition: max-height 0.4s ease;
